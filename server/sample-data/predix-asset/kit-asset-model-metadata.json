@@ -1,0 +1,47 @@
+{
+  "putFieldDataCriteria": [
+    {
+      "namespaces": [],
+      "fieldData": {
+        "field": [
+          {
+            "fieldIdentifier": {
+              "complexType": "FieldIdentifier",
+              "source": "PREDIX_ASSET"
+            },
+            "parents": []
+          }
+        ],
+        "data": {
+          "complexType": "MetaData",
+          "name": "predix-kit-nuc",
+          "description": "Asset Model for Predix Kit Cloud App",
+          "source": "PREDIX_ASSET",
+          "tags": [
+            "Aviation",
+            "Locomotive",
+            "Windfarm",
+            "Healthcare"
+          ]
+        }
+      }
+    },
+    {
+      "namespaces": [],
+      "fieldData": {
+        "field": [
+          {
+            "fieldIdentifier": {
+              "complexType": "FieldIdentifier",
+              "source": "PREDIX_ASSET"
+            },
+            "parents": []
+          }
+        ],
+        "data": {
+          "complexType": "DataFile"
+        }
+      }
+    }
+  ]
+}

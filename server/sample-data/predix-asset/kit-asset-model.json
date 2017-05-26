@@ -1,0 +1,114 @@
+[
+  {
+    "complexType": "Asset",
+    "uri": "/industrial-asset/jet-engine",
+    "classificationUri": "/classification/JET-ENGINE",
+    "assetId": "jet-engine",
+    "description": "GEnx-1B Jet Engine",
+    "filter": "group=/group/nuc",
+	  "group": "/group/nuc",
+    "assetTag": {
+      "for-button": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-sound": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-light": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-temperature": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-rotary": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-vibration": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-touch": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      }
+    },
+    "attributes": {
+      "manufacturer": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "GE Aviation"
+        ]
+      },
+      "firstRun": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "2006"
+        ]
+      },
+      "applications": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Boeing 787 Dreamliner",
+          "Boeing 747-8"
+        ]
+      },
+      "fuelEfficiency": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "15% savings over GE CF6"
+        ]
+      },
+      "CO2Efficiency": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "15% savings over GE CF6"
+        ]
+      },
+      "thrust": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "TakeOff Thrust 57,400 lbf"
+        ]
+      },
+      "production": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Over 1600 engines on order"
+        ]
+      }
+    }
+  }
+]
