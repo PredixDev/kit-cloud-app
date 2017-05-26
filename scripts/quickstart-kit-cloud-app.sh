@@ -49,6 +49,7 @@ QUICKSTART_ARGS="-ba -uaa -asset -ts -cidd -dx $ASSET_MODEL -kitsvc -kitui $SCRI
 VERSION_JSON="version.json"
 PREDIX_SCRIPTS=predix-scripts
 REPO_NAME=kit-cloud-app
+APP_DIR="kit-cloud"
 APP_NAME="Predix Kit Cloud App"
 SCRIPT_NAME="quickstart-kit-cloud-app.sh"
 TOOLS="Cloud Foundry CLI, Git, Maven, Node.js, Predix CLI"
@@ -79,6 +80,10 @@ function init() {
   if [[ $currentDir == *"scripts" ]]; then
     echo 'Please launch the script from the root dir of the project'
     exit 1
+  fi
+  if [[ ! $currentDir == *"$REPO_NAME" ]]; then
+    mkdir -p $APP_DIR
+    cd $APP_DIR
   fi
 
   check_internet
