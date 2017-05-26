@@ -1,0 +1,97 @@
+{
+	"uri": "/device/NUC-123",
+	"deviceName": "MyDevice",
+	"deviceAddress": "NUC-123",
+	"deviceType": "NUCK",
+	"activationDate": "1492548519371",
+	"groupRef": "/company",
+	"userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+	"createdDate": "1492548532675",
+	"tags": [{
+		"complexType": "AssetTag",
+		"tagUri": "/tag/rotaryangle",
+		"isKpi": null,
+		"hiQualityThreshold": 0.0,
+		"hiAlarmThreshold": 80.0,
+		"loAlarmThreshold": 65.0,
+		"loQualityThreshold": 0.0,
+		"lastCalibrated": null,
+		"locationUUID": null,
+		"alertStatusUri": null,
+		"timeseriesDatasource": {
+			"complexType": "TimeseriesDatasource",
+			"tag": "NUC-123:rotaryangle"
+		},
+		"edgeDatasource": null
+	}, {
+		"complexType": "AssetTag",
+		"tagUri": "/tag/button",
+		"isKpi": null,
+		"hiQualityThreshold": 0.0,
+		"hiAlarmThreshold": 80.0,
+		"loAlarmThreshold": 65.0,
+		"loQualityThreshold": 0.0,
+		"lastCalibrated": null,
+		"locationUUID": null,
+		"alertStatusUri": null,
+		"timeseriesDatasource": {
+			"complexType": "TimeseriesDatasource",
+			"tag": "NUC-123:button"
+		},
+		"edgeDatasource": null
+	}, {
+		"complexType": "AssetTag",
+		"tagUri": "/tag/light",
+		"isKpi": null,
+		"hiQualityThreshold": 0.0,
+		"hiAlarmThreshold": 80.0,
+		"loAlarmThreshold": 65.0,
+		"loQualityThreshold": 0.0,
+		"lastCalibrated": null,
+		"locationUUID": null,
+		"alertStatusUri": null,
+		"timeseriesDatasource": {
+			"complexType": "TimeseriesDatasource",
+			"tag": "NUC-123:light"
+		},
+		"edgeDatasource": null
+	}, {
+		"complexType": "AssetTag",
+		"tagUri": "/tag/temperature",
+		"isKpi": null,
+		"hiQualityThreshold": 0.0,
+		"hiAlarmThreshold": 80.0,
+		"loAlarmThreshold": 65.0,
+		"loQualityThreshold": 0.0,
+		"lastCalibrated": null,
+		"locationUUID": null,
+		"alertStatusUri": null,
+		"timeseriesDatasource": {
+			"complexType": "TimeseriesDatasource",
+			"tag": "NUC-123:temperature"
+		},
+		"edgeDatasource": null
+	}, {
+		"complexType": "AssetTag",
+		"tagUri": "/tag/led",
+		"isKpi": null,
+		"hiQualityThreshold": 0.0,
+		"hiAlarmThreshold": 80.0,
+		"loAlarmThreshold": 65.0,
+		"loQualityThreshold": 0.0,
+		"lastCalibrated": null,
+		"locationUUID": null,
+		"alertStatusUri": null,
+		"timeseriesDatasource": {
+			"complexType": "TimeseriesDatasource",
+			"tag": "NUC-123:led"
+		},
+		"edgeDatasource": null
+	}],
+	"deviceConfig": {
+		"predix_uaa_issuer": "https://92c10ab6-9ed3-4daf-a1b7-b71207885eb1.predix-uaa-training.run.aws-usw02-pr.ice.predix.io/oauth/token",
+		"client": "WVhCd1gyTnNhV1Z1ZEY5cFpEcHpaV055WlhRPQ==",
+		"predix-timeseries_ingest_url": "wss://gateway-predix-data-services.run.aws-usw02-pr.ice.predix.io/v1/stream/messages",
+		"predix-timeseries_zoneid": "743e1d4a-e546-4e77-a22c-f775ecf85288"
+	}
+}

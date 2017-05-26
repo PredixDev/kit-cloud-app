@@ -1,0 +1,56 @@
+[
+  {
+    "description": "/group/Swap-Integration",
+    "uri": "/group/Swap-Integration",
+    "name": "MOCK-Integration",
+    "createdate": "1493060894249",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/Swap2-Integration",
+    "uri": "/group/Swap2-Integration",
+    "name": "Swap2-Integration",
+    "createdate": "1493070951959",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/Swap3Integration",
+    "uri": "/group/Swap3Integration",
+    "name": "Swap3Integration",
+    "createdate": "1493071237611",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/testcomp2",
+    "uri": "/group/testcomp2",
+    "name": "testcomp2",
+    "createdate": "1493067005424",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/testcompany-1",
+    "uri": "/group/testcompany-1",
+    "name": "testcompany-1",
+    "createdate": "1493059183522",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/testexpiry",
+    "uri": "/group/testexpiry",
+    "name": "testexpiry",
+    "createdate": "1493156500795",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  }
+]

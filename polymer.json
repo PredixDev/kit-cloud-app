@@ -1,0 +1,17 @@
+{
+  "entrypoint": "public/index.html",
+  "shell": "public/elements/seed-app/seed-app.html",
+  "fragments": [
+    "public/elements/views/over-view.html",
+    "public/elements/views/about-view.html",
+    "public/elements/views/kit-data-view.html",
+    "public/elements/sensor-chart/sensor-chart.html"
+  ],
+  "sources": [
+    "public/elements/**/*",
+    "public/index*",
+    "public/seed*",
+    "!public/elements/dev-guide/**"
+  ],
+  "extraDependencies": []
+}

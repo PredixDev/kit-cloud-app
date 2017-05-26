@@ -1,0 +1,74 @@
+[
+  {
+    "uri": "/device/NUC-34jkd90kj87",
+    "deviceName": "GregsNuc4",
+    "deviceAddress": "NUC-34jkd90kj87",
+    "deviceType": "NUC",
+    "activationDate": "1493067003815",
+    "groupRef": "/group/testcomp2",
+    "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+    "createdDate": "1493067003815",
+    "tags": [
+      {
+        "complexType": "AssetTag",
+        "tagUri": "/tag/light",
+        "hiQualityThreshold": 0,
+        "hiAlarmThreshold": 80,
+        "loAlarmThreshold": 65,
+        "loQualityThreshold": 0,
+        "timeseriesDatasource": {
+          "complexType": "TimeseriesDatasource",
+          "tag": "NUC-34jkd90kj87:light"
+        }
+      },
+      {
+        "complexType": "AssetTag",
+        "tagUri": "/tag/rotaryangle",
+        "hiQualityThreshold": 0,
+        "hiAlarmThreshold": 80,
+        "loAlarmThreshold": 65,
+        "loQualityThreshold": 0,
+        "timeseriesDatasource": {
+          "complexType": "TimeseriesDatasource",
+          "tag": "NUC-34jkd90kj87:rotaryangle"
+        }
+      },
+      {
+        "complexType": "AssetTag",
+        "tagUri": "/tag/led",
+        "hiQualityThreshold": 0,
+        "hiAlarmThreshold": 80,
+        "loAlarmThreshold": 65,
+        "loQualityThreshold": 0,
+        "timeseriesDatasource": {
+          "complexType": "TimeseriesDatasource",
+          "tag": "NUC-34jkd90kj87:led"
+        }
+      },
+      {
+        "complexType": "AssetTag",
+        "tagUri": "/tag/temperature",
+        "hiQualityThreshold": 0,
+        "hiAlarmThreshold": 80,
+        "loAlarmThreshold": 65,
+        "loQualityThreshold": 0,
+        "timeseriesDatasource": {
+          "complexType": "TimeseriesDatasource",
+          "tag": "NUC-34jkd90kj87:temperature"
+        }
+      },
+      {
+        "complexType": "AssetTag",
+        "tagUri": "/tag/button",
+        "hiQualityThreshold": 0,
+        "hiAlarmThreshold": 80,
+        "loAlarmThreshold": 65,
+        "loQualityThreshold": 0,
+        "timeseriesDatasource": {
+          "complexType": "TimeseriesDatasource",
+          "tag": "NUC-34jkd90kj87:button"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,2291 @@
+[
+    {
+        "uri": "/device/10.0.0.173",
+        "deviceName": "WR-IDP-ECBD",
+        "deviceAddress": "10.0.0.173",
+        "deviceType": "NUC",
+        "activationDate": "1494831017020",
+        "groupRef": "ASDSF",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494831017020",
+        "updateDate": "1494831017020",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.0.0.173:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.0.0.173:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.0.0.173:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.0.0.173:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.0.0.173:light"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/10.7.188.62",
+        "deviceName": "WR-IDP-4993",
+        "deviceAddress": "10.7.188.62",
+        "deviceType": "NUC",
+        "activationDate": "1495142142462",
+        "groupRef": "test",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495142142462",
+        "updateDate": "1495142142462",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.7.188.62:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.7.188.62:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.7.188.62:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.7.188.62:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "10.7.188.62:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/134.134.155.104",
+        "deviceName": "NUC-124-test-1",
+        "deviceAddress": "134.134.155.104",
+        "deviceType": "NUC",
+        "activationDate": "1494950824367",
+        "groupRef": "/group/testcompany-1",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494950824367",
+        "updateDate": "1494950824367",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.104:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.104:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.104:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.104:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.104:rotaryangle"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/134.134.155.96",
+        "deviceName": "NUC-124-test-1",
+        "deviceAddress": "134.134.155.96",
+        "deviceType": "NUC",
+        "activationDate": "1494898697538",
+        "groupRef": "/group/testcompany-1",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494898697538",
+        "updateDate": "1494898697538",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.96:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.96:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.96:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.96:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "134.134.155.96:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/ASDF",
+        "deviceName": "WRIDPECBD",
+        "deviceAddress": "ASDF",
+        "deviceType": "NUC",
+        "activationDate": "1494831039662",
+        "groupRef": "ASDSF",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494831039662",
+        "updateDate": "1494831039662",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "ASDF:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "ASDF:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "ASDF:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "ASDF:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "ASDF:temperature"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/blah",
+        "deviceName": "blah",
+        "deviceAddress": "blah",
+        "deviceType": "NUC",
+        "activationDate": "1494544737862",
+        "groupRef": "blah",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494544737862",
+        "updateDate": "1494544737862",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "blah:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "blah:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "blah:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "blah:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "blah:temperature"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-124-test-1",
+        "deviceName": "UpdateDevice-Test",
+        "deviceAddress": "NUC-124-test-1",
+        "deviceType": "NUC",
+        "activationDate": "1493155602037",
+        "groupRef": "/group/testcompany-1",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493155606804",
+        "updateDate": "1495145353435",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-1:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-1:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-1:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-1:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-1:temperature"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-124-test-2",
+        "deviceName": "UpdateDevice-Test",
+        "deviceAddress": "NUC-124-test-2",
+        "deviceType": "NUC",
+        "activationDate": "1495145284739",
+        "groupRef": "/group/testcompany-2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495145311818",
+        "updateDate": "1495216903948",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-2:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-2:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-2:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-2:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-124-test-2:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-34jkd90kj87",
+        "deviceName": "GregsNuc4",
+        "deviceAddress": "NUC-34jkd90kj87",
+        "deviceType": "NUC",
+        "activationDate": "1493067003815",
+        "groupRef": "/group/testcomp2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493067003815",
+        "updateDate": null,
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34jkd90kj87:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34jkd90kj87:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34jkd90kj87:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34jkd90kj87:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34jkd90kj87:led"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-34kjf8d90kj87",
+        "deviceName": "GregsNuc5",
+        "deviceAddress": "NUC-34kjf8d90kj87",
+        "deviceType": "NUC",
+        "activationDate": "1495143129001",
+        "groupRef": "/group/testcomp2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495143129001",
+        "updateDate": "1495143129001",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34kjf8d90kj87:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34kjf8d90kj87:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34kjf8d90kj87:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34kjf8d90kj87:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-34kjf8d90kj87:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-3kj34dv89oj87",
+        "deviceName": "GregsNuc55",
+        "deviceAddress": "NUC-3kj34dv89oj87",
+        "deviceType": "NUC",
+        "activationDate": "1495144084269",
+        "groupRef": "/group/greg-iot",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495144084269",
+        "updateDate": "1495144084269",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-3kj34dv89oj87:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-3kj34dv89oj87:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-3kj34dv89oj87:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-3kj34dv89oj87:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-3kj34dv89oj87:light"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-94723zzz9090",
+        "deviceName": "GregsNuc93785",
+        "deviceAddress": "NUC-94723zzz9090",
+        "deviceType": "NUC",
+        "activationDate": "1495147718935",
+        "groupRef": "/group/greg-iot",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495147718935",
+        "updateDate": "1495147718935",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-94723zzz9090:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-94723zzz9090:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-94723zzz9090:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-94723zzz9090:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-94723zzz9090:light"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Label-TEST-123",
+        "deviceName": "SwapnaLabelTest",
+        "deviceAddress": "NUC-Label-TEST-123",
+        "deviceType": "NUC",
+        "activationDate": "1495139334077",
+        "groupRef": "/group/test",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495139334077",
+        "updateDate": "1495139334077",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label-TEST-123:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label-TEST-123:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label-TEST-123:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label-TEST-123:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label-TEST-123:light"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Label2-TEST-123",
+        "deviceName": "SwapnaLabel2Test",
+        "deviceAddress": "NUC-Label2-TEST-123",
+        "deviceType": "NUC",
+        "activationDate": "1495145054672",
+        "groupRef": "/group/test2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495145054672",
+        "updateDate": "1495145054672",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label2-TEST-123:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label2-TEST-123:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label2-TEST-123:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label2-TEST-123:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label2-TEST-123:rotaryangle"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Label3-TEST-123",
+        "deviceName": "SwapnaLabel3Test",
+        "deviceAddress": "NUC-Label3-TEST-123",
+        "deviceType": "NUC",
+        "activationDate": "1495147594560",
+        "groupRef": "/group/test2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1495147594560",
+        "updateDate": "1495147594560",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": "Light",
+                "isKpi": null,
+                "unit": "lumens",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label3-TEST-123:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": "Rotary Angle",
+                "isKpi": null,
+                "unit": "degrees",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label3-TEST-123:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": "Temperature",
+                "isKpi": null,
+                "unit": "F",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label3-TEST-123:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/sound",
+                "label": "Sound",
+                "isKpi": null,
+                "unit": "dB",
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label3-TEST-123:sound"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": "Button",
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": null,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": null,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Label3-TEST-123:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-s987",
+        "deviceName": "GregsNuc3",
+        "deviceAddress": "NUC-s987",
+        "deviceType": "NUC",
+        "activationDate": "1493061301500",
+        "groupRef": "/testcomp2",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493061301500",
+        "updateDate": null,
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-s987:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-s987:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-s987:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-s987:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-s987:rotaryangle"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Swap-Integration",
+        "deviceName": "SwapnaIntegration",
+        "deviceAddress": "NUC-Swap-Integration",
+        "deviceType": "NUC",
+        "activationDate": "1493060894145",
+        "groupRef": "/group/Swap-Integration",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493060894145",
+        "updateDate": null,
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap-Integration:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap-Integration:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap-Integration:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap-Integration:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap-Integration:button"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Swap2-Integration",
+        "deviceName": "Swapna2Integration",
+        "deviceAddress": "NUC-Swap2-Integration",
+        "deviceType": "NUC",
+        "activationDate": "1493070951854",
+        "groupRef": "/group/Swap2-Integration",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493070951854",
+        "updateDate": null,
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap2-Integration:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap2-Integration:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap2-Integration:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap2-Integration:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap2-Integration:rotaryangle"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/NUC-Swap3Integration",
+        "deviceName": "Swapna3Integration",
+        "deviceAddress": "NUC-Swap3Integration",
+        "deviceType": "NUC",
+        "activationDate": "1493071237532",
+        "groupRef": "/group/Swap3Integration",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493071237532",
+        "updateDate": null,
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap3Integration:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap3Integration:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap3Integration:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap3Integration:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "NUC-Swap3Integration:led"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/test",
+        "deviceName": "test",
+        "deviceAddress": "test",
+        "deviceType": "NUC",
+        "activationDate": "1494573398450",
+        "groupRef": "test",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1494573398450",
+        "updateDate": "1494573398450",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "test:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "test:light"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "test:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "test:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "test:led"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    },
+    {
+        "uri": "/device/testexpiry",
+        "deviceName": "TEST-EXPIRY",
+        "deviceAddress": "TEST-EXPIRY",
+        "deviceType": "NUC",
+        "activationDate": "1487889671255",
+        "groupRef": "/group/testexpiry",
+        "userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+        "createdDate": "1493156500403",
+        "updateDate": "1493156500403",
+        "tags": [
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/button",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "TEST-EXPIRY:button"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/led",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "TEST-EXPIRY:led"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/temperature",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "TEST-EXPIRY:temperature"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/rotaryangle",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "TEST-EXPIRY:rotaryangle"
+                },
+                "edgeDatasource": null
+            },
+            {
+                "complexType": "AssetTag",
+                "tagUri": "/tag/light",
+                "label": null,
+                "isKpi": null,
+                "unit": null,
+                "hiQualityThreshold": 0,
+                "hiAlarmThreshold": 80,
+                "loAlarmThreshold": 65,
+                "loQualityThreshold": 0,
+                "lastCalibrated": null,
+                "locationUUID": null,
+                "alertStatusUri": null,
+                "timeseriesDatasource": {
+                    "complexType": "TimeseriesDatasource",
+                    "tag": "TEST-EXPIRY:light"
+                },
+                "edgeDatasource": null
+            }
+        ],
+        "deviceConfig": null
+    }
+]

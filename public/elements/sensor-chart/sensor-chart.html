@@ -1,0 +1,231 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/px-vis-timeseries/px-vis-timeseries.html">
+<link rel="import" href="../../bower_components/px-card/px-card.html">
+<link rel="import" href="../../bower_components/px-percent-circle/px-percent-circle.html">
+<link rel="import" href="../../bower_components/px-simple-bar-chart/px-simple-bar-chart.html">
+
+<link rel="import" href="sensor-chart-styles.html">
+
+<script src="../../bower_components/moment/min/moment.min.js"></script>
+
+<!--
+Displays data for a single tag on various chart types.
+A single tag should be passed in.
+-->
+<dom-module id="sensor-chart">
+    <template>
+      <style include="sensor-chart-styles"></style>
+      <px-card style="margin-right: .33333rem;">
+        <div style="height: 300px;">
+          <h4 style="margin-bottom: -30px; padding-top: 10px;">[[tag.val]]</h4>
+          <!--<template is="dom-if" if="{{showTimeSeries}}">-->
+            <px-vis-timeseries id="tsChart"
+                hidden$="{{!showTimeSeries}}"
+                chart-data="{{tsChartData}}"
+                chart-extents='{"x":["dynamic","dynamic"],"y":["dynamic","dynamic"]}'
+                x-axis-config='{"ticks": 5}'
+                series-config="{{tsSeriesConfig}}"
+                disable-navigator
+                hide-register
+                clean-on-detached>
+            </px-vis-timeseries>
+          <!--</template>-->
+          <template is="dom-if" if="{{showPercentCircle}}">
+            <div style="width: 70%; padding-top: 2rem">
+              <px-percent-circle max="10" val="{{circleValue}}" colors="[rgb(96,189,104)]">
+              </px-percent-circle>
+            </div>
+          </template>
+          <template is="dom-if" if="{{showBar}}">
+            <div style="padding-top: 75px">
+              <px-simple-bar-chart chart-data="{{tsChartData}}">
+              </px-simple-bar-chart>
+            </div>
+          </template>
+        </div>
+      </px-card>
+      <iron-ajax id="tsAjaxEl" content-type="application/json"></iron-ajax>
+    </template>
+    <script>
+    Polymer({
+      is: 'sensor-chart',
+      properties: {
+        // a tag object for display.
+        // {key: "tag1", val: "Tag 1"}
+        tag: {
+          type: Object
+        },
+        tsChartData: {
+          type: Array
+        },
+        tsSeriesConfig: {
+          type: Object
+        },
+        selectedRange: {
+          type: Object
+        },
+        circleValue: {
+          type: Number
+        },
+        // time-series, percent-circle, bar
+        showTimeSeries: {
+          type: Boolean,
+          computed: '_computeShowTimeSeries(tag)'
+        },
+        showPercentCircle: {
+          type: Boolean,
+          computed: '_computeShowCircle(tag)'
+        },
+        showBar: {
+          type: Boolean,
+          computed: '_computeShowBar(tag)'
+        }
+      },
+      observers: ['_tagsOrRangeChanged(tag.*, selectedRange)'],
+
+      ready: function() {
+        this.selectedRange = this._getDefaultRange(1);
+       
+        this.$.tsAjaxEl.addEventListener('response', function(evt) {
+          console.log('ts data', evt.detail.response);
+          if (evt.detail.response.tags) {
+            this._formatDataForChart(evt.detail.response.tags);
+          }
+        }.bind(this));
+
+        // this.$.tsAjaxEl.addEventListener('refreshCharts', function(e) {
+        //   console.log('Refresh event caught.');
+        // });
+
+      },
+
+      _computeShowTimeSeries: function(tag) {
+        return tag.chartType === 'time-series';
+      },
+
+      _computeShowCircle: function(tag) {
+        return tag.chartType === 'percent-circle';
+      },
+
+      _computeShowBar: function(tag) {
+        return tag.chartType === 'bar';
+      },
+
+      _buildSeriesConfig: function(tsTags, displayTag) {               
+        var config = {};
+        tsTags.forEach(function(tag, index) {
+          var seriesKey = "series" + index;
+          var yKey = "y" + index;
+          var xKey = "x" + index;
+          config[seriesKey] = {
+            type: "line",
+            name: displayTag.val,
+            // This seems like it should work, but causes an error.
+            // x: xKey,
+            x: "x0",
+            y: yKey,
+            yAxisUnit: displayTag.unit,
+            axis: {
+              id: "axis" + index,
+              side: (index % 2 === 0) ? "left" : "right",
+              number: index
+            }
+          }
+        });
+        console.log('series config', config);
+        return config;
+      },
+
+      _formatDataForChart: function(tags) {
+        var chartData = [], seriesConfig = {};
+        if (this.showBar) {
+          tags.forEach(function(tag) {
+            chartData[0] = []
+            tag.results[0].values.forEach(function(val) {
+              chartData[0].push(val[1]);
+            }, this);            
+          }, this);
+        } else if (this.showTimeSeries) {
+          tags.forEach(function(tag, i) {
+            var yKey = "y" + i;
+            var xKey = "x" + i;
+            tag.results[0].values.forEach(function(val) {
+              var point = {};
+              // This seems like it should work, but causes an error.
+              // point[xKey] = val[0];
+              point.x0 = val[0]
+              point[yKey] = val[1];
+              chartData.push(point);
+            })
+          });
+          this.$.tsChart.notifyResize();  // force the chart to redraw
+          this.tsSeriesConfig = {};
+          this.tsSeriesConfig = this._buildSeriesConfig(tags, this.tag);
+        } else { // for circle chart or button indicator, we just need latest value.
+          // this.circleValue = chartData[0].y0;
+          this.circleValue = tags[0].results[0].values[0][1];
+        }
+        // console.log('formatted chartData:', chartData);
+        this.tsChartData = chartData;
+      },
+
+      _tagsOrRangeChanged: function(newTags, newRange) {
+        console.log('_tagsOrRangeChanged', newTags, newRange);
+        this.debounce('fetch', function() {     
+          if (newRange && newTags) {
+            this._fetchTimeseriesData(newTags.base || newTags, newRange);
+          }
+        }, 100);
+      },
+
+      // Expects a tag object, and a range object from px-rangepicker
+      // {key: "tag1", val: "Tag 1"}
+      // {"from":"2016-01-01T00:00:00.000Z","to":"2016-07-01T11:00:00.000Z"}
+      _fetchTimeseriesData: function(tag, range) {
+        // var agg = [{
+        //   "type": "avg",
+        //   "sampling": {
+        //     "unit": "s",
+        //     "value": "30"
+        //   }
+        // }];
+        var query = {
+          "cache_time": 0,
+          start: "30mi-ago", //moment(range.from).valueOf(),
+          end: moment(range.to).valueOf(),
+          tags: []
+        };
+        // tags.forEach(function(t) {
+          if (tag.checked) {
+            query.tags.push({
+              name: tag.key,
+              limit: 50,
+              order: "desc"
+              // aggregations: agg
+            });
+          }
+        // });
+        if (query.tags.length === 0) {  // default, if none were selected yet
+          query.tags.push({
+            name: tag.key
+            // aggregations: agg
+          });
+        }
+        console.log('fetching timeseries data', tag, range);
+        this.set('tsChartData', []);
+        this.set('tsSeriesConfig', {});
+        this.$.tsAjaxEl.url = '/api/predix-timeseries/v1/datapoints';
+        this.$.tsAjaxEl.method = 'POST';
+        this.$.tsAjaxEl.body = query;
+        this.$.tsAjaxEl.generateRequest();
+      },
+
+      _getDefaultRange: function(weeks) {
+        var from = moment().subtract(weeks, 'week'),
+          to = moment();
+        return {"from":from.toISOString(),"to":to.toISOString()};
+      }
+    });
+    </script>
+</dom-module>

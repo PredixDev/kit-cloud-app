@@ -1,0 +1,167 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/px-dropdown/px-dropdown.html">
+<link rel="import" href="../../bower_components/px-dropdown/px-dropdown-content.html">
+<link rel="import" href="../asset-browser/asset-browser.html">
+
+<link rel="import" href="kit-data-view-styles.html">
+
+<dom-module id="kit-data-view">
+  <style>
+  :host {
+    --iron-icon-width: 16px;
+    --iron-icon-height: 16px;
+  }
+  </style>
+  <template>
+    <style include="kit-data-view-styles"></style>
+    <asset-browser id="assetBrowser"
+      asset-model="{{rmdAssetModel}}"
+      opened-asset="{{openedAsset}}"
+      asset-query-url="/api/kit/device">
+    </asset-browser>
+
+    <px-dropdown id="refreshFrequencyDropdown"
+      display-value="Refresh Frequency"
+      style="position: absolute; top: 18px; right: 50px; width: 150px; padding-right: 5px">
+      <px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10'
+        items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"15","val":"Every 15 sec"},{"key":"60","val":"Every 60 sec"}]'>
+      </px-dropdown-content>
+    </px-dropdown>
+
+    <div id="refreshTableBtn"
+      style="text-align: center; line-height: 26px; width: 28px; height: 28px; position: absolute; top: 18px; right: 20px; border: 1px solid #999; border-radius: 4px;">
+      <iron-icon icon="fa:fa-refresh" style="margin-left: 2px; margin-top: 1px"></iron-icon>
+    </div>
+
+    <div class="u-pt flex">
+      <div class="u-1/4-desk u-1/1-palm">
+        <div class="u-pr">
+          <px-dropdown id="tagDropdown" checkbox-mode="true" display-value="Select Tags">
+            <px-dropdown-content items="{{displayTags}}" checkbox-mode="true"></px-dropdown-content>
+          </px-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex--wrap">
+      <template is="dom-repeat" items="{{displayTags}}">
+        <div class="flex__item u-1/3-desk u-1/1-palm">
+          <sensor-chart tag="{{item}}"></sensor-chart>
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'kit-data-view',
+      properties: {
+        rmdAssetModel: {
+          type: Object,
+          observer: '_assetModelChanged'
+        },
+        openedAsset: {
+          type: Object,
+          observer: '_openedAssetChanged'
+        },
+        displayTags: {
+          type: Array
+        }
+      },
+
+      _formatTagsForDisplay: function(tags) {
+        var displayTags = []
+        tags.forEach(function(t) {
+          var tag = {
+            key: t.timeseriesDatasource.tag,
+            val: t.label,
+            unit: t.unit,
+            chartType: 'time-series'
+          }
+          if (t.tagUri.toLowerCase().indexOf('rotary') > -1) {
+            tag.chartType = 'percent-circle';
+          } else if (t.tagUri.toLowerCase().indexOf('sound') > -1) {
+            tag.chartType = 'bar';
+          }
+          displayTags.push(tag);
+        });
+        return displayTags;
+      },
+      _openedAssetChanged: function(newVal) {
+        console.log('asset opened:', newVal);
+        if (newVal.tags) {
+          this.displayTags = this._formatTagsForDisplay(newVal.tags);
+        }
+        // this.showTimeseriesChart = newVal.uri.indexOf('asset') >= 0;
+      },
+      _assetModelChanged: function(newVal) {
+        console.log('asset model changed:', newVal);
+      },
+
+      _loadFragment: function(elementId, fragmentPath) {
+        if (Polymer.isInstance(this.$[elementId])) {
+          return;
+        }
+        Polymer.Base.importHref(fragmentPath, null, function() {
+          console.log('failed to load:', fragmentPath);
+        }, true);
+      },
+
+      _buildGroupQueryUrl: function() {
+        var userInfo = document.getElementById('kitLogin').userInfo;
+        if (userInfo && userInfo["user_id"]) {
+          // TODO: Move this into the server side.  don't want to expose the guid & query.
+          this.$.assetBrowser.assetGroupQueryUrl = '/api/predix-asset/group?filter=users=' + userInfo["user_id"] + '<groupRef';
+        } else {
+          window.location = '/login';
+        }
+      },
+
+      ready: function(){
+        this._loadFragment('tsChart', '/elements/sensor-chart/sensor-chart.html');
+        this._buildGroupQueryUrl();
+
+        // set copy of 'this' for callback function use below
+        var that = this;
+        // initialize refresh interval
+        this.refreshTimerInterval = 0;
+        // this.wsUrl = document.querySelector('#rmdPxView').elementData.wsUrl;
+
+        // Set refresh  button behavior
+        this.$.refreshTableBtn.addEventListener('click', function() {
+          // TODO: make this work.
+          // document.dispatchEvent(new Event('refreshCharts'));
+          console.log(this.$$('sensor-chart').length);
+        }.bind(this));
+
+        // Set refresh dropdown behavior
+        this.$.refreshFrequencyDropdown.addEventListener('px-dropdown-value-changed', function(evt){
+          var interval = 0;
+          switch (evt.detail.key) {
+            case '3':
+              interval = 3000;  // every 3 seconds
+              break;
+              case '15':
+                interval = 15000;  // every 3 seconds
+                break;
+            case '60':
+              interval = 60000;  // every 60 seconds
+              break;
+          }
+          clearInterval(that.refreshTimerInterval);
+
+          // If no refresh selected, clear any existing interval
+          if (interval === 0) {
+            that.refreshTimerInterval = 0;
+          }
+          // else set interval according to user selection
+          else {
+            that.refreshTimerInterval = setInterval(function() {
+              console.log('TODO: Fix this to request new time series data.');
+              // that.$.datatableAjaxEl.generateRequest();
+            }, interval);
+          }
+        });
+      }
+    });
+  </script>
+</dom-module>
