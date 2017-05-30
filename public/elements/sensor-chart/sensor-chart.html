@@ -133,7 +133,7 @@ A single tag should be passed in.
             }
           }
         });
-        console.log('series config', config);
+        // console.log('series config', config);
         return config;
       },
 
@@ -164,14 +164,14 @@ A single tag should be passed in.
           this.tsSeriesConfig = this._buildSeriesConfig(tags, this.tag);
         } else { // for circle chart or button indicator, we just need latest value.
           // this.circleValue = chartData[0].y0;
-          this.circleValue = tags[0].results[0].values[0][1];
+          this.circleValue = tags[0].results[0].values[0] ? tags[0].results[0].values[0][1] : 0;
         }
         // console.log('formatted chartData:', chartData);
         this.tsChartData = chartData;
       },
 
       _tagsOrRangeChanged: function(newTags, newRange) {
-        console.log('_tagsOrRangeChanged', newTags, newRange);
+        console.log('sensor-chart _tagsOrRangeChanged', newTags, newRange);
         this.debounce('fetch', function() {     
           if (newRange && newTags) {
             this._fetchTimeseriesData(newTags.base || newTags, newRange);
@@ -192,7 +192,7 @@ A single tag should be passed in.
         // }];
         var query = {
           "cache_time": 0,
-          start: "30mi-ago", //moment(range.from).valueOf(),
+          start: moment(range.from).valueOf(),
           end: moment(range.to).valueOf(),
           tags: []
         };
@@ -212,7 +212,7 @@ A single tag should be passed in.
             // aggregations: agg
           });
         }
-        console.log('fetching timeseries data', tag, range);
+        console.log('sensor-chart fetching timeseries data', tag, range);
         this.set('tsChartData', []);
         this.set('tsSeriesConfig', {});
         this.$.tsAjaxEl.url = '/api/predix-timeseries/v1/datapoints';

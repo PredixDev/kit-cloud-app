@@ -156,7 +156,7 @@ if (!config.isUaaConfigured()) {
       noredirect: false
     }),
     function(req, res, next) {
-      // add token to request
+      // add user token to request
       if (req.session 
           && req.session.passport 
           && req.session.passport.user 
@@ -171,48 +171,41 @@ if (!config.isUaaConfigured()) {
     proxy.customProxyMiddleware('/api/kit/device', config.kitServiceURL, '/device/')
   );
 
-  // TODO: get kit service URL from config
-  // if (config.kitServiceURL && config.kitServiceURL.indexOf('https') === 0) {
-    app.post('/api/kit/register',
+  app.post('/api/kit/register',
 
-        function(req, res, next) {
-          console.log('in /api/kit/* route.'); 
-          // console.log('req.query.cloudSession', req.query.cloudSession);
-          console.log('req.body', req.body);
-          console.log('req.body.pk', req.body.pk);
-          sessionOptions.store.get(req.body.pk, function(err, session) {
-            if (err) {
-         			res.status(err.status || 500);
-              res.send({
-                message: err.message,
-                error: err
-              });
-            }
-            console.log('session pulled from store by id:', JSON.stringify(session));
-            // add token to request
-            if (session 
-                && session.passport 
-                && session.passport.user 
-                && session.passport.user.ticket
-                && session.passport.user.ticket.access_token) {
-              req.headers['Authorization'] = 'bearer ' + session.passport.user.ticket.access_token;   
-              next();       
-            } else {
-              console.log('session:', session);
-              console.warn('*** No token found in session.')
-              // res.redirect('/device-login');
-              res.status(401).send({error: "Session expired, or no token found in session."})
-            }
-            // next();
-          });
-          // console.log('entire session: ', JSON.stringify(req.session));
-          // sessionOptions.store.ids(function(err, keys) {
-          //   console.log('session count: ', JSON.stringify(keys));
-          // });      
-        },
+      function(req, res, next) {
+        console.log('in /api/kit/* route.'); 
+        // console.log('req.query.cloudSession', req.query.cloudSession);
+        console.log('req.body', req.body);
+        console.log('req.body.pk', req.body.pk);
+        sessionOptions.store.get(req.body.pk, function(err, session) {
+          if (err) {
+            res.status(err.status || 500);
+            res.send({
+              message: err.message,
+              error: err
+            });
+          }
+          console.log('session pulled from store by id:', JSON.stringify(session));
+          // add user token to request
+          if (session 
+              && session.passport 
+              && session.passport.user 
+              && session.passport.user.ticket
+              && session.passport.user.ticket.access_token) {
+            req.headers['Authorization'] = 'bearer ' + session.passport.user.ticket.access_token;   
+            next();       
+          } else {
+            console.log('session:', session);
+            console.warn('*** No token found in session.')
+            // res.redirect('/device-login');
+            res.status(401).send({error: "Session expired, or no token found in session."})
+          }
+        });  
+      },
 
-        proxy.customProxyMiddleware('/api/kit/register', config.kitServiceURL, '/device/register')
-    );  
+      proxy.customProxyMiddleware('/api/kit/register', config.kitServiceURL, '/device/register')
+  );  
 
   // access real Predix services using this route.
   // the proxy will add UAA token and Predix Zone ID.
@@ -246,7 +239,7 @@ var mockKitRoutes = require('./routes/mock-kit.js')();
 app.use(['/mock-api/predix-asset', '/api/predix-asset'], jsonServer.router(mockAssetRoutes));
 app.use(['/mock-api/predix-timeseries', '/api/predix-timeseries'], mockTimeSeriesRouter);
 app.use('/api/kit', jsonServer.router(mockKitRoutes));
-require('./routes/mock-live-data.js')(httpServer);
+// require('./routes/mock-live-data.js')(httpServer);
 // ***** END MOCK ROUTES *****
 
 // route to return info for path-guide component.
