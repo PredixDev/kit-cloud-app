@@ -212,7 +212,7 @@ if (!config.isUaaConfigured()) {
   // (this route must be register after /api/kit/register, since that route is not protected by passport authentication.)
   app.use(['/predix-api', '/api'],
   	passport.authenticate('main', {
-  		noredirect: true
+  		noredirect: false
   	}),
   	proxy.router);
 
