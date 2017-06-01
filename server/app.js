@@ -80,6 +80,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.get('/docs', require('./routes/docs')(config));
 
+function redirectToDevice(req, res) {
+  console.log('session ID: ', req.sessionID);
+  if (req.session.deviceUrl) {
+    var url = req.session.deviceUrl;
+    req.session.deviceUrl = null;
+    console.log('deviceUrl found in session. redirecting to: ', url);
+    // we can't pass headers thru redirect, so we have to use query string. :(
+    res.redirect(url + '?pk=' + req.sessionID);
+  } else {
+    console.log('** No deviceUrl found in session. redirecting to: /');
+    res.redirect('/');
+  }
+}
+
+function getUserToken(req) {
+  if (req.session 
+          && req.session.passport 
+          && req.session.passport.user 
+          && req.session.passport.user.ticket
+          && req.session.passport.user.ticket.access_token) {
+    return req.session.passport.user.ticket.access_token;
+  }
+  return null;
+}
+
 if (!config.isUaaConfigured()) { 
   // no restrictions
   app.use(express.static(path.join(__dirname, process.env['base-dir'] ? process.env['base-dir'] : '../public')));
@@ -89,7 +114,7 @@ if (!config.isUaaConfigured()) {
     res.redirect('/');
   })
   app.get('/userinfo', function(req, res) {
-      res.send({user_name: 'Sample User'});
+      res.send({user_name: 'Sample User', user_id: 'sample_id'});
   });
 } else {
   //login route redirect to predix uaa login page
@@ -106,20 +131,7 @@ if (!config.isUaaConfigured()) {
   //callback route redirects to secure route after login
   app.get('/callback', passport.authenticate('predix', {
   	failureRedirect: '/'
-  }), function(req, res) {
-    console.log('in /callback route.');
-    console.log('session ID: ', req.sessionID);
-    if (req.session.deviceUrl) {
-      var url = req.session.deviceUrl;
-      req.session.deviceUrl = null;
-      console.log('/callback route. redirecting to: ', url);
-      // we can't pass headers thru redirect, so we have to use query string. :(
-      res.redirect(url + '?pk=' + req.sessionID);
-    } else {
-      console.log('/callback route. redirecting to: /');
-      res.redirect('/');
-    }
-  });
+  }), redirectToDevice);
 
   // example of calling a custom microservice.
   // if (windServiceURL && windServiceURL.indexOf('https') === 0) {
@@ -147,8 +159,30 @@ if (!config.isUaaConfigured()) {
     },
     passport.authenticate('main', {
       noredirect: false
-    }) 
+    }),
+    redirectToDevice // if they've already logged in.
   );
+
+  // get device groups for a user.
+  // here we just add the user_id to the filter, then the predix-asset route below proxies the request.
+  app.get('/api/predix-asset/group', 
+    passport.authenticate('main', {
+      noredirect: false
+    }),
+    function(req, res, next) {
+      var buf;
+      var tokenString = getUserToken(req).split('.')[1];
+      if (typeof Buffer.from === "function") {
+        // Node 5.10+
+        buf = Buffer.from(tokenString, 'base64');
+      } else {
+        // older Node versions
+        buf = new Buffer(tokenString, 'base64');
+      }
+      var userId = JSON.parse(buf.toString()).user_id;
+      req.url += '?filter=users=' + userId + '<groupRef';
+      next();
+  });
 
   // route to get all devices for a user from kit-service.  needs a user token.
   app.get('/api/kit/device',
@@ -157,12 +191,8 @@ if (!config.isUaaConfigured()) {
     }),
     function(req, res, next) {
       // add user token to request
-      if (req.session 
-          && req.session.passport 
-          && req.session.passport.user 
-          && req.session.passport.user.ticket
-          && req.session.passport.user.ticket.access_token) {
-        req.headers['Authorization'] = 'bearer ' + req.session.passport.user.ticket.access_token;   
+      if (getUserToken(req)) {
+        req.headers['Authorization'] = 'bearer ' + getUserToken(req);
         next();       
       } else {
         res.status(401).send({error: "Session expired, or no token found in session."})
@@ -172,7 +202,6 @@ if (!config.isUaaConfigured()) {
   );
 
   app.post('/api/kit/register',
-
       function(req, res, next) {
         console.log('in /api/kit/* route.'); 
         // console.log('req.query.cloudSession', req.query.cloudSession);
@@ -188,12 +217,8 @@ if (!config.isUaaConfigured()) {
           }
           console.log('session pulled from store by id:', JSON.stringify(session));
           // add user token to request
-          if (session 
-              && session.passport 
-              && session.passport.user 
-              && session.passport.user.ticket
-              && session.passport.user.ticket.access_token) {
-            req.headers['Authorization'] = 'bearer ' + session.passport.user.ticket.access_token;   
+          if (getUserToken(req)) {
+            req.headers['Authorization'] = 'bearer ' + getUserToken(req);
             next();       
           } else {
             console.log('session:', session);

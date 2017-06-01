@@ -1,8 +1,67 @@
 [
   {
+    "description": "/group/Ama",
+    "uri": "/group/Ama",
+    "name": "Ama",
+    "createdate": "1495833805506",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/AmarGroupMay30",
+    "uri": "/group/AmarGroupMay30",
+    "name": "AmarGroupMay30",
+    "createdate": "1496181827273",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "parent": "/group/root",
+    "description": "Predix Energy",
+    "uri": "/group/enterprise-predix",
+    "level": "enterprise",
+    "name": "Predix Energy"
+  },
+  {
+    "description": "/group/ge-devrel",
+    "uri": "/group/ge-devrel",
+    "name": "ge-devrel",
+    "createdate": "1496178304136",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/greg-iot",
+    "uri": "/group/greg-iot",
+    "name": "greg-iot",
+    "createdate": "1495144084346",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/NickTest",
+    "uri": "/group/NickTest",
+    "name": "NickTest",
+    "createdate": "1495857676344",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "parent": "/group/enterprise-predix",
+    "description": "Richmond Refinery",
+    "uri": "/group/plant-richmond-refinery",
+    "level": "plant",
+    "name": "Richmond Refinery 1"
+  },
+  {
     "description": "/group/Swap-Integration",
     "uri": "/group/Swap-Integration",
-    "name": "MOCK-Integration",
+    "name": "Swap-Integration",
     "createdate": "1493060894249",
     "groupRef": [
       "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
@@ -27,6 +86,42 @@
     ]
   },
   {
+    "description": "/group/swapna-updated",
+    "uri": "/group/swapna-updated",
+    "name": "swapna-updated",
+    "createdate": "1495649527253",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/test",
+    "uri": "/group/test",
+    "name": "test",
+    "createdate": "1495139334182",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/test2",
+    "uri": "/group/test2",
+    "name": "test2",
+    "createdate": "1495145054800",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/Test5-26",
+    "uri": "/group/Test5-26",
+    "name": "Test5-26",
+    "createdate": "1495857530685",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
     "description": "/group/testcomp2",
     "uri": "/group/testcomp2",
     "name": "testcomp2",
@@ -45,10 +140,28 @@
     ]
   },
   {
+    "description": "/group/testcompany-2",
+    "uri": "/group/testcompany-2",
+    "name": "testcompany-2",
+    "createdate": "1495145333889",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
     "description": "/group/testexpiry",
     "uri": "/group/testexpiry",
     "name": "testexpiry",
     "createdate": "1493156500795",
+    "groupRef": [
+      "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
+    ]
+  },
+  {
+    "description": "/group/TestTestTEst",
+    "uri": "/group/TestTestTEst",
+    "name": "TestTestTEst",
+    "createdate": "1495755774253",
     "groupRef": [
       "/user-group/6be0b648-03e8-40a2-a1d3-a4f6aa9c845e"
     ]

@@ -1,0 +1,71 @@
+[{
+	"uri": "/device/swapna-device-name",
+	"deviceName": "swapna-device-name",
+	"deviceAddress": "swapna-device-name",
+	"deviceType": "NUC",
+	"activationDate": "1496178304042",
+	"groupRef": "/group/ge-devrel",
+	"userId": "bd9f70a3-8aaa-490b-b2a8-91ba59e58f0f",
+	"createdDate": "1496178304042",
+	"updateDate": "1496178304042",
+	"tags": [{
+			"complexType": "AssetTag",
+			"tagUri": "/tag/light",
+			"label": "Light",
+			"unit": "lumens",
+			"hiAlarmThreshold": 80,
+			"loAlarmThreshold": 65,
+			"timeseriesDatasource": {
+				"complexType": "TimeseriesDatasource",
+				"tag": "swapna-device-name:light"
+			}
+		},
+		{
+			"complexType": "AssetTag",
+			"tagUri": "/tag/temperature",
+			"label": "Temperature",
+			"unit": "F",
+			"hiAlarmThreshold": 80,
+			"loAlarmThreshold": 65,
+			"timeseriesDatasource": {
+				"complexType": "TimeseriesDatasource",
+				"tag": "swapna-device-name:temperature"
+			}
+		},
+		{
+			"complexType": "AssetTag",
+			"tagUri": "/tag/sound",
+			"label": "Sound",
+			"unit": "dB",
+			"hiAlarmThreshold": 80,
+			"loAlarmThreshold": 65,
+			"timeseriesDatasource": {
+				"complexType": "TimeseriesDatasource",
+				"tag": "swapna-device-name:sound"
+			}
+		},
+		{
+			"complexType": "AssetTag",
+			"tagUri": "/tag/button",
+			"label": "Button",
+			"hiAlarmThreshold": 80,
+			"loAlarmThreshold": 65,
+			"timeseriesDatasource": {
+				"complexType": "TimeseriesDatasource",
+				"tag": "swapna-device-name:button"
+			}
+		},
+		{
+			"complexType": "AssetTag",
+			"tagUri": "/tag/rotaryangle",
+			"label": "Rotary Angle",
+			"unit": "degrees",
+			"hiAlarmThreshold": 80,
+			"loAlarmThreshold": 65,
+			"timeseriesDatasource": {
+				"complexType": "TimeseriesDatasource",
+				"tag": "swapna-device-name:rotaryangle"
+			}
+		}
+	]
+}]

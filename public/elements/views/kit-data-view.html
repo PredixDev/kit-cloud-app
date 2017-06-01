@@ -24,7 +24,8 @@
     <asset-browser id="assetBrowser"
       asset-model="{{rmdAssetModel}}"
       opened-asset="{{openedAsset}}"
-      asset-query-url="/api/kit/device">
+      asset-query-url="/api/kit/device"
+      asset-group-query-url="/api/predix-asset/group">
     </asset-browser>
 
     <px-dropdown id="refreshFrequencyDropdown"
@@ -123,19 +124,9 @@
         }, true);
       },
 
-      _buildGroupQueryUrl: function() {
-        var userInfo = document.getElementById('kitLogin').userInfo;
-        if (userInfo && userInfo["user_id"]) {
-          // TODO: Move this into the server side.  don't want to expose the guid & query.
-          this.$.assetBrowser.assetGroupQueryUrl = '/api/predix-asset/group?filter=users=' + userInfo["user_id"] + '<groupRef';
-        } else {
-          window.location = '/login';
-        }
-      },
-
       _getDefaultRange: function(weeks) {
-        var from = moment().subtract(weeks, 'week'),
-          to = moment();
+        var to = moment().add(1, 'day');
+        var from = moment(to).subtract(weeks, 'week');
         return {"from":from.toISOString(),"to":to.toISOString()};
       },
 
@@ -169,30 +160,34 @@
           // }
         });
         console.log('kit-data-view fetching timeseries data', tags, range);
-        // this.set('tsChartData', []);
-        // this.set('tsSeriesConfig', {});
         this.$.tsAjaxEl.url = '/api/predix-timeseries/v1/datapoints';
         this.$.tsAjaxEl.method = 'POST';
         this.$.tsAjaxEl.body = query;
         this.$.tsAjaxEl.generateRequest();
       },      
 
+      // find which tags from predix asset have matching data in predix time series.
       _buildTagsWithData: function(tsTags) {
-        // TODO: Loop through display tags, find match.
-        // add tsTags data to display Tag
-        // else don't add to tagsWithData
         var matchingTags = [];
-        this.assetTags.forEach(function(dt) {
-          var copy = Object.assign({}, dt); // shallow copy only
-          copy.tsTag = tsTags[0];
-          matchingTags.push(copy);
-        }, this);
+        
+        if (tsTags && tsTags.length > 0 && this.assetTags && this.assetTags.length > 0) {
+          for (var i = 0; i < tsTags.length; i++) {
+            var tsTag = tsTags[i];
+            for (var j = 0; j < this.assetTags.length; j++) {
+              var aTag = this.assetTags[j];
+              if (aTag.key === tsTag.name) {
+                var copy = Object.assign({}, aTag); //shallow copy only
+                matchingTags.push(copy);
+                break;
+              }
+            }
+          }
+        }
         return matchingTags;
       },
 
       ready: function(){
         this._loadFragment('tsChart', '/elements/sensor-chart/sensor-chart.html');
-        this._buildGroupQueryUrl();
         this.selectedRange = this._getDefaultRange(1);
 
         // set copy of 'this' for callback function use below
@@ -203,7 +198,7 @@
         this.$.tsAjaxEl.addEventListener('response', function(evt) {
           console.log('ts data', evt.detail.response);
           if (evt.detail.response.tags) {
-            this.tagsWithData = this._buildTagsWithData(evt.detail.response.tags);
+            this.set('tagsWithData', this._buildTagsWithData(evt.detail.response.tags));
           }
           this.chartRange = this.selectedRange;
         }.bind(this));

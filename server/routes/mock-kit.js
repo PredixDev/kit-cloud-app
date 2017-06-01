@@ -8,5 +8,8 @@ module.exports = function() {
   const registerJson = require(path.resolve(__dirname, '../sample-data/kit-service/nuc-register.json'));
   routes["register"] = registerJson;
 
+  const deviceJson = require(path.resolve(__dirname, '../sample-data/kit-service/device.json'));
+  routes["device"] = deviceJson;  
+
   return routes;
 };

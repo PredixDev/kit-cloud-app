@@ -222,8 +222,8 @@ A single tag should be passed in.
       },
 
       _getDefaultRange: function(weeks) {
-        var from = moment().subtract(weeks, 'week'),
-          to = moment();
+        var to = moment().add(1, 'day');
+        var from = moment(to).subtract(weeks, 'week');
         return {"from":from.toISOString(),"to":to.toISOString()};
       }
     });
