@@ -1,6 +1,6 @@
 {
   "name": "Predix Kit",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "private": true,
   "dependencies": {
     "data-exchange": "https://github.com/PredixDev/data-exchange#2.0.29",

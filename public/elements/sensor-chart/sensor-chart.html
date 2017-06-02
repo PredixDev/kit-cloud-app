@@ -1,3 +1,4 @@
+
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/px-vis-timeseries/px-vis-timeseries.html">
@@ -32,9 +33,15 @@ A single tag should be passed in.
             </px-vis-timeseries>
           <!--</template>-->
           <template is="dom-if" if="{{showPercentCircle}}">
-            <div style="width: 70%; padding-top: 2rem">
-              <px-percent-circle max="1023" val="{{circleValue}}" colors="[rgb(96,189,104)]">
-              </px-percent-circle>
+            <div class="flex">
+              <div class="flex__item u-3/4-desk u-1/1-palm">
+            <!--<div style="width: 60%; padding-top: 2rem">-->
+                <px-percent-circle max="1023" val="{{circleValue}}" colors="[rgb(96,189,104)]">
+                </px-percent-circle>
+              </div>
+              <div class="flex__item u-1/4-desk u-1/1-palm">
+                <h4>{{circleValue}}</h4>
+              </div>
             </div>
           </template>
           <template is="dom-if" if="{{showBar}}">
@@ -183,13 +190,7 @@ A single tag should be passed in.
       // {key: "tag1", val: "Tag 1"}
       // {"from":"2016-01-01T00:00:00.000Z","to":"2016-07-01T11:00:00.000Z"}
       _fetchTimeseriesData: function(tag, range) {
-        // var agg = [{
-        //   "type": "avg",
-        //   "sampling": {
-        //     "unit": "s",
-        //     "value": "30"
-        //   }
-        // }];
+
         var query = {
           "cache_time": 0,
           start: moment(range.from).valueOf(),
@@ -197,20 +198,19 @@ A single tag should be passed in.
           tags: []
         };
         // tags.forEach(function(t) {
-          if (tag.checked) {
+          // if (tag.checked) {
             query.tags.push({
               name: tag.key,
               limit: 50,
               order: "desc"
-              // aggregations: agg
             });
-          }
+          // }
         // });
         if (query.tags.length === 0) {  // default, if none were selected yet
-          query.tags.push({
-            name: tag.key
-            // aggregations: agg
-          });
+          console.log('no tags passed to sensor chart.');
+          // query.tags.push({
+          //   name: tag.key
+          // });
         }
         console.log('sensor-chart fetching timeseries data', tag, range);
         this.set('tsChartData', []);

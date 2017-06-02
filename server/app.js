@@ -94,13 +94,13 @@ function redirectToDevice(req, res) {
   }
 }
 
-function getUserToken(req) {
-  if (req.session 
-          && req.session.passport 
-          && req.session.passport.user 
-          && req.session.passport.user.ticket
-          && req.session.passport.user.ticket.access_token) {
-    return req.session.passport.user.ticket.access_token;
+function getUserToken(session) {
+  if (session 
+          && session.passport 
+          && session.passport.user 
+          && session.passport.user.ticket
+          && session.passport.user.ticket.access_token) {
+    return session.passport.user.ticket.access_token;
   }
   return null;
 }
@@ -170,18 +170,22 @@ if (!config.isUaaConfigured()) {
       noredirect: false
     }),
     function(req, res, next) {
-      var buf;
-      var tokenString = getUserToken(req).split('.')[1];
-      if (typeof Buffer.from === "function") {
-        // Node 5.10+
-        buf = Buffer.from(tokenString, 'base64');
+      if (req.session) {
+        var buf;
+        var tokenString = getUserToken(req.session).split('.')[1];
+        if (typeof Buffer.from === "function") {
+          // Node 5.10+
+          buf = Buffer.from(tokenString, 'base64');
+        } else {
+          // older Node versions
+          buf = new Buffer(tokenString, 'base64');
+        }
+        var userId = JSON.parse(buf.toString()).user_id;
+        req.url += '?filter=users=' + userId + '<groupRef';
+        next();
       } else {
-        // older Node versions
-        buf = new Buffer(tokenString, 'base64');
+        res.status(401).send({error: "Session expired, or no token found in session."})
       }
-      var userId = JSON.parse(buf.toString()).user_id;
-      req.url += '?filter=users=' + userId + '<groupRef';
-      next();
   });
 
   // route to get all devices for a user from kit-service.  needs a user token.
@@ -191,8 +195,8 @@ if (!config.isUaaConfigured()) {
     }),
     function(req, res, next) {
       // add user token to request
-      if (getUserToken(req)) {
-        req.headers['Authorization'] = 'bearer ' + getUserToken(req);
+      if (getUserToken(req.session)) {
+        req.headers['Authorization'] = 'bearer ' + getUserToken(req.session);
         next();       
       } else {
         res.status(401).send({error: "Session expired, or no token found in session."})
@@ -217,8 +221,8 @@ if (!config.isUaaConfigured()) {
           }
           console.log('session pulled from store by id:', JSON.stringify(session));
           // add user token to request
-          if (getUserToken(req)) {
-            req.headers['Authorization'] = 'bearer ' + getUserToken(req);
+          if (getUserToken(session)) {
+            req.headers['Authorization'] = 'bearer ' + getUserToken(session);
             next();       
           } else {
             console.log('session:', session);

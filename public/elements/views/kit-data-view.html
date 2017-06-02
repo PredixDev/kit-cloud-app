@@ -173,12 +173,14 @@
         if (tsTags && tsTags.length > 0 && this.assetTags && this.assetTags.length > 0) {
           for (var i = 0; i < tsTags.length; i++) {
             var tsTag = tsTags[i];
-            for (var j = 0; j < this.assetTags.length; j++) {
-              var aTag = this.assetTags[j];
-              if (aTag.key === tsTag.name) {
-                var copy = Object.assign({}, aTag); //shallow copy only
-                matchingTags.push(copy);
-                break;
+            if (tsTag.results[0].values.length > 0) {
+              for (var j = 0; j < this.assetTags.length; j++) {
+                var aTag = this.assetTags[j];
+                if (aTag.key === tsTag.name) {
+                  var copy = Object.assign({}, aTag); //shallow copy only
+                  matchingTags.push(copy);
+                  break;
+                }
               }
             }
           }
