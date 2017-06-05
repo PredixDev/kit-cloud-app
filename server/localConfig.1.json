@@ -1,0 +1,14 @@
+{
+  "development": {
+    "note": "This is for release-kit-app on June 1.",
+    "uaaURL": "https://7d0acc22-5e19-401d-b7a2-4ed99cf959fa.predix-uaa.run.aws-usw02-pr.ice.predix.io",
+    "base64ClientCredential": "YXBwX2NsaWVudF9pZDpzZWNyZXQ=",
+    "loginBase64ClientCredential": "bG9naW5fY2xpZW50X2lkOnNlY3JldA==",
+    "appURL": "http://localhost:5000",
+    "timeseriesURL": "https://time-series-store-predix.run.aws-usw02-pr.ice.predix.io/v1/datapoints",
+    "timeseriesZoneId": "28c38cbe-5186-4440-a03d-44025ba0bfe5",
+    "assetURL": "https://predix-asset.run.aws-usw02-pr.ice.predix.io",
+    "assetZoneId": "b3b8b426-09d7-4a56-bf31-ae063d8ac6e2",
+    "kitServiceURL": "https://release-kit-service.run.aws-usw02-pr.ice.predix.io"
+  }
+}

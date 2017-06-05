@@ -30,6 +30,7 @@
 
     <px-dropdown id="refreshFrequencyDropdown"
       display-value="Refresh Frequency"
+      selected-key="15"
       style="position: absolute; top: 18px; right: 50px; width: 150px; padding-right: 5px">
       <px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10'
         items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"15","val":"Every 15 sec"},{"key":"60","val":"Every 60 sec"}]'>
@@ -191,6 +192,7 @@
       ready: function(){
         this._loadFragment('tsChart', '/elements/sensor-chart/sensor-chart.html');
         this.selectedRange = this._getDefaultRange(1);
+        // this.$.refreshFrequencyDropdown.selectedKey = 15;
 
         // set copy of 'this' for callback function use below
         var that = this;

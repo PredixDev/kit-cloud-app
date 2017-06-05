@@ -25,7 +25,7 @@
       properties: {},
       ready: function() {
         var that = this;
-        this.$.aboutContentAjaxEl.url = "/docs";
+        this.$.aboutContentAjaxEl.url = "/docs/ABOUT.md";
 
         this.$.aboutContentAjaxEl.addEventListener('response', function(evt) {
           that.$.aboutContentMarkdown.markdown = evt.detail.response;

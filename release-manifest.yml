@@ -1,0 +1,23 @@
+---
+applications:
+  - name: release-kit-app
+    memory: 128M
+    timeout: 180
+    buildpack: nodejs_buildpack
+    command: node server/app.js
+    # command: DEBUG=express:* node server/app.js
+    path: dist
+services:
+ # to work with mock data - comment out these services
+  - release-uaa
+  - release-redis
+  - release-time-series
+  - release-asset
+env:
+    node_env: cloud
+    uaa_service_label : predix-uaa
+    # Add these values for authentication in the cloud
+    clientId: app_client_id
+    base64ClientCredential: YXBwX2NsaWVudF9pZDpzZWNyZXQ=
+    loginBase64ClientCredential: bG9naW5fY2xpZW50X2lkOnNlY3JldA==
+    kitServiceURL: https://release-kit-service.run.aws-usw02-pr.ice.predix.io

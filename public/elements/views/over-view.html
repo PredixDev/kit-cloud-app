@@ -1,19 +1,263 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/px-view-header/px-view-header.html">
 <link rel="import" href="../../bower_components/px-card/px-card.html">
 
 <dom-module id="over-view">
+  <style>
+    .component-mouseover {
+      border: 1px solid rgba(58, 180, 212, 0);
+      border-radius: 44px;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 88px;
+      height: 88px;
+    }
+
+    .small-mouseover {
+      width: 40px;
+      height: 40px;
+    }
+
+    .component-mouseover:hover {
+      box-shadow: 0 0 0 25px rgba(58, 180, 212, 0.3);
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: absolute;
+    }
+
+    .overlay-tipup {
+    	width: 0;
+    	height: 0;
+    	border-left: 10px solid transparent;
+    	border-right: 10px solid transparent;
+    	border-bottom: 10px solid rgba(58, 180, 212, 1);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .overlay-body {
+      width: 200px;
+      height: 100px;
+      display: block;
+      background-color: rgba(58, 180, 212, 1);
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      padding-top: 10px;
+    }
+
+    .text-container {
+      width: 180px;
+      height: 90px;
+      display: block;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .overview-image-container {
+      width: 100%;
+      background-color: #fff;
+      position: relative;
+      padding: 25px 0 5px 0;
+      min-width: 780px;
+    }
+
+    .image-container {
+      width: 750px;
+      display: block;
+      margin: 0 auto 15px auto;
+      position: relative;
+    }
+
+    .overview-image {
+      display: block;
+    }
+
+    .overview-text-container {
+      width: 100%;
+      height: 120px;
+      color: #fff;
+      background-color: rgb(40, 134, 175);
+      position: relative;
+      min-width: 780px;
+    }
+
+    .overview-header {
+      margin: 15px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .overview-text {
+      margin: 15px;
+    }
+  </style>
   <template>
-    <px-card>
-      OVERVIEW
+    <px-card header-text="Predix Kits">
+      <div class="overview-image-container">
+        <div class="image-container">
+          <img class="overview-image" src="/docs/images/SystemDiagram.png"></img>
+          <div
+            class="component-mouseover"
+            id="predixMachine"
+            style="left: 53px; top: 70px;"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="industrialAsset"
+            style="left: 53px; top: 298px;"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="eventHub"
+            style="left: 210px; top: 194px;"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="analytics"
+            style="left: 312px; top: 88px;"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="customServices"
+            style="left: 433px; top: 88px;"
+          >
+          </div>
+          <div
+            class="component-mouseover"
+            id="timeSeries"
+            style="left: 433px; top: 301px;"
+          >
+          </div>
+          <div
+            class="component-mouseover"
+            id="asset"
+            style="left: 312px; top: 301px;"
+            >
+          </div>
+          <div
+            class="component-mouseover small-mouseover"
+            id="auth"
+            style="left: 245px; top: 53px;"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="apps"
+            style="left: 604px; top: 250px;"
+          >
+          </div>
+          <!--
+          <div class="overlay" id="overlay" style="left: -2px; top: 160px; width: 200px; height: 110px;">
+            <div class="overlay-tipup"></div>
+            <div class="overlay-body">
+              <div class="text-container">
+                <span>The Predix Machine is software running on the device.  Click on this area to learn more about Predix Machine.</span>
+              </div>
+            </div>
+          </div>
+          -->
+        </div>
+        <div class="overview-text-container">
+          <div id="overviewHeader" class="overview-header"></div>
+          <div id="overviewText" class="overview-text">
+            <br/>Mouse over each component in the diagram to learn more.
+          </div>
+        </div>
+      </div>
     </px-card>
   </template>
   <script>
     Polymer({
       is: 'over-view',
-      properties: {},
-      ready: function() {
+      properties: {
+        mouseOverDetails: {
+          'industrialAsset': {
+            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.   Click continue to view data from the Device associated to this asset.'
+            , 'header': "Industrial Asset"
+            , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html?environment=dev#2365'
+          },
+          'predixMachine': {
+            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Learn more about how you can leverage Predix Machine to realize operations optimization.  Click to learn more.'
+            , 'header': 'Predix Machine'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/machine/'
+          },
+          'eventHub': {
+            'text': 'Real time messaging across your Digital Twin ecosystem is critical.  From data ingestion events to analytics events Event Hub streaming services keep your processes running efficiently.  Click to learn more.'
+            , 'header': 'Event Hub'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/event_hub/'
+          },
+          'asset': {
+            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your Fleet of assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytics inputs, aggregate results and most importantly your core Asset Model for each asset.  Click to learn more.'
+            , 'header': 'Asset'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/asset/'
+          },
+          'timeSeries': {
+            'text': 'Data Variety at a high Velocity and with Volume is the inevitable Industrial Internet use-case.  Predix Time Series stores data at cloud scale and provides a straightforward REST API, allowing your Analytics to unlock the potential of asset optimization.  Click to learn more.'
+            , 'header': 'Time Series'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/time_series/'
+          },
+          'analytics': {
+            'text': 'The realization of continuously updating your Digital Twin is where Predix Analytics shines.  With a huge library of Orchestrated analytics you can realize efficiencies across your assets, your plant, your fleets, your people and your processes. Click to learn more.'
+            , 'header': 'Analytics'
+            , 'learnMoreURL': 'https://docs.predix.io/en/service'
+          },
+          'customServices': {
+            'text': 'Predix architecture provides developers the ability to create their own custom services, leveraging the security and performance of the Predix platform.  Click to learn more.'
+            , 'header': 'Custom Services'
+            , 'learnMoreURL': 'https://docs.predix.io/en/service'
+          },
+          'auth': {
+            'text': 'Security permeates the entire Predix ecosystem.  From Edge devices to Edge Manager and the Cloud your industrial processes are safe and secure.  Click to learn more.'
+            , 'header': 'Authentication'
+            , 'learnMoreURL': 'https://docs.predix.io/en/service'
+          },
+          'edgeManager': {
+            'text': ''
+            , 'header': 'Edge Manager'
+            , 'learnMoreURL': ''
+          },
+          'apps': {
+            'text': 'Predix provides pre-built, responsive web application starter kits that accelerate frontend development.  These applications are based on leading frontend technology and come with server-side features for easy integration with Predix services.  Click to learn more.'
+            , 'header': 'Applications'
+            , 'learnMoreURL': 'https://github.com/PredixDev/predix-webapp-starter'
+          }
+        }
+      },
 
+      ready: function() {
+        var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
+        var component;
+        for (var i=0; i < hoverComponents.length; i++) {
+          component = hoverComponents[i];
+          component.addEventListener(
+            'mouseover',
+            function(event) {
+              this.$$('#overviewText').innerHTML = this.properties.mouseOverDetails[event.target.id].text;
+              this.$$('#overviewHeader').innerHTML = '<br/>' + this.properties.mouseOverDetails[event.target.id].header;
+            }.bind(this)
+          );
+          component.addEventListener(
+            'mouseout',
+            function(event) {
+              this.$$('#overviewText').innerHTML = '<br/>Mouse over each component in the diagram to learn more.';
+              this.$$('#overviewHeader').innerHTML = '';
+            }.bind(this)
+          );
+          component.addEventListener(
+            'click',
+            function(event) {
+              var url = this.properties.mouseOverDetails[event.target.id].learnMoreURL;
+              var win = window.open(url, '_blank');
+              win.focus();
+            }.bind(this)
+          )
+        };
       }
     });
   </script>
