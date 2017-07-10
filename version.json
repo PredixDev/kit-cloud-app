@@ -1,11 +1,11 @@
 {
   "name": "Predix Kit Cloud App",
-  "version": "1.0.39",
+  "version": "1.0.41",
   "private": true,
   "dependencies": {
     "data-exchange": "https://github.com/PredixDev/data-exchange#2.0.29",
     "local-setup": "https://github.com/PredixDev/local-setup#1.0.12",
-    "kit-cloud-app": "https://github.com/PredixDev/kit-cloud-app#1.0.39",
+    "kit-cloud-app": "https://github.com/PredixDev/kit-cloud-app#1.0.41",
     "kit-service": "https://github.com/PredixDev/kit-service#1.0.1",
     "Predix-HelloWorld-WebApp": "https://github.com/PredixDev/Predix-HelloWorld-WebApp#1.1.46",
     "predix-scripts": "https://github.com/PredixDev/predix-scripts#1.1.35"

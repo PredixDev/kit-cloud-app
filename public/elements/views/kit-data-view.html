@@ -30,11 +30,12 @@
     </asset-browser>
 
     <px-dropdown id="refreshFrequencyDropdown"
-      display-value="Refresh Frequency"
-      selected-key="15"
+      display-value="Every 5 sec"
+      selected-key="{{_refreshTimerInterval}}"
+      value="Every 5 sec"
       style="position: absolute; top: 18px; right: 50px; width: 150px; padding-right: 5px">
       <px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10'
-        items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"15","val":"Every 15 sec"},{"key":"60","val":"Every 60 sec"}]'>
+        items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"5","val":"Every 5 sec"},{"key":"30","val":"Every 30 sec"}]'>
       </px-dropdown-content>
     </px-dropdown>
 
@@ -88,6 +89,10 @@
         },
         chartRange: {
           type: Object
+        },
+        _refreshTimerInterval: {
+          type: Number,
+          value: 5
         }
       },
       observers: ['_tagsOrRangeChanged(assetTags.*, selectedRange)'],
@@ -187,18 +192,17 @@
             }
           }
         }
+        if (matchingTags.length === 0) {
+          matchingTags.push({val: 'No Data Found', chartType: 'empty'});
+        }
         return matchingTags;
       },
 
       ready: function(){
         this._loadFragment('tsChart', '/elements/sensor-chart/sensor-chart.html');
         this.selectedRange = this._getDefaultRange(1);
-        // this.$.refreshFrequencyDropdown.selectedKey = 15;
-
         // set copy of 'this' for callback function use below
         var that = this;
-        // initialize refresh interval
-        this.refreshTimerInterval = 0;
 
         this.$.tsAjaxEl.addEventListener('response', function(evt) {
           console.log('ts data', evt.detail.response);
@@ -215,31 +219,26 @@
 
         // Set refresh dropdown behavior
         this.$.refreshFrequencyDropdown.addEventListener('px-dropdown-value-changed', function(evt){
-          var interval = 0;
-          switch (evt.detail.key) {
-            case '3':
-              interval = 3000;  // every 3 seconds
-              break;
-              case '15':
-                interval = 15000;  // every 3 seconds
-                break;
-            case '60':
-              interval = 60000;  // every 60 seconds
-              break;
-          }
-          clearInterval(that.refreshTimerInterval);
+          var interval = that._refreshTimerInterval * 1000;
+          console.log('interval', interval);
+          clearInterval(that.intervalId);
 
           // If no refresh selected, clear any existing interval
           if (interval === 0) {
-            that.refreshTimerInterval = 0;
+            that._refreshTimerInterval = 0;
           }
           // else set interval according to user selection
           else {
-            that.refreshTimerInterval = setInterval(function() {
+            that.intervalId = setInterval(function() {
               that.selectedRange = that._getDefaultRange(1);
             }, interval);
           }
         });
+
+        // start off initial interval loop
+        this.intervalId = setInterval(function() {
+          that.selectedRange = that._getDefaultRange(1);
+        }, 5000);
       }
     });
   </script>

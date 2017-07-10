@@ -19,6 +19,7 @@ px-simple-bar-chart {
 
 // Trumps
 $inuit-enable-paddings : true;
+$inuit-enable-paddings--large : true;
 $inuit-enable-paddings--tiny : true;
 @import "px-spacing-design/_trumps.spacing.scss";
 @import "px-widths-responsive-design/_trumps.widths-responsive.scss";

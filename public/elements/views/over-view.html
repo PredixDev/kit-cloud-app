@@ -3,8 +3,14 @@
 
 <dom-module id="over-view">
   <style>
+    :root {
+      --overlay-background-rgb: rgb(58, 180, 212);
+      --overlay-background-hex: #2886af;
+      --overlay-background: #fff5cc;
+      --mouseover-halo: rgba(58, 180, 212, 0.3);
+    }
+
     .component-mouseover {
-      border: 1px solid rgba(58, 180, 212, 0);
       border-radius: 44px;
       position: absolute;
       background-color: rgba(255, 255, 255, 0.1);
@@ -12,46 +18,86 @@
       height: 88px;
     }
 
-    .small-mouseover {
-      width: 40px;
-      height: 40px;
-    }
-
     .component-mouseover:hover {
-      box-shadow: 0 0 0 25px rgba(58, 180, 212, 0.3);
+      box-shadow: 0 0 6px 18px var(--mouseover-halo);
       cursor: pointer;
     }
 
     .overlay {
       position: absolute;
+      width: 390px;
+      height: 160px;
     }
 
-    .overlay-tipup {
+    .overlay-tip-up {
+      position: absolute;
     	width: 0;
     	height: 0;
-    	border-left: 10px solid transparent;
-    	border-right: 10px solid transparent;
-    	border-bottom: 10px solid rgba(58, 180, 212, 1);
-      display: block;
-      margin: 0 auto;
+      top: -9px;
+      left: 165px;
+    	border-left: 20px solid transparent;
+    	border-right: 20px solid transparent;
+    	border-bottom: 20px solid var(--overlay-background);
+    }
+
+    .overlay-tip-down {
+      position: absolute;
+    	width: 0;
+    	height: 0;
+      top: 129px;
+      left: 165px;
+    	border-left: 20px solid transparent;
+    	border-right: 20px solid transparent;
+    	border-top: 20px solid var(--overlay-background);
+    }
+
+    .overlay-tip-right {
+      position: absolute;
+    	width: 0;
+    	height: 0;
+      top: 50px;
+      left: 359px;
+    	border-top: 20px solid transparent;
+    	border-bottom: 20px solid transparent;
+    	border-left: 20px solid var(--overlay-background);
+    }
+
+    .overlay-tip-left {
+      position: absolute;
+    	width: 0;
+    	height: 0;
+      left: -9px;
+      top: 50px;
+    	border-top: 20px solid transparent;
+    	border-bottom: 20px solid transparent;
+    	border-right: 20px solid var(--overlay-background);
+    }
+
+    .overlay-shell {
+      width: 370px;
+      height: 140px;
+      border: 10px solid transparent;
+      position: relative;
     }
 
     .overlay-body {
-      width: 200px;
-      height: 100px;
-      display: block;
-      background-color: rgba(58, 180, 212, 1);
-      border-radius: 5px;
-      color: #fff;
+      position: absolute;
+      width: 350px;
+      height: 120px;
+      top: 10px;
+      left: 10px;
+      border: 0;
+      background-color: var(--overlay-background);
+      border-radius: 8px;
+      color: #012939;
       font-size: 14px;
-      padding-top: 10px;
     }
 
     .text-container {
-      width: 180px;
-      height: 90px;
+      width: 330px;
+      height: 110px;
       display: block;
-      margin: auto;
+      margin: 10px;
       overflow: hidden;
     }
 
@@ -68,34 +114,70 @@
       display: block;
       margin: 0 auto 15px auto;
       position: relative;
+      overflow: hiddeh;
     }
 
     .overview-image {
       display: block;
     }
 
-    .overview-text-container {
-      width: 100%;
-      height: 120px;
-      color: #fff;
-      background-color: rgb(40, 134, 175);
+    .video-thumbnail {
+      display: inline;
+      position: absolute;
+      top: -70px;
+      right: 0;
+      width: 40px;
+      height: 30px;
+      background-color: transparent;
+    }
+
+    .video-thumbnail-inside {
       position: relative;
-      min-width: 780px;
+      width: 40px;
+      height: 30px;
+      margin: 10px 0;
+      background: #aaa;
+      border-radius: 50% / 10%;
+      color: white;
+      text-align: center;
+      text-indent: .1em;
     }
 
-    .overview-header {
-      margin: 15px;
-      font-size: 16px;
-      font-weight: bold;
+    .video-thumbnail-inside:before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      bottom: 10%;
+      right: -5%;
+      left: -5%;
+      background: inherit;
+      border-radius: 5% / 50%;
     }
 
-    .overview-text {
-      margin: 15px;
+    .video-thumbnail-play-icon {
+      position: absolute;
+    	width: 0;
+    	height: 0;
+      top: 7px;
+      left: 15px;
+    	border-top: 8px solid transparent;
+    	border-bottom: 8px solid transparent;
+    	border-left: 15px solid white;
+    }
+
+    .iframe-video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #000;
+      width: 750px;
+      height: 450px;
     }
   </style>
   <template>
     <px-card header-text="Predix Kits">
       <p>Mouse over each component in the diagram to learn more.</p>
+        <!--Click on the video icon to see a Predix video.</p>-->
       <div class="overview-image-container">
         <div class="image-container">
           <img class="overview-image" src="/docs/images/SystemDiagram.png"></img>
@@ -103,72 +185,140 @@
             class="component-mouseover"
             id="predixMachine"
             style="left: 53px; top: 70px;"
+            data-overlay-position="right"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="device"
+            style="left: 53px; top: 165px;"
+            data-overlay-position="right"
             >
           </div>
           <div
             class="component-mouseover"
             id="industrialAsset"
             style="left: 53px; top: 298px;"
+            data-overlay-position="right"
             >
           </div>
           <div
             class="component-mouseover"
             id="eventHub"
             style="left: 210px; top: 194px;"
+            data-overlay-position="top"
             >
           </div>
           <div
             class="component-mouseover"
             id="analytics"
             style="left: 312px; top: 88px;"
+            data-overlay-position="bottom"
             >
           </div>
           <div
             class="component-mouseover"
             id="customServices"
             style="left: 433px; top: 88px;"
+            data-overlay-position="bottom"
           >
           </div>
           <div
             class="component-mouseover"
             id="timeSeries"
-            style="left: 433px; top: 301px;"
+            style="left: 435px; top: 304px;"
+            data-overlay-position="top"
           >
           </div>
           <div
             class="component-mouseover"
             id="asset"
-            style="left: 312px; top: 301px;"
+            style="left: 314px; top: 303px;"
+            data-overlay-position="top"
             >
           </div>
           <div
-            class="component-mouseover small-mouseover"
-            id="auth"
-            style="left: 245px; top: 53px;"
+            class="component-mouseover"
+            id="edgeManager"
+            style="left: 185px; top: 295px;"
+            data-overlay-position="top"
             >
+          </div>
+          <div
+            class="component-mouseover"
+            id="auth"
+            style="left: 220px; top: 25px;"
+            data-overlay-position="bottom"
+            >
+          </div>
+          <div
+            class="component-mouseover"
+            id="mobile"
+            style="left: 605px; top: 135px;"
+            data-overlay-position="left"
+          >
           </div>
           <div
             class="component-mouseover"
             id="apps"
             style="left: 604px; top: 250px;"
+            data-overlay-position="left"
           >
           </div>
-          <!--
-          <div class="overlay" id="overlay" style="left: -2px; top: 160px; width: 200px; height: 110px;">
-            <div class="overlay-tipup"></div>
-            <div class="overlay-body">
-              <div class="text-container">
-                <span>The Predix Machine is software running on the device.  Click on this area to learn more about Predix Machine.</span>
+
+          <div class="overlay overlay-bottom" id="overlayBottom" style="display: none;">
+            <div class="overlay-shell">
+              <div class="overlay-tip-up"></div>
+              <div class="overlay-body">
+                <div class="text-container">
+                  <span>overlay bottom</span>
+                </div>
               </div>
             </div>
           </div>
-          -->
-        </div>
-        <div class="overview-text-container">
-          <div id="overviewHeader" class="overview-header"></div>
-          <div id="overviewText" class="overview-text">
-            <br/>Mouse over each component in the diagram to learn more.
+
+          <div class="overlay overlay-top" id="overlayTop" style="display: none;">
+            <div class="overlay-shell">
+              <div class="overlay-tip-down"></div>
+              <div class="overlay-body">
+                <div class="text-container">
+                  <span>overlay top</span>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="overlay overlay-right" id="overlayRight" style="display: none;">
+            <div class="overlay-shell">
+              <div class="overlay-tip-left"></div>
+              <div class="overlay-body">
+                <div class="text-container">
+                  <span>overlay right</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overlay overlay-left" id="overlayLeft" style="display: none;">
+            <div class="overlay-shell">
+              <div class="overlay-body">
+                <div class="text-container">
+                  <span>overlay left</span>
+                </div>
+              </div>
+              <div class="overlay-tip-right"></div>
+            </div>
+          </div>
+
+          <!--<div id="videoThumbnail" class="video-thumbnail">
+            <div id="videoThumbnailInside" class="video-thumbnail-inside">
+              <div class="video-thumbnail-play-icon"></div>
+            </div>
+          </div>
+
+          <div id="iframeVideoContainer" class="iframe-video-container" style="display: none;">
+            <iframe id="iframeVideo" width="750" height="450" src="https://www.youtube.com/embed/cTKDDy8cHfg" frameborder="0" allowfullscreen></iframe>
+          </div>-->
         </div>
       </div>
     </px-card>
@@ -179,86 +329,185 @@
       properties: {
         mouseOverDetails: {
           'industrialAsset': {
-            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.   Click continue to view data from the Device associated to this asset.'
+            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.  Click to view data from the Device associated to this asset.'
             , 'header': "Industrial Asset"
-            , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html?environment=dev#2365'
+            , 'learnMoreURL': '/#/kit-data'
+            , 'newTab': false
+          },
+          'device': {
+            'text': 'A wide variety of devices can run Predix Machine software to monitor and react to your Industrial Asset, aggregate data from your site, and push to the Predix Cloud for industrial scale analytics. Click to view data from your connected device.'
+            , 'header': "Industrial Asset"
+            , 'learnMoreURL': '/#/kit-data'
+            , 'newTab': false
           },
           'predixMachine': {
-            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Learn more about how you can leverage Predix Machine to realize operations optimization.  Click to learn more.'
+            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Click to learn how to leverage Predix Machine to optimize your operations.'
             , 'header': 'Predix Machine'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/machine/'
+            , 'newTab': true
           },
           'eventHub': {
-            'text': 'Real time messaging across your Digital Twin ecosystem is critical.  From data ingestion events to analytics events Event Hub streaming services keep your processes running efficiently.  Click to learn more.'
+            'text': 'Real time messaging across your Digital Twin ecosystem is critical.  From data ingestion to analytics, Event Hub streaming services keep your processes running efficiently.  Click to learn more.'
             , 'header': 'Event Hub'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/event_hub/'
+            , 'newTab': true
           },
           'asset': {
-            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your Fleet of assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytics inputs, aggregate results and most importantly your core Asset Model for each asset.  Click to learn more.'
+            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytic inputs, aggregating results and managing core asset models.  Click to learn more.'
             , 'header': 'Asset'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/asset/'
+            , 'newTab': true
           },
           'timeSeries': {
-            'text': 'Data Variety at a high Velocity and with Volume is the inevitable Industrial Internet use-case.  Predix Time Series stores data at cloud scale and provides a straightforward REST API, allowing your Analytics to unlock the potential of asset optimization.  Click to learn more.'
+            'text': 'Data that is diverse, high velocity and high volume is the inevitable use case of the Industrial Internet.  Predix Time Series stores data at cloud scale and provides a straightforward REST API, allowing your Analytics to unlock the potential of asset optimization.  Click to learn more.'
             , 'header': 'Time Series'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/time_series/'
+            , 'newTab': true
           },
           'analytics': {
-            'text': 'The realization of continuously updating your Digital Twin is where Predix Analytics shines.  With a huge library of Orchestrated analytics you can realize efficiencies across your assets, your plant, your fleets, your people and your processes. Click to learn more.'
+            'text': 'The realization of continuously updating your Digital Twin is where Predix Analytics shines.  With a huge library of orchestrated analytics you can realize efficiencies across your assets, your plant, your fleets, your people and your processes. Click to learn more.'
             , 'header': 'Analytics'
-            , 'learnMoreURL': 'https://docs.predix.io/en/service'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/analytics_services/analytics_framework/'
+            , 'newTab': true
           },
           'customServices': {
-            'text': 'Predix architecture provides developers the ability to create their own custom services, leveraging the security and performance of the Predix platform.  Click to learn more.'
+            'text': 'Predix architecture enables you to create your own custom services, leveraging the security and performance of the Predix platform.  This app is downloadable for further customization.  Visit the About page to Install a Personal Copy of this app and to see the code from this app.  Click to learn more.'
             , 'header': 'Custom Services'
-            , 'learnMoreURL': 'https://docs.predix.io/en/service'
+            , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html#2041'
+            , 'newTab': true
           },
           'auth': {
-            'text': 'Security permeates the entire Predix ecosystem.  From Edge devices to Edge Manager and the Cloud your industrial processes are safe and secure.  Click to learn more.'
+            'text': 'Security permeates the entire Predix ecosystem.  From Edge devices to Edge Manager and the Cloud, your industrial processes are safe and secure.  Click to learn more.'
             , 'header': 'Authentication'
             , 'learnMoreURL': 'https://docs.predix.io/en/service'
+            , 'newTab': true
           },
           'edgeManager': {
-            'text': ''
+            'text': 'Predix EdgeManager provides a single point of entry for deploying and monitoring remote devices.  EdgeManager allows you to administer your applications and configuration files at both a device and a fleet level, helping you keep your device software current.  Click to learn more.'
             , 'header': 'Edge Manager'
-            , 'learnMoreURL': ''
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/edge_manager/'
+            , 'newTab': true
           },
           'apps': {
             'text': 'Predix provides pre-built, responsive web application starter kits that accelerate frontend development.  These applications are based on leading frontend technology and come with server-side features for easy integration with Predix services.  Click to learn more.'
             , 'header': 'Applications'
             , 'learnMoreURL': 'https://github.com/PredixDev/predix-webapp-starter'
+            , 'newTab': true
+          },
+          'mobile': {
+            'text': 'Predix Mobile provides a Backend-as-a-Service to Industrial Internet mobile applications built with the Predix Mobile SDK.  Use the Mobile SDK to interact with the Mobile service components and your Mobile application code.  Click to learn more.'
+            , 'header': 'Applications'
+            , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/mobile/mobile_overview/'
+            , 'newTab': true
           }
         }
+        , videoIsVisible: false
       },
+
+      getOverlayElement: function(overlayPosition) {
+        var elem = null, elemID = '';
+        switch (overlayPosition) {
+          case 'top':
+            elemID = 'overlayTop';
+            break;
+          case 'bottom':
+            elemID = 'overlayBottom';
+            break;
+          case 'right':
+            elemID = 'overlayRight';
+            break;
+          case 'left':
+            elemID = 'overlayLeft';
+            break;
+          default:
+            elemID = 'overlayBottom';
+        }
+        return document.querySelector('#' + elemID);
+      }.bind(this),
+
+      getOverlayCoords: function(element, overlayID) {
+        var coords = {};
+        switch(overlayID) {
+          case 'overlayTop':
+            coords.top = parseInt(element.style.top, 10) - 160 + 'px';
+            coords.left = parseInt(element.style.left, 10) + 44 - 195 + 'px';
+            break;
+          case 'overlayBottom':
+            coords.top = parseInt(element.style.top, 10) + 88 + 'px';
+            coords.left = parseInt(element.style.left, 10) + 44 - 195 + 'px';
+            break;
+          case 'overlayLeft':
+            coords.top = parseInt(element.style.top, 10) + 44 - 80 + 'px';
+            coords.left = parseInt(element.style.left, 10) - 390 + 'px';
+            break;
+          case 'overlayRight':
+            coords.top = parseInt(element.style.top, 10) + 44 - 80 + 'px';
+            coords.left = parseInt(element.style.left, 10) + 88 + 'px';
+            break;
+        }
+        return coords;
+      }.bind(this),
 
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
-        var component;
+        var component, vidtoThumbnail;
         for (var i=0; i < hoverComponents.length; i++) {
           component = hoverComponents[i];
           component.addEventListener(
             'mouseover',
             function(event) {
-              this.$$('#overviewText').innerHTML = this.properties.mouseOverDetails[event.target.id].text;
-              this.$$('#overviewHeader').innerHTML = '<br/>' + this.properties.mouseOverDetails[event.target.id].header;
+              var hoverComponent = event.target;
+              var overlayElem = this.getOverlayElement(hoverComponent.dataset.overlayPosition);
+              overlayCoords = this.getOverlayCoords(hoverComponent, overlayElem.id);
+              overlayElem.style.top = overlayCoords.top;
+              overlayElem.style.left = overlayCoords.left;
+              hoverComponent.dataset.overlayElemID = overlayElem.id;
+              overlayElem.querySelector('span').innerHTML = this.properties.mouseOverDetails[event.target.id].text;
+              overlayElem.style.display = 'inline';
             }.bind(this)
           );
           component.addEventListener(
             'mouseout',
             function(event) {
-              this.$$('#overviewText').innerHTML = '<br/>Mouse over each component in the diagram to learn more.';
-              this.$$('#overviewHeader').innerHTML = '';
+              var hoverComponent = event.target;
+              document.querySelector('#' + hoverComponent.dataset.overlayElemID).style.display = 'none';
+              // this.$$('#overviewText').innerHTML = '<br/>Mouse over each component in the diagram to learn more.';
+              // this.$$('#overviewHeader').innerHTML = '';
             }.bind(this)
           );
           component.addEventListener(
             'click',
             function(event) {
               var url = this.properties.mouseOverDetails[event.target.id].learnMoreURL;
-              var win = window.open(url, '_blank');
-              win.focus();
+              if (this.properties.mouseOverDetails[event.target.id].newTab) {
+                var win = window.open(url, '_blank');
+                win.focus();
+              } else {
+                window.location = url;
+              }
             }.bind(this)
           )
         };
+        // videoThumbnail = Polymer.dom(this.root).querySelector('#videoThumbnail');
+        // videoThumbnail.addEventListener(
+        //   'click',
+        //   function() {
+        //     var iframeVideoContainer = Polymer.dom(this.root).querySelector('#iframeVideoContainer');
+        //     var iframeVideo = Polymer.dom(this.root).querySelector('#iframeVideo');
+        //     var videoThumbnailInside = Polymer.dom(this.root).querySelector('#videoThumbnailInside');
+        //     if (this.properties.videoIsVisible) {
+        //       iframeVideoContainer.style.display = 'none';
+        //       iframeVideo.src = iframeVideo.src;
+        //       videoThumbnailInside.style.background = '#ddd';
+        //       this.properties.videoIsVisible = false;
+        //     }
+        //     else {
+        //       iframeVideoContainer.style.display = 'inline';
+        //       videoThumbnailInside.style.background = 'rgb(58, 180, 212)';
+        //       this.properties.videoIsVisible = true;
+        //     }
+        //   }.bind(this)
+        // );
       }
     });
   </script>

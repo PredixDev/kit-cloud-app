@@ -35,9 +35,10 @@ A single tag should be passed in.
           <template is="dom-if" if="{{showPercentCircle}}">
             <div class="flex">
               <div class="flex__item u-3/4-desk u-1/1-palm">
-            <!--<div style="width: 60%; padding-top: 2rem">-->
-                <px-percent-circle max="1023" val="{{circleValue}}" colors="[rgb(96,189,104)]">
-                </px-percent-circle>
+                <div style="padding-top: 12%;">
+                  <px-percent-circle style="height: 280px" max="1023" val="{{circleValue}}" colors="[rgb(96,189,104)]">
+                  </px-percent-circle>
+                </div>
               </div>
               <div class="flex__item u-1/4-desk u-1/1-palm">
                 <h4>{{circleValue}}</h4>
@@ -48,6 +49,18 @@ A single tag should be passed in.
             <div style="padding-top: 75px">
               <px-simple-bar-chart chart-data="{{tsChartData}}">
               </px-simple-bar-chart>
+            </div>
+          </template>
+          <template is="dom-if" if="{{showEmpty}}">
+            <div class="u-pt+">
+              <p>Try these tips to see your data in the cloud.</p>
+              <ul>
+                <li>Have you completed the device registration process?</li>
+                <li>Make sure sensors are connected correctly to your device.</li>
+                <li>Make sure the Node Red flow is configured to send data to Predix Edge.</li>
+                <li>Check the Predix Machine logs on your device.  Data should be flowing every few seconds.</li>
+                <li>Is your data outside the date range above? Turn off Refresh, and adjust date range.</li>
+              </ul>
             </div>
           </template>
         </div>
@@ -87,6 +100,10 @@ A single tag should be passed in.
         showBar: {
           type: Boolean,
           computed: '_computeShowBar(tag)'
+        },
+        showEmpty: {
+          type: Boolean,
+          computed: '_computeShowEmpty(tag)'
         }
       },
       observers: ['_tagsOrRangeChanged(tag.*, selectedRange)'],
@@ -118,6 +135,10 @@ A single tag should be passed in.
       _computeShowBar: function(tag) {
         return tag.chartType === 'bar';
       },
+
+      _computeShowEmpty: function(tag) {
+        return tag.chartType === 'empty';
+      },      
 
       _buildSeriesConfig: function(tsTags, displayTag) {               
         var config = {};
@@ -179,6 +200,7 @@ A single tag should be passed in.
 
       _tagsOrRangeChanged: function(newTags, newRange) {
         console.log('sensor-chart _tagsOrRangeChanged', newTags, newRange);
+        if (this.showEmpty) { return; }
         this.debounce('fetch', function() {     
           if (newRange && newTags) {
             this._fetchTimeseriesData(newTags.base || newTags, newRange);

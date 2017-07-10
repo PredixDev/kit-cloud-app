@@ -1,0 +1,66 @@
+{
+	"tags": [{
+		"name": "WR-IDP-EB72:button",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:vibration",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:touch",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:light",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:sound",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:temperature",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}, {
+		"name": "WR-IDP-EB72:rotaryangle",
+		"results": [{
+			"values": [],
+			"attributes": {}
+		}],
+		"stats": {
+			"rawCount": 0
+		}
+	}]
+}
