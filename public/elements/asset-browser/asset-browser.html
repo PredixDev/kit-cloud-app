@@ -7,7 +7,8 @@
     <template>
         <px-context-browser id="assetBrowser" 
           opened-item-name="Select Asset"
-          browser-context="{{assetModel}}">Sensor Data</px-context-browser>
+          browser-context="{{assetModel}}"
+          disable-infinite-scroll>Sensor Data</px-context-browser>
         <!-- Fetch the whole asset model at once, using these two queries.
             (Our asset model has only groups and assets.)
             This way, we can pre-select an asset deep in the tree. 
@@ -109,7 +110,7 @@
               });
             });
 
-            self._buildAssetModel('/group/root', allAssets, newAssetModel.data, localStorage.getItem('kitCloud.openedAssetId'));
+            self._buildAssetModel('/deviceGroup/root', allAssets, newAssetModel.data, localStorage.getItem('kitCloud.openedAssetId'));
 
             self.assetModel = newAssetModel;
             self.openedAsset = self.$.assetBrowser.selectedItem;
@@ -125,10 +126,10 @@
       */
       _transformEntityForDisplay: function (entity) {
         entity.id = entity.uri;
-        if (entity.uri.indexOf('/group') === 0) {
-          entity.parentId = '/group/root';
+        if (entity.uri.indexOf('/deviceGroup') === 0) {
+          entity.parentId = '/deviceGroup/root';
         } else if (entity.uri.indexOf('/device') === 0) {
-          entity.parentId = entity.groupRef;
+          entity.parentId = entity.deviceGroup;
           entity.name = entity.deviceName;
           entity.isOpenable = true;
         }

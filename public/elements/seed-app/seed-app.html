@@ -42,6 +42,7 @@
 
       <div class="content-wrapper">
         <px-app-nav
+          id="kitAppNav"
           class="navbar"
           nav-items="[[navItems]]"
           path-prefix="[[pathPrefix]]">
@@ -168,11 +169,13 @@
         }
       },
 
-      // observers: ['_routeChanged(_route)'],
+      observers: ['_routeChanged(_route)'],
 
       ready: function(){
         this._checkForDefaultRoute();
         this.$.configAjaxEl.addEventListener('response', function(evt) {
+          document.getElementById('userNameButton').style = 'color: #95a8b3';
+          document.getElementById('loginButton').style = 'color: #95a8b3';          
           // We're getting some global config from the server.
           // console.log('config', evt.detail.response);
           this.appHeader = evt.detail.response.appHeader;
@@ -186,11 +189,12 @@
         if((l.hash === "#/" || l.hash === "") && l.pathname === "/") {
           l.hash = "/overview";
         }
-      }
+      },
 
-      // _routeChanged(newRoute) {
-      //   console.log('new route:', newRoute);
-      // }
+      _routeChanged(newRoute) {        
+        // console.log('new route:', newRoute);
+        this.$.kitAppNav.markSelected(newRoute.path);
+      }
 
     });
   </script>

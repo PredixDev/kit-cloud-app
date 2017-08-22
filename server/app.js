@@ -75,10 +75,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /****************************************************************************
-	SET UP EXPRESS ROUTES
+	Kit app functions
 *****************************************************************************/
-
-// app.get('/docs', require('./routes/docs')(config));
 
 function redirectToDevice(req, res) {
   console.log('session ID: ', req.sessionID);
@@ -95,15 +93,78 @@ function redirectToDevice(req, res) {
 }
 
 function getUserToken(session) {
-  if (session 
-          && session.passport 
-          && session.passport.user 
+  if (session
+          && session.passport
+          && session.passport.user
           && session.passport.user.ticket
           && session.passport.user.ticket.access_token) {
     return session.passport.user.ticket.access_token;
   }
   return null;
 }
+
+function getUserTokenObject(session) {
+  var buf;
+  var tokenString = getUserToken(session).split('.')[1];
+  if (typeof Buffer.from === "function") {
+    // Node 5.10+
+    buf = Buffer.from(tokenString, 'base64');
+  } else {
+    // older Node versions
+    buf = new Buffer(tokenString, 'base64');
+  }
+  return JSON.parse(buf.toString());
+}
+
+function authenticateWithState(req, res, next) {
+  req.session.state = 'state' + (1000000000000000000 * Math.random());
+  // console.log('req.session.state:', req.session.state);
+  passport.authenticate('predix', {'scope': '', 'state': req.session.state})(req, res, next);
+}
+
+function verifyLoginState(req, res, next) {
+  // console.log('token:', req.session.passport.user.ticket);
+  var stateFromSession = req.session.state;
+  delete req.session.state;
+  if (req.query.state === stateFromSession) {
+    next();
+  } else {
+    res.status(403).send('Forbidden');
+  }
+}
+
+// get token from session store, based on PK request parameter
+//  add token to header.
+function addTokenFromPK(req, res, next) {
+  console.log('in /api/kit/* route.');
+  // console.log('req.query.cloudSession', req.query.cloudSession);
+  console.log('req.body', req.body);
+  console.log('req.body.pk', req.body.pk);
+  sessionOptions.store.get(req.body.pk, function(err, session) {
+    if (err) {
+      res.status(err.status || 500);
+      res.send({
+        message: err.message,
+        error: err
+      });
+    }
+    // console.log('session pulled from store by id:', JSON.stringify(session));
+    // add user token to request
+    if (getUserToken(session)) {
+      req.headers['Authorization'] = 'bearer ' + getUserToken(session);
+      next();
+    } else {
+      // console.log('session:', session);
+      console.warn('*** No token found in session.')
+      // res.redirect('/device-login');
+      res.status(401).send({error: "Session expired, or no token found in session."})
+    }
+  });
+}
+
+/****************************************************************************
+	SET UP EXPRESS ROUTES
+*****************************************************************************/
 
 if (!config.isUaaConfigured()) { 
   // no restrictions
@@ -118,7 +179,7 @@ if (!config.isUaaConfigured()) {
   });
 } else {
   //login route redirect to predix uaa login page
-  app.get('/login',passport.authenticate('predix', {'scope': ''}), function() {
+  app.get('/login', authenticateWithState, function() {
     // The request will be redirected to Predix for authentication, so this
     // function will not be called.
   });
@@ -129,59 +190,36 @@ if (!config.isUaaConfigured()) {
   });
 
   //callback route redirects to secure route after login
-  app.get('/callback', passport.authenticate('predix', {
-  	failureRedirect: '/'
-  }), redirectToDevice);
-
-  // example of calling a custom microservice.
-  // if (windServiceURL && windServiceURL.indexOf('https') === 0) {
-  //   app.get('/windy/*', passport.authenticate('main', { noredirect: true}),
-  //     // if calling a secure microservice, you can use this middleware to add a client token.
-  //     // proxy.addClientTokenMiddleware,
-  //     proxy.customProxyMiddleware('/windy', windServiceURL)
-  //   );
-  // }
-
-  // if (config.rmdDatasourceURL && config.rmdDatasourceURL.indexOf('https') === 0) {
-  //   app.get('/api/datagrid/*', 
-  //       proxy.addClientTokenMiddleware, 
-  //       proxy.customProxyMiddleware('/api/datagrid', config.rmdDatasourceURL, '/services/experience/datasource/datagrid'));
-  // }
-
+  app.get('/callback',  
+    passport.authenticate('predix', {failureRedirect: '/'}),
+    verifyLoginState,
+    redirectToDevice);
 
   // We need this to be registered before the '/' route.
-  app.get('/device-login', 
+  app.get('/device-login',
     function(req, res, next) {
-      console.log('cloudlogin, before auth.  deviceUrl from query:', req.query.deviceUrl);      
+      console.log('cloudlogin, before auth.  deviceUrl from query:', req.query.deviceUrl);
       req.session.deviceUrl = req.query.deviceUrl;
       console.log('cloudlogin, sessionID:', req.sessionID);
       next();
     },
-    passport.authenticate('main', {
-      noredirect: false
-    }),
+    authenticateWithState,
     redirectToDevice // if they've already logged in.
   );
 
   // get device groups for a user.
   // here we just add the user_id to the filter, then the predix-asset route below proxies the request.
-  app.get('/api/predix-asset/group', 
+  app.get('/api/predix-asset/deviceGroup',
     passport.authenticate('main', {
       noredirect: false
     }),
     function(req, res, next) {
       if (req.session) {
-        var buf;
-        var tokenString = getUserToken(req.session).split('.')[1];
-        if (typeof Buffer.from === "function") {
-          // Node 5.10+
-          buf = Buffer.from(tokenString, 'base64');
-        } else {
-          // older Node versions
-          buf = new Buffer(tokenString, 'base64');
+        var tokenObj = getUserTokenObject(req.session);
+        if (!tokenObj.scope.includes('predixkit.admin')) { // array.includes is ES2016
+          // add filter by user
+          req.url += '?filter=uaaUsers=' + tokenObj.user_id + '<usergroup';
         }
-        var userId = JSON.parse(buf.toString()).user_id;
-        req.url += '?filter=users=' + userId + '<groupRef';
         next();
       } else {
         res.status(401).send({error: "Session expired, or no token found in session."})
@@ -189,52 +227,37 @@ if (!config.isUaaConfigured()) {
   });
 
   // route to get all devices for a user from kit-service.  needs a user token.
+  // kit-service will return all devices if token has admin scope.
   app.get('/api/kit/device',
       passport.authenticate('main', {
       noredirect: false
     }),
     function(req, res, next) {
-      // add user token to request
-      if (getUserToken(req.session)) {
-        req.headers['Authorization'] = 'bearer ' + getUserToken(req.session);
-        next();       
-      } else {
+      var tokenString = getUserToken(req.session);
+      if (!tokenString) {
         res.status(401).send({error: "Session expired, or no token found in session."})
-      }      
+      } else {
+        // add user token to request
+        req.headers['Authorization'] = 'bearer ' + tokenString;        
+      }
+      next();
     },
     proxy.customProxyMiddleware('/api/kit/device', config.kitServiceURL, '/device/')
   );
 
   app.post('/api/kit/register',
-      function(req, res, next) {
-        console.log('in /api/kit/* route.'); 
-        // console.log('req.query.cloudSession', req.query.cloudSession);
-        console.log('req.body', req.body);
-        console.log('req.body.pk', req.body.pk);
-        sessionOptions.store.get(req.body.pk, function(err, session) {
-          if (err) {
-            res.status(err.status || 500);
-            res.send({
-              message: err.message,
-              error: err
-            });
-          }
-          console.log('session pulled from store by id:', JSON.stringify(session));
-          // add user token to request
-          if (getUserToken(session)) {
-            req.headers['Authorization'] = 'bearer ' + getUserToken(session);
-            next();       
-          } else {
-            console.log('session:', session);
-            console.warn('*** No token found in session.')
-            // res.redirect('/device-login');
-            res.status(401).send({error: "Session expired, or no token found in session."})
-          }
-        });  
-      },
-
+      addTokenFromPK,
       proxy.customProxyMiddleware('/api/kit/register', config.kitServiceURL, '/device/register')
-  );  
+  );
+
+  app.put('/api/kit/reset/:deviceId',
+      addTokenFromPK,
+      // proxy.customProxyMiddleware('/api/kit/register', config.kitServiceURL, '/device/reset/req.params.deviceId')
+      proxy.customProxyMiddleware('/api/kit/reset', config.kitServiceURL, '/device/reset')
+  );
+
+  // This route is for Predix Machine. it passes it own token, we just proxy to kit service.
+  app.get('/device/*', proxy.customProxyMiddleware('/device', config.kitServiceURL, '/device'));
 
   // access real Predix services using this route.
   // the proxy will add UAA token and Predix Zone ID.
@@ -246,7 +269,7 @@ if (!config.isUaaConfigured()) {
   	proxy.router);
 
   //Use this route to make the entire app secure.  This forces login for any path in the entire app.
-  app.use('/', 
+  app.use('/',
     passport.authenticate('main', {
       noredirect: false //Don't redirect a user to the authentication page, just show an error
     }),
@@ -258,7 +281,7 @@ if (!config.isUaaConfigured()) {
 /*******************************************************
 SET UP MOCK API ROUTES
 *******************************************************/
-// NOTE: these routes are added after the real API routes. 
+// NOTE: these routes are added after the real API routes.
 //  So, if you have configured asset, the real asset API will be used, not the mock API.
 // Import route modules
 var mockAssetRoutes = require('./routes/mock-asset.js')();
@@ -287,7 +310,7 @@ app.get('/favicon.ico', function (req, res) {
 });
 
 app.get('/config', function(req, res) {
-  let title = "Predix Kit Sensors";
+  let title = "Predix DeviceCloud";
   res.send({wsUrl: config.websocketServerURL, appHeader: title});
 });
 

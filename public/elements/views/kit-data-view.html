@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/px-dropdown/px-dropdown-content.html">
 <link rel="import" href="../../bower_components/px-rangepicker/px-rangepicker.html">
 <link rel="import" href="../asset-browser/asset-browser.html">
+<link rel="import" href="../../bower_components/px-moment-imports/px-moment-imports.html">
 
 <link rel="import" href="kit-data-view-styles.html">
 <!--
@@ -25,7 +26,7 @@
       asset-model="{{rmdAssetModel}}"
       opened-asset="{{openedAsset}}"
       asset-query-url="/api/kit/device"
-      asset-group-query-url="/api/predix-asset/group"
+      asset-group-query-url="/api/predix-asset/deviceGroup"
       disable-infinite-scroll="true">
     </asset-browser>
 
@@ -45,19 +46,26 @@
     </div>
 
     <div class="u-pt flex kit-data-controls-row">
-      <!--<div class="u-1/4-desk u-1/1-palm">
-        <div class="u-pr">
-          <px-dropdown id="tagDropdown" checkbox-mode="true" display-value="Select Tags">
-            <px-dropdown-content items="{{assetTags}}" checkbox-mode="true"></px-dropdown-content>
-          </px-dropdown>
-        </div>
-      </div>-->
       <div class="u-1/2-desk u-1/1-palm">
         <div class="u-pr">
           <px-rangepicker id="tsRangepicker" range="{{selectedRange}}"></px-rangepicker>
         </div>
       </div>
+      <template is="dom-if" if="{{expirationDate}}"> 
+        <div class="u-1/2-desk u-1/1-palm" style="text-align: right;">
+          <span class="u-pr"><a href="/#/about">Device active in cloud until:</a></span><br/>
+          <span class="u-pr">{{expirationDate}}</span>
+        </div>
+      </template>
     </div>
+
+    <template is="dom-if" if="{{expired}}">
+      <div style="text-align: center;">
+        <h3 class="u-pt">This device has expired, and is no longer available in the shared DeviceCloud app.</h3>
+        <span>Follow <a target="_blank" href="https://www.predix.io/resources/tutorials/tutorial-details.html?tutorial_id=1475&tag=2365&journey=Predix%20Developer%20Kit">this tutorial</a> to learn how to deploy your own DeviceCloud app.</span>
+      </div>
+    </template>
+
     <div class="flex flex--wrap">
       <template is="dom-repeat" items="{{tagsWithData}}">
         <div class="flex__item u-1/3-desk u-1/1-palm">
@@ -65,6 +73,7 @@
         </div>
       </template>
     </div>
+
     <iron-ajax id="tsAjaxEl" content-type="application/json"></iron-ajax>
   </template>
   <script>
@@ -89,6 +98,12 @@
         },
         chartRange: {
           type: Object
+        },
+        expirationDate: {
+          type: String
+        },
+        expired: {
+          type: Boolean
         },
         _refreshTimerInterval: {
           type: Number,
@@ -115,10 +130,25 @@
         });
         return displayTags;
       },
-      _openedAssetChanged: function(newVal) {
+
+      _openedAssetChanged: function(newVal) {        
         console.log('asset opened:', newVal);
-        if (newVal.tags) {
-          this.assetTags = this._formatTagsForDisplay(newVal.tags);
+        this.expired = false;
+        this.set('assetTags', []);
+        this.set('tagsWithData',[]);
+        // if item is selected, then check exp date
+        if (newVal.uri && newVal.uri.length > 0) {
+          var expDate = newVal.expirationDate || "0";
+          var expMoment = moment(expDate, 'x');
+          if (moment().diff(expMoment) < 0) { // show data
+            if (newVal.tags) {
+              this.assetTags = this._formatTagsForDisplay(newVal.tags);
+            }
+            this.expirationDate = expMoment.format('h:mm A MMM D, YYYY');
+          } else { // show expiration message
+            this.expirationDate = null; 
+            this.expired = true;
+          }
         }
       },
 
