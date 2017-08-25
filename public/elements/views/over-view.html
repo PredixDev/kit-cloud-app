@@ -9,7 +9,7 @@
     :root {
       --overlay-background-rgb: rgb(58, 180, 212);
       --overlay-background-hex: #2886af;
-      --overlay-background: #fff5cc;
+      --mouseover-background: #fff5cc;
       --mouseover-halo: rgba(58, 180, 212, 0.3);
     }
 
@@ -53,18 +53,18 @@
       left: 165px;
     	border-left: 20px solid transparent;
     	border-right: 20px solid transparent;
-    	border-bottom: 20px solid var(--overlay-background);
+    	border-bottom: 20px solid var(--mouseover-background);
     }
 
     .overlay-tip-down {
       position: absolute;
     	width: 0;
     	height: 0;
-      top: 129px;
+      top: 139px;
       left: 165px;
     	border-left: 20px solid transparent;
     	border-right: 20px solid transparent;
-    	border-top: 20px solid var(--overlay-background);
+    	border-top: 20px solid var(--mouseover-background);
     }
 
     .overlay-tip-right {
@@ -75,7 +75,7 @@
       left: 359px;
     	border-top: 20px solid transparent;
     	border-bottom: 20px solid transparent;
-    	border-left: 20px solid var(--overlay-background);
+    	border-left: 20px solid var(--mouseover-background);
     }
 
     .overlay-tip-left {
@@ -86,7 +86,7 @@
       top: 50px;
     	border-top: 20px solid transparent;
     	border-bottom: 20px solid transparent;
-    	border-right: 20px solid var(--overlay-background);
+    	border-right: 20px solid var(--mouseover-background);
     }
 
     .overlay-shell {
@@ -101,7 +101,7 @@
       top: 10px;
       left: 10px;
       border: 0;
-      background-color: var(--overlay-background);
+      background-color: var(--mouseover-background);
       border-radius: 8px;
       color: #012939;
       font-size: 14px;
@@ -203,13 +203,56 @@
 
     .welcome-banner span.welcome-text {
     }
+
+    .dropdown-container {
+      width: 200px;
+      display: inline-block;
+    }
+
+    .header {
+      font-weight: bold;
+    }
+
+    #welcomeCurtain {
+      padding: 10px 10px 0 10px;
+      display: none;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      margin-left: -375px;
+      background-color: rgba(256, 256, 256, 0.85);
+      width: 730px;
+      height: 560px;
+    }
+
+    #welcomeBanner {
+      padding: 10px 10px 0 10px;
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -375px;
+      background-color: var(--overlay-background-rgb);
+      width: 730px;
+      height: 130px;
+    }
+
+    .overlay-gotit-button {
+      font-size: 14px;
+      display: block;
+      margin: 10px auto;
+      background-color: rgb(58, 180, 212);
+      border: 1px solid #fff;
+      width: 200px;
+      height: 30px;
+    }
   </style>
   <template>
     <px-card header-text="Predix Kits">
       <div class="overview-shell" style="position: relative;">
         <div class="asset-selection" style="width: 600px; margin: 25px auto;">
           Select your asset and see its data flow from edge to cloud:
-          <div class="dropdown-container" style="width: 200px; display: inline-block;">
+          <div class="dropdown-container">
             <px-dropdown
               display-value="Select">
               <px-dropdown-content
@@ -335,7 +378,7 @@
                 <div class="overlay-tip-up"></div>
                 <div class="overlay-body">
                   <div class="text-container">
-                    <span class="header" style="font-weight: bold;"></span><br/>
+                    <span class="header"></span><br/>
                     <span class="text">overlay bottom</span>
                   </div>
                   <div class="overlay-custom-content"></div>
@@ -348,7 +391,7 @@
                 <div class="overlay-tip-down"></div>
                 <div class="overlay-body">
                   <div class="text-container">
-                    <span class="header" style="font-weight: bold;"></span><br/>
+                    <span class="header"></span><br/>
                     <span class="text">overlay top</span>
                   </div>
                   <div class="overlay-custom-content"></div>
@@ -361,7 +404,7 @@
                 <div class="overlay-tip-left"></div>
                 <div class="overlay-body">
                   <div class="text-container">
-                    <span class="header" style="font-weight: bold;"></span><br/>
+                    <span class="header"></span><br/>
                     <span class="text">overlay right</span>
                   </div>
                   <div class="overlay-custom-content"></div>
@@ -373,7 +416,7 @@
               <div class="overlay-shell">
                 <div class="overlay-body">
                   <div class="text-container">
-                    <span class="header" style="font-weight: bold;"></span><br/>
+                    <span class="header"></span><br/>
                     <span class="text">overlay left</span>
                   </div>
                   <div class="overlay-custom-content"></div>
@@ -393,14 +436,14 @@
             </div>
           </div>
         </div>
-        <div id="welcomeCurtain" class="welcome-curtain" style="padding: 10px 10px 0 10px; display: block; position: absolute; top: -20px; left: 50%; margin-left: -375px; background-color: rgba(256, 256, 256, 0.85); width: 730px; height: 560px;">
+        <div id="welcomeCurtain" class="welcome-curtain">
         </div>
-        <div id="welcomeBanner" class="welcome-banner" style="padding: 10px 10px 0 10px; display: block; position: absolute; top: 0; left: 50%; margin-left: -375px; background-color: rgb(58, 180, 212); width: 730px; height: 130px;">
-          <span class="welcome-text">Welcome to the Predix Cloud.  Here you bring data from multiple devices and processes together to gain insights and improve operational efficiency.  Select an asset to see its data flow from edge to cloud.</span>
-          <button style="font-size: 14px; display: block; margin: 10px auto; background-color: rgb(58, 180, 212); border: 1px solid #fff; width: 200px; height: 30px;" on-tap="welcomeGotIt">Got it</button>
+        <div id="welcomeBanner" class="welcome-banner">
+          <span class="welcome-text" style="font">Welcome to the Predix Cloud.  Here you bring data from multiple devices and processes together to gain insights and improve operational efficiency.  Select an asset to see its data flow from edge to cloud.</span>
+          <button class="overlay-gotit-button" on-tap="welcomeGotIt">Got it</button>
           <div style="margin: 0 auto; width: 170px;">
-            <input type="checkbox" id="doNotShowCheckbox" style="display: inline-block; margin-left: 0; margin-top: 5px;">
-            <span>Do not show this again</span>
+            <input type="checkbox" id="doNotShowAgainCb" style="display: inline-block; margin-left: 0; margin-top: 5px;">
+            <label for="doNotShowAgainCb">Do not show this again</label>
           </div>
         </div>
       </div>
@@ -634,6 +677,10 @@
       },
 
       welcomeGotIt: function() {
+        var doNotShow = Polymer.dom(this.root).querySelector('#doNotShowAgainCb');
+        if (doNotShow.checked === true) {
+          localStorage.setItem('kitCloud.doNotShowWelcome', true);
+        }
         Polymer.dom(this.root).querySelector('#welcomeBanner').style.display = 'none';
         Polymer.dom(this.root).querySelector('#welcomeCurtain').style.display = 'none';
       },
@@ -694,8 +741,18 @@
 
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
-        var component, videoThumbnail;
+        var component, videoThumbnail, welcomeDisplayVal;
         window.predix = window.predix || {};
+        var doNotShowWelcome = localStorage.getItem('kitCloud.doNotShowWelcome');
+        if (typeof doNotShowWelcome !== 'undefined' && doNotShowWelcome === 'true') {
+          welcomeDisplayVal = 'none';
+        }
+        else {
+          welcomeDisplayVal = 'block';
+        }
+        Polymer.dom(this.root).querySelector('#welcomeBanner').style.display = welcomeDisplayVal;
+        Polymer.dom(this.root).querySelector('#welcomeCurtain').style.display = welcomeDisplayVal;
+
         this._showEula();
         for (var i=0; i < hoverComponents.length; i++) {
           component = hoverComponents[i];
@@ -758,9 +815,9 @@
         videoThumbnail.addEventListener(
           'click',
           function() {
-            var iframeVideoContainer = Polymer.dom(this.root).querySelector('#iframeVideoContainer');
-            var iframeVideo = Polymer.dom(this.root).querySelector('#iframeVideo');
-            var videoThumbnailInside = Polymer.dom(this.root).querySelector('#videoThumbnailInside');
+            var iframeVideoContainer = this.$.iframeVideoContainer;
+            var iframeVideo = this.$.iframeVideo;
+            var videoThumbnailInside = this.$.videoThumbnailInside;
             if (this.properties.videoIsVisible) {
               iframeVideoContainer.style.display = 'none';
               iframeVideo.src = iframeVideo.src;
@@ -773,6 +830,15 @@
               this.properties.videoIsVisible = true;
             }
           }.bind(this)
+        );
+
+        // A temporary way to reset the 'do not show again' flag in welcome banner
+        // to avoid having to clear cache through browser
+        videoThumbnail.addEventListener(
+          'dblclick',
+          function() {
+            localStorage.removeItem('kitCloud.doNotShowWelcome');
+          }
         );
 
         this.$.eulaModal.addEventListener('btnModalPositiveClicked', function() {
