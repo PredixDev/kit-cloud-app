@@ -216,7 +216,10 @@ if (!config.isUaaConfigured()) {
     function(req, res, next) {
       if (req.session) {
         var tokenObj = getUserTokenObject(req.session);
-        if (!tokenObj.scope.includes('predixkit.admin')) { // array.includes is ES2016
+        if (tokenObj.scope.includes('predixkit.admin')) { // array.includes is ES2016
+          // crazy super awesome filter to hide useless groups that contain no devices.
+          req.url += '?filter=deviceGroup=/deviceGroup*>deviceGroup&pageSize=1000';
+        } else {
           // add filter by user
           req.url += '?filter=uaaUsers=' + tokenObj.user_id + '<usergroup';
         }

@@ -1,0 +1,50 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="asset-info-styles.html">
+
+<dom-module id='asset-info'>
+  <template>
+    <style include="asset-info-styles"></style>
+    <div class="asset-info-container">
+      <div class="asset-text">
+        <div class="heading">My Big Asset</div>
+        <div class="attributes">
+          <div class="attribute"><div class="key heading">key 1</div><div class="value">value 1</div></div>
+          <div class="attribute"><div class="key heading">key 2</div><div class="value">value 2</div></div>
+          <div class="attribute"><div class="key heading">key 3</div><div class="value">value 3</div></div>
+          <div class="attribute"><div class="key heading">key 4</div><div class="value">value 4</div></div>
+        </div>
+      </div>
+      <div class="image-container">
+        <img class="asset-image" src$="{{imageSourceUrl}}"/>
+      </div>
+    <div>
+    <div class="gateway-device-container">
+      <div class="parent-connector"></div>
+      <div class="sibling-connector"></div>
+      <div class="device-image">
+        <img src$="{{deviceImageURL}}"/>
+      </div>
+      <div class="device-text">
+        <div class="heading">Device 1</div>
+        <div class="attributes">
+          <div class="attribute"><div class="key heading">key 1</div><div class="value">value 1</div></div>
+          <div class="attribute"><div class="key heading">key 2</div><div class="value">value 2</div></div>
+          <div class="attribute"><div class="key heading">key 3</div><div class="value">value 3</div></div>
+          <div class="attribute"><div class="key heading">key 4</div><div class="value">value 4</div></div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+  Polymer({
+    is: 'asset-info',
+    properties: {
+      textContent: '',
+      imageSourceUrl: ''
+    },
+    ready: function(){
+
+    }
+  });
+  </script>
+</dom-module>

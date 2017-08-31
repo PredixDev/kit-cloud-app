@@ -3,8 +3,10 @@
 <link rel="import" href="../../bower_components/px-dropdown/px-dropdown.html">
 <link rel="import" href="../../bower_components/px-dropdown/px-dropdown-content.html">
 <link rel="import" href="../../bower_components/px-rangepicker/px-rangepicker.html">
+<link rel="import" href="../asset-info/asset-info.html">
 <link rel="import" href="../asset-browser/asset-browser.html">
 <link rel="import" href="../../bower_components/px-moment-imports/px-moment-imports.html">
+
 
 <link rel="import" href="kit-data-view-styles.html">
 <!--
@@ -19,6 +21,14 @@
     --iron-icon-width: 16px;
     --iron-icon-height: 16px;
   }
+  #assetInfo {
+    height: 100px;
+    background-color: #aaa;
+  }
+
+  #assetInfo > img {
+    height: 88px;
+  }
   </style>
   <template>
     <style include="kit-data-view-styles"></style>
@@ -26,10 +36,13 @@
       asset-model="{{rmdAssetModel}}"
       opened-asset="{{openedAsset}}"
       asset-query-url="/api/kit/device"
-      asset-group-query-url="/api/predix-asset/deviceGroup"
+      asset-group-query-url="/api/predix-asset/devicegroup"
       disable-infinite-scroll="true">
     </asset-browser>
-
+    <asset-info
+      image-source-url="/docs/images/PredixAsset_Aircraft.png"
+    >
+    </asset-info>
     <px-dropdown id="refreshFrequencyDropdown"
       display-value="Every 5 sec"
       selected-key="{{_refreshTimerInterval}}"
@@ -51,7 +64,7 @@
           <px-rangepicker id="tsRangepicker" range="{{selectedRange}}"></px-rangepicker>
         </div>
       </div>
-      <template is="dom-if" if="{{expirationDate}}"> 
+      <template is="dom-if" if="{{expirationDate}}">
         <div class="u-1/2-desk u-1/1-palm" style="text-align: right;">
           <span class="u-pr"><a href="/#/about">Device active in cloud until:</a></span><br/>
           <span class="u-pr">{{expirationDate}}</span>
@@ -85,7 +98,10 @@
         },
         openedAsset: {
           type: Object,
-          observer: '_openedAssetChanged'
+          observer: '_openedAssetChanged',
+          value: {
+            'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          }
         },
         assetTags: {
           type: Array
@@ -130,25 +146,23 @@
         });
         return displayTags;
       },
-
-      _openedAssetChanged: function(newVal) {        
+      _openedAssetChanged: function(newVal) {
         console.log('asset opened:', newVal);
         this.expired = false;
-        this.set('assetTags', []);
-        this.set('tagsWithData',[]);
-        // if item is selected, then check exp date
-        if (newVal.uri && newVal.uri.length > 0) {
-          var expDate = newVal.expirationDate || "0";
-          var expMoment = moment(expDate, 'x');
-          if (moment().diff(expMoment) < 0) { // show data
+        if (newVal.expirationDate) {
+          var expMoment = moment(newVal.expirationDate, 'x');
+          if (moment().diff(expMoment) < 0) {
             if (newVal.tags) {
               this.assetTags = this._formatTagsForDisplay(newVal.tags);
             }
             this.expirationDate = expMoment.format('h:mm A MMM D, YYYY');
-          } else { // show expiration message
-            this.expirationDate = null; 
-            this.expired = true;
+            return;
           }
+        } else if (newVal.uri && newVal.uri.length > 0) {
+          this.set('assetTags', []);
+          this.set('tagsWithData',[]);
+          this.expirationDate = null;
+          this.expired = true;
         }
       },
 
@@ -169,12 +183,12 @@
 
       _tagsOrRangeChanged: function(newTags, newRange) {
         console.log('kit-data-view _tagsOrRangeChanged', newTags, newRange);
-        this.debounce('fetch', function() {     
+        this.debounce('fetch', function() {
           if (newRange && newTags && newTags.base.length > 0) {
             this._fetchTimeseriesData(newTags.base, newRange);
           }
         }, 100);
-      },      
+      },
 
       // Expects a tag object, and a range object from px-rangepicker
       // {key: "tag1", val: "Tag 1"}
@@ -201,12 +215,12 @@
         this.$.tsAjaxEl.method = 'POST';
         this.$.tsAjaxEl.body = query;
         this.$.tsAjaxEl.generateRequest();
-      },      
+      },
 
       // find which tags from predix asset have matching data in predix time series.
       _buildTagsWithData: function(tsTags) {
         var matchingTags = [];
-        
+
         if (tsTags && tsTags.length > 0 && this.assetTags && this.assetTags.length > 0) {
           for (var i = 0; i < tsTags.length; i++) {
             var tsTag = tsTags[i];
@@ -265,10 +279,26 @@
           }
         });
 
+        // Update the image for the selected asset
+        window.predix = window.predix || {};
+        if (window.predix == {}) {
+          window.predix.selectedAssetImageURL = '/docs/images/PredixAsset_Aircraft.png';
+        }
+        // this.$.selectedAssetImage.src = window.predix.selectedAssetImageURL;
+
         // start off initial interval loop
         this.intervalId = setInterval(function() {
           that.selectedRange = that._getDefaultRange(1);
         }, 5000);
+      },
+
+      getAssetInfoDisplay: function() {
+        if (this.properties.openedAsset && this.properties.openedAsset !== {}) {
+          return 'block';
+        }
+        else {
+          return 'none';
+        }
       }
     });
   </script>

@@ -1,0 +1,109 @@
+:root * {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+}
+
+.asset-info-container {
+  background-color: #fff;
+  position: relative;
+  padding: 15px;
+}
+
+.image-container {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 120px;
+
+  height: 80px;
+  overflow: hidden;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.asset-text {
+  border-radius: 5px;
+  height: 80px;
+  overflow: hidden;
+  float: left;
+  width: 100%;
+  background-color: #eee;
+  padding: 0 0 0 130px;
+}
+
+.asset-image {
+  height: 80px;
+}
+
+.gateway-device-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0 0 0 220px;
+  height: 60px;
+  width: 100%;
+}
+
+.device-image {
+  position: absolute;
+  top: 0;
+  left: 120px;
+  height: 60px;
+  width: 90px;
+  background-color: #eaa;
+  border-radius: 5px;
+}
+
+.device-text {
+  display: inline-block;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+}
+
+.parent-connector {
+  position: absolute;
+  top: 0;
+  left: 60px;
+  height: 30px;
+  width: 60px;
+  border-left: 1px solid #888;
+  border-bottom: 1px solid #888;
+  border-bottom-left-radius: 5px;
+}
+
+.sibling-connector {
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  width: 1px;
+  height: 65px;
+  border-left: 1px solid #888;
+}
+
+.gateway-device-container:last-child > .sibling-connector {
+  border-left: 0;
+}
+
+.heading {
+  width: 100%;
+  font-weight: bold;
+}
+
+.asset-text > .heading, .device-text > .heading {
+  background-color: rgb(58, 180, 212);
+}
+
+div.key, div.value {
+  display: inline-block;
+}
+
+div.key {
+  width: 70px;
+}
+
+.asset-text *, .device-text * {
+  font-size: 12px;
+}
