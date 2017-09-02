@@ -14,15 +14,15 @@
           <div class="attribute"><div class="key heading">key 4</div><div class="value">value 4</div></div>
         </div>
       </div>
-      <div class="image-container">
+      <div class="asset-image-container">
         <img class="asset-image" src$="{{imageSourceUrl}}"/>
       </div>
     <div>
     <div class="gateway-device-container">
       <div class="parent-connector"></div>
       <div class="sibling-connector"></div>
-      <div class="device-image">
-        <img src$="{{deviceImageURL}}"/>
+      <div class="device-image-container">
+        <img class="device-image" src$="{{deviceImageUrl}}"/>
       </div>
       <div class="device-text">
         <div class="heading">Device 1</div>
@@ -40,7 +40,8 @@
     is: 'asset-info',
     properties: {
       textContent: '',
-      imageSourceUrl: ''
+      imageSourceUrl: '',
+      deviceImageUrl: ''
     },
     ready: function(){
 

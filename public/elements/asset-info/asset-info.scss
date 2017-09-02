@@ -10,7 +10,7 @@
   padding: 15px;
 }
 
-.image-container {
+.asset-image-container {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -46,14 +46,17 @@
   width: 100%;
 }
 
-.device-image {
+.device-image-container {
   position: absolute;
   top: 0;
   left: 120px;
   height: 60px;
   width: 90px;
-  background-color: #eaa;
-  border-radius: 5px;
+}
+
+img.device-image {
+  margin: 10px 0 0 2px;
+  height: 36px;
 }
 
 .device-text {
