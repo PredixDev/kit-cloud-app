@@ -220,7 +220,7 @@
       top: -20px;
       left: 50%;
       margin-left: -375px;
-      background-color: rgba(256, 256, 256, 0.85);
+      background-color: rgba(256, 256, 256, 0.3);
       width: 730px;
       height: 560px;
     }
@@ -229,12 +229,12 @@
       padding: 10px 10px 0 10px;
       display: none;
       position: absolute;
-      top: 0;
+      top: 115px;
       left: 50%;
-      margin-left: -375px;
+      margin-left: -205px;
       background-color: var(--overlay-background-rgb);
-      width: 730px;
-      height: 130px;
+      width: 380px;
+      height: 150px;
     }
 
     .overlay-gotit-button {
@@ -245,6 +245,17 @@
       border: 1px solid #fff;
       width: 200px;
       height: 30px;
+    }
+
+    .welcome-overlay-tip-up {
+      position: absolute;
+    	width: 0;
+    	height: 0;
+      top: -20px;
+      left: 180px;
+    	border-left: 20px solid transparent;
+    	border-right: 20px solid transparent;
+    	border-bottom: 20px solid var(--overlay-background-rgb);
     }
   </style>
   <template>
@@ -347,8 +358,8 @@
             <div
               class="component-mouseover"
               id="auth"
-              style="left: 415px; top: 30px;"
-              data-overlay-position="bottom"
+              style="left: 200px; top: 330px;"
+              data-overlay-position="right"
               >
             </div>
             <div
@@ -445,6 +456,7 @@
             <input type="checkbox" id="doNotShowAgainCb" style="display: inline-block; margin-left: 0; margin-top: 5px;">
             <label for="doNotShowAgainCb">[[staticText.doNotShowAgain]]</label>
           </div>
+          <div class="welcome-overlay-tip-up"></div>
         </div>
       </div>
       <px-modal id="eulaModal" btn-modal-positive="I Accept" modal-heading="End User License Agreement">
@@ -529,8 +541,8 @@
     Polymer({
       // TODOs:
       // - Asset JSON fetch and populate UI
-      // - persist selected asset to localStorage
-      // - 
+      // - persist selected asset details to localStorage
+      // -
       is: 'over-view',
 
       listeners: {
@@ -725,7 +737,7 @@
         var coords = {};
         switch(overlayID) {
           case 'overlayTop':
-            coords.top = parseInt(element.style.top, 10) - 160 + 'px';
+            coords.top = parseInt(element.style.top, 10) - 170 + 'px';
             coords.left = parseInt(element.style.left, 10) + 44 - 195 + 'px';
             break;
           case 'overlayBottom':

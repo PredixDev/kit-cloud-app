@@ -6,42 +6,56 @@
     <style include="asset-info-styles"></style>
     <div class="asset-info-container">
       <div class="asset-text">
-        <div class="heading">My Big Asset</div>
+        <div class="heading">[[assetDetails.name]]</div>
         <div class="attributes">
-          <div class="attribute"><div class="key heading">key 1</div><div class="value">value 1</div></div>
-          <div class="attribute"><div class="key heading">key 2</div><div class="value">value 2</div></div>
-          <div class="attribute"><div class="key heading">key 3</div><div class="value">value 3</div></div>
-          <div class="attribute"><div class="key heading">key 4</div><div class="value">value 4</div></div>
+          <template is="dom-repeat" items="[[assetDetails.attributes]]">
+          <div class="attribute">
+            <div class="key heading">[[item.label]]</div>
+            <div class="value">[[item.value]]</div>
+          </div>
+        </template>
         </div>
       </div>
       <div class="asset-image-container">
-        <img class="asset-image" src$="{{imageSourceUrl}}"/>
+        <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
       </div>
     <div>
-    <div class="gateway-device-container">
-      <div class="parent-connector"></div>
-      <div class="sibling-connector"></div>
-      <div class="device-image-container">
-        <img class="device-image" src$="{{deviceImageUrl}}"/>
-      </div>
-      <div class="device-text">
-        <div class="heading">Device 1</div>
-        <div class="attributes">
-          <div class="attribute"><div class="key heading">key 1</div><div class="value">value 1</div></div>
-          <div class="attribute"><div class="key heading">key 2</div><div class="value">value 2</div></div>
-          <div class="attribute"><div class="key heading">key 3</div><div class="value">value 3</div></div>
-          <div class="attribute"><div class="key heading">key 4</div><div class="value">value 4</div></div>
+    <template is="dom-repeat" items="[[connectedDevices]]">
+      <div class="gateway-device-container">
+        <div class="parent-connector"></div>
+        <div class="sibling-connector"></div>
+        <div class="device-image-container">
+          <img class="device-image" src$="[[item.imageUrl]]"/>
+        </div>
+        <div class="device-text">
+          <div class="heading">[[item.deviceName]]</div>
+          <div class="attributes">
+            <template is="dom-repeat" items="[[item.attributes]]">
+              <div class="attribute">
+                <div class="key heading">[[item.label]]</div>
+                <div class="value">[[item.value]]</div>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </template>
   <script>
   Polymer({
     is: 'asset-info',
     properties: {
       textContent: '',
-      imageSourceUrl: '',
-      deviceImageUrl: ''
+      assetImageUrl: '',
+      deviceImageUrl: '',
+      assetDetails: {
+        type: Object,
+        value: {}
+      },
+      connectedDevices: {
+        type: Array,
+        value: []
+      }
     },
     ready: function(){
 

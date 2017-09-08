@@ -60,6 +60,7 @@ img.device-image {
 }
 
 .device-text {
+  border-radius: 5px;
   display: inline-block;
   width: 100%;
   height: 80px;
@@ -86,17 +87,13 @@ img.device-image {
   border-left: 1px solid #888;
 }
 
-.gateway-device-container:last-child > .sibling-connector {
+.gateway-device-container:last-of-type > .sibling-connector {
   border-left: 0;
 }
 
 .heading {
   width: 100%;
   font-weight: bold;
-}
-
-.asset-text > .heading, .device-text > .heading {
-  background-color: rgb(58, 180, 212);
 }
 
 div.key, div.value {

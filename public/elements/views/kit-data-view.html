@@ -40,8 +40,8 @@
       disable-infinite-scroll="true">
     </asset-browser>
     <asset-info
-      image-source-url="/docs/images/PredixAsset_Aircraft.png"
-      device-image-url="/docs/images/NUC.png"
+      asset-details="[[openedAsset]]"
+      connected-devices="[[connectedDevices]]"
     >
     </asset-info>
     <px-dropdown id="refreshFrequencyDropdown"
@@ -101,7 +101,15 @@
           type: Object,
           observer: '_openedAssetChanged',
           value: {
+            'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
             'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+            , name: 'My Big Asset'
+            , attributes: [
+                { 'label': 'keyA', 'value': 'valueA'},
+                { 'label': 'keyB', 'value': 'valueB'},
+                { 'label': 'keyC', 'value': 'valueC'},
+                { 'label': 'keyD', 'value': 'valueD'}
+            ]
           }
         },
         assetTags: {
@@ -125,6 +133,41 @@
         _refreshTimerInterval: {
           type: Number,
           value: 5
+        },
+        connectedDevices: {
+          type: Array,
+          value: [
+            {
+              'deviceName': 'NUC1',
+              'imageUrl': '/docs/images/NUC.png',
+              'attributes': [
+                { 'label': 'key1', 'value': 'value1'},
+                { 'label': 'key2', 'value': 'value2'},
+                { 'label': 'key3', 'value': 'value3'},
+                { 'label': 'key4', 'value': 'value4'}
+              ]
+            },
+            {
+              'deviceName': 'NUC2',
+              'imageUrl': '/docs/images/NUC.png',
+              'attributes': [
+                { 'label': 'key5', 'value': 'value5'},
+                { 'label': 'key6', 'value': 'value6'},
+                { 'label': 'key7', 'value': 'value7'},
+                { 'label': 'key8', 'value': 'value8'}
+              ]
+            },
+            {
+              'deviceName': 'NUC3',
+              'imageUrl': '/docs/images/NUC.png',
+              'attributes': [
+                { 'label': 'key9', 'value': 'value9'},
+                { 'label': 'key10', 'value': 'value10'},
+                { 'label': 'key11', 'value': 'value11'},
+                { 'label': 'key12', 'value': 'value12'}
+              ]
+            }
+          ]
         }
       },
       observers: ['_tagsOrRangeChanged(assetTags.*, selectedRange)'],

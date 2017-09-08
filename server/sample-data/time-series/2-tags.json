@@ -1,6 +1,6 @@
 {
 	"tags": [{
-		"name": "swapna-device-name:rotaryangle",
+		"name": "NUC-Label5-TEST-123:rotaryangle",
 		"results": [{
 			"groups": [{
 				"name": "type",
@@ -55,7 +55,7 @@
 			"rawCount": 326
 		}
 	}, {
-		"name": "swapna-device-name:light",
+		"name": "NUC-Label5-TEST-123:light",
 		"results": [{
 			"groups": [{
 				"name": "type",
