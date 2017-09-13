@@ -1,8 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/px-card/px-card.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/px-icon-set/px-icon-set.html">
 <link rel="import" href="asset-info-styles.html">
 
 <dom-module id='asset-info'>
   <template>
+    <px-card>
     <style include="asset-info-styles"></style>
     <div class="asset-info-container">
       <div class="asset-text">
@@ -19,27 +23,34 @@
       <div class="asset-image-container">
         <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
       </div>
+      <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon></button>
+    </div>
+    <div class="asset-image-container">
+      <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
+    </div>
     <div>
-    <template is="dom-repeat" items="[[connectedDevices]]">
-      <div class="gateway-device-container">
-        <div class="parent-connector"></div>
-        <div class="sibling-connector"></div>
-        <div class="device-image-container">
-          <img class="device-image" src$="[[item.imageUrl]]"/>
-        </div>
-        <div class="device-text">
-          <div class="heading">[[item.deviceName]]</div>
-          <div class="attributes">
-            <template is="dom-repeat" items="[[item.attributes]]">
-              <div class="attribute">
-                <div class="key heading">[[item.label]]</div>
-                <div class="value">[[item.value]]</div>
-              </div>
-            </template>
+      <template is="dom-repeat" items="[[connectedDevices]]">
+        <div class="gateway-device-container">
+          <div class="parent-connector"></div>
+          <div class="sibling-connector"></div>
+          <div class="device-image-container">
+            <img class="device-image" src$="[[item.imageUrl]]"/>
+          </div>
+          <div class="device-text">
+            <div class="heading">[[item.deviceName]]</div>
+            <div class="attributes">
+              <template is="dom-repeat" items="[[item.attributes]]">
+                <div class="attribute">
+                  <div class="key heading">[[item.label]]</div>
+                  <div class="value">[[item.value]]</div>
+                </div>
+              </template>
+            </div>
           </div>
         </div>
-      </div>
-    </template>
+      </template>
+      <iron-ajax id="downloadAjaxEl" content-type="application/octet-stream" handle-as="blob"></iron-ajax>
+    </px-card>
   </template>
   <script>
   Polymer({
@@ -50,15 +61,55 @@
       deviceImageUrl: '',
       assetDetails: {
         type: Object,
-        value: {}
+        value: {},
+        observer: '_assetDetailsChanged'
       },
       connectedDevices: {
         type: Array,
         value: []
       }
     },
-    ready: function(){
 
+    _assetDetailsChanged: function(newVal) {
+      this.$.downloadAjaxEl.url = '/api/kit' + (newVal.uri || '');
+    },
+
+    ready: function(){
+      this.$.exportBtn.addEventListener('click', function() {        
+        this.$.downloadAjaxEl.generateRequest();
+      }.bind(this));
+
+      this.$.downloadAjaxEl.addEventListener('response', function(evt) {
+        // console.log('user agent: ', navigator.userAgent);
+        var dl = document.createElement('a');
+        var blob = new Blob([evt.detail.response], {type: 'application/zip'});
+        var fileUrl = window.URL.createObjectURL(blob);  //(evt.detail.response);
+        if ('download' in dl) {                    
+          dl.href = fileUrl;
+          dl.download = 'predix_kit_assets.zip';
+          // Crude browser detection, to make the download work...
+          if (navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') < 0) {
+            // Safari
+            document.body.appendChild(dl);  // appendchild makes safari work.  Chrome and firefox fail.
+          } else {
+            // Chrome & Firefox
+            // with both appendChild and target set, then chrome & firefox work.  safari gives unknown file. 
+            document.body.appendChild(dl);
+            dl.target = '_blank';  // safari works if target is not set.  But firefox fails.
+          }
+          // if target is _blank, then safari downloads unknown file.  firefox fails.
+          dl.click();
+          document.body.removeChild(dl);
+        } else if (navigator.userAgent.indexOf('MSIE') > -1 || navigator.userAgent.indexOf('Trident') > -1) {
+          // IE or Edge
+          navigator.msSaveBlob(blob, 'predix_kit_assets.zip');
+        }
+      }.bind(this));
+
+      this.$.downloadAjaxEl.addEventListener('error', function(evt) {
+        // TODO: handle better
+        console.log('error: ', evt);
+      });
     }
   });
   </script>

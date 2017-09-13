@@ -39,11 +39,7 @@
       asset-group-query-url="/api/predix-asset/devicegroup"
       disable-infinite-scroll="true">
     </asset-browser>
-    <asset-info
-      asset-details="[[openedAsset]]"
-      connected-devices="[[connectedDevices]]"
-    >
-    </asset-info>
+
     <px-dropdown id="refreshFrequencyDropdown"
       display-value="Every 5 sec"
       selected-key="{{_refreshTimerInterval}}"
@@ -58,6 +54,12 @@
       style="text-align: center; line-height: 26px; width: 28px; height: 28px; position: absolute; top: 18px; right: 20px; border: 1px solid #999; border-radius: 4px; cursor: pointer;">
       <iron-icon icon="fa:fa-refresh" style="margin-left: 2px; margin-top: 1px"></iron-icon>
     </div>
+
+    <asset-info
+      asset-details="[[openedAsset]]"
+      connected-devices="[[connectedDevices]]"
+    >
+    </asset-info>
 
     <div class="u-pt flex kit-data-controls-row">
       <div class="u-1/2-desk u-1/1-palm">

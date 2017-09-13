@@ -248,6 +248,18 @@ if (!config.isUaaConfigured()) {
     proxy.customProxyMiddleware('/api/kit/device', config.kitServiceURL, '/device/')
   );
 
+  app.get('/api/kit/device/:deviceId',
+      passport.authenticate('main', {
+      noredirect: false
+    }),
+    function(req, res, next) {
+      console.log('getting a device.');
+      next();
+    },
+    proxy.addClientTokenMiddleware,
+    proxy.customProxyMiddleware('/api/kit/device', config.kitServiceURL, '/device')
+  );
+
   app.post('/api/kit/register',
       addTokenFromPK,
       proxy.customProxyMiddleware('/api/kit/register', config.kitServiceURL, '/device/register')
@@ -274,7 +286,7 @@ if (!config.isUaaConfigured()) {
   //Use this route to make the entire app secure.  This forces login for any path in the entire app.
   app.use('/',
     passport.authenticate('main', {
-      noredirect: false //Don't redirect a user to the authentication page, just show an error
+      noredirect: false // Redirect a user to the authentication page
     }),
     express.static(path.join(__dirname, process.env['base-dir'] ? process.env['base-dir'] : '../public'))
   );
@@ -294,7 +306,6 @@ var mockKitRoutes = require('./routes/mock-kit.js')();
 app.use(['/mock-api/predix-asset', '/api/predix-asset'], jsonServer.router(mockAssetRoutes));
 app.use(['/mock-api/predix-timeseries', '/api/predix-timeseries'], mockTimeSeriesRouter);
 app.use('/api/kit', jsonServer.router(mockKitRoutes));
-// require('./routes/mock-live-data.js')(httpServer);
 // ***** END MOCK ROUTES *****
 
 // route to return info for path-guide component.

@@ -24,7 +24,7 @@
     "px-view-header": "^0.2.0",
     "px-path-guide": "^0.0.2",
     "px-login": "^1.0.0",
-    "px-context-browser": "^1.6.7", 
+    "px-context-browser": "^1.6.7",
     "iron-ajax": "^1.4.3",
     "es6-promise": "~3.3.1",
     "px-moment-imports": "*",
@@ -40,9 +40,13 @@
     "px-simple-bar-chart": "^1.9.1",
     "px-colors-design": "^0.3.9",
     "px-datetime-common": "0.8.1",
-    "px-modal": "^1.4.10"
+    "px-modal": "^1.4.10",
+    "px-icon-set": "^2.0.10"
   },
   "resolutions": {
-    "app-localize-behavior": "^1.0.2"
+    "app-localize-behavior": "^1.0.2",
+    "iron-iconset-svg": "^1.0.9",
+    "iron-flex-layout": "^1.0.0",
+    "iron-icon": "^1.0.7"
   }
 }

@@ -85,7 +85,9 @@ function buildDecorator(zoneId) {
 		if (corporateProxyAgent) {
 			req.agent = corporateProxyAgent;
 		}
-		req.headers['Content-Type'] = 'application/json';
+		if (!req.headers['Content-Type'] && !req.headers['content-type']) {
+			req.headers['Content-Type'] = 'application/json';
+		}
 		if (zoneId) {
 			req.headers['Predix-Zone-Id'] = zoneId;
 		}
