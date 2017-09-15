@@ -22,7 +22,10 @@ module.exports = function(gulp) {
       'public/bower_components/px-polymer-font-awesome',
       'public/bower_components/px-data-table',
 
-      'public/elements/dev-guide'
+      'public/elements/dev-guide',
+      'public/elements/fonts',
+      'public/elements/hopscotch',
+      'public/elements/images'
     ];
 
     var extraStreams = [];

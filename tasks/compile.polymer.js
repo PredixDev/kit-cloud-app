@@ -20,7 +20,7 @@ module.exports = function(gulp) {
       .pipe(project.bundler())
       // polymer build will copy over all the bower components. we'll filter them out here.
       //  then add back a few that we need in the dist.copy task.
-      .pipe(filter(['**', '!**/bower_components/**',]))
+      .pipe(filter(['**', '!**/bower_components/**', '!**/hopscotch/**', '!**/elements/images/**', '!**/elements/fonts/**']))
 
       .pipe(htmlmin({
           removeEmptyAttributes: true,

@@ -12,7 +12,6 @@
     "tutorials"
   ],
   "dependencies": {
-    "hopscotch": "^0.2.6",
     "polymer": "^1.6.1",
     "px-view": "^1.1.1",
     "app-route": "PolymerElements/app-route#^0.9.1",

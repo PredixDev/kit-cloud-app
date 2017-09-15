@@ -3,16 +3,13 @@
 <link rel="import" href="../../bower_components/px-modal/px-modal.html">
 <link rel="import" href="../../bower_components/px-dropdown/px-dropdown.html">
 <link rel="import" href="../../bower_components/px-dropdown/px-dropdown-content.html">
-<link href="../hopscotch/hopscotch_custom.css" rel="stylesheet">
-<script src="../hopscotch/hopscotch.js" inline></script>
-<script src="../hopscotch/predix-tour.js" inline></script>
 
 <dom-module id="over-view">
   <style>
     :root {
       --overlay-background-rgb: rgb(58, 180, 212);
       --overlay-background-hex: #2886af;
-      --mouseover-background: #fff5cc;
+      --mouseover-background: rgba(66, 88, 102, 0.95);
       --mouseover-halo: rgba(58, 180, 212, 0.3);
     }
 
@@ -82,7 +79,7 @@
     	width: 0;
     	height: 0;
       top: 50px;
-      left: 359px;
+      left: 369px;
     	border-top: 20px solid transparent;
     	border-bottom: 20px solid transparent;
     	border-left: 20px solid var(--mouseover-background);
@@ -107,18 +104,18 @@
 
     .overlay-body {
       position: absolute;
-      width: 350px;
+      width: 360px;
       top: 10px;
       left: 10px;
       border: 0;
       background-color: var(--mouseover-background);
       border-radius: 8px;
-      color: #012939;
+      color: #fff;
       font-size: 14px;
     }
 
     .text-container {
-      width: 330px;
+      width: 340px;
       height: 110px;
       display: block;
       margin: 10px;
@@ -223,6 +220,11 @@
       width: 730px;
       height: 560px;
     }
+
+    .iot-graphic {
+      position: absolute;
+      height: 108px;
+    }
   </style>
   <template>
     <px-card header-text="Predix Kits">
@@ -242,8 +244,24 @@
         </div>
         <div class="overview-image-container">
           <div class="image-container">
-            <img class="overview-image" src="/docs/images/SystemDiagram.png" width="750" height="450"></img>
+            <img class="overview-image" src="/docs/images/SystemDiagram_sansGraphics.png" width="750" height="450"></img>
             <p style="text-align: right; margin-right: 60px;">[[staticText.clickOnVideo]]</p>
+            <img class="iot-graphic"
+              style="left: 30px; top: 315px;"
+              src="/docs/images/Wind-Turbine_black.png">
+            </img>
+            <img class="iot-graphic"
+              style="height: 72px; left: 50px; top: 195px;"
+              src="/docs/images/Gateway_black.png">
+            </img>
+            <img class="iot-graphic"
+              style="height: 72px; left: 620px; top: 160px;"
+              src="/docs/images/Desktop_black.png">
+            </img>
+            <img class="iot-graphic"
+              style="height: 72px; left: 622px; top: 65px;"
+              src="/docs/images/Smartphone_black.png">
+            </img>
             <div
               class="component-mouseover"
               id="predixMachine"
@@ -366,7 +384,6 @@
                     <span class="header"></span><br/>
                     <span class="text">overlay bottom</span>
                   </div>
-                  <div class="overlay-custom-content"></div>
                 </div>
               </div>
             </div>
@@ -379,7 +396,6 @@
                     <span class="header"></span><br/>
                     <span class="text">overlay top</span>
                   </div>
-                  <div class="overlay-custom-content"></div>
                 </div>
               </div>
             </div>
@@ -392,7 +408,6 @@
                     <span class="header"></span><br/>
                     <span class="text">overlay right</span>
                   </div>
-                  <div class="overlay-custom-content"></div>
                 </div>
               </div>
             </div>
@@ -404,7 +419,6 @@
                     <span class="header"></span><br/>
                     <span class="text">overlay left</span>
                   </div>
-                  <div class="overlay-custom-content"></div>
                 </div>
                 <div class="overlay-tip-right"></div>
               </div>
@@ -575,13 +589,13 @@
             , 'newTab': true
           },
           'asset': {
-            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytic inputs, aggregating results and managing core asset models.  Click to learn more.'
+            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytics inputs, aggregating results and managing core asset models.  Click to learn more.'
             , 'header': 'Asset'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/asset/'
             , 'newTab': true
           },
           'timeSeries': {
-            'text': 'Data that is diverse, high velocity and high volume is the inevitable use case of the Industrial Internet.  Predix Time Series stores data at cloud scale and provides a straightforward REST API, allowing your Analytics to unlock the potential of asset optimization.  Click to learn more.'
+            'text': 'Diverse, high velocity and high volume data is the inevitable use case of the Industrial Internet.  Predix Time Series stores data at cloud scale, and with a straightforward REST API, allows your Analytics to unlock the potential of asset optimization.  Click to learn more.'
             , 'header': 'Time Series'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/time_series/'
             , 'newTab': true
@@ -593,13 +607,13 @@
             , 'newTab': true
           },
           'appEngine': {
-            'text': 'The App Engine is the greatest thing since sliced bread!'
+            'text': 'The Predix App Engine is the runtime for Predix Studio where Citizen Developers can aggregate data and build apps with ease. Click to learn more.'
             , 'header': 'App Engine'
             , 'learnMoreURL': 'https://www.predix.io/'
             , 'newTab': true
           },
           'customServices': {
-            'text': 'Predix architecture enables you to create your own custom services, leveraging the security and performance of the Predix platform.  This app is downloadable for further customization.  Visit the About page to Install a Personal Copy of this app and to see the code from this app.  Click to learn more.'
+            'text': 'Predix enables you to create your own services, leveraging the security and performance of the platform.  Visit the About page to Install a personal, customizable copy of this app and see its code.  Click to learn more.'
             , 'header': 'Custom Microservices'
             , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html#2041'
             , 'newTab': true
@@ -617,7 +631,7 @@
             , 'newTab': true
           },
           'edgeManager': {
-            'text': 'Predix EdgeManager provides a single point of entry for deploying and monitoring remote devices.  EdgeManager allows you to administer your applications and configuration files at both a device and a fleet level, helping you keep your device software current.  Click to learn more.'
+            'text': 'Predix EdgeManager provides a single point of entry for deploying and monitoring remote devices.  EdgeManager lets you administer applications and configuration files at both device and fleet levels, helping keep your device software current.  Click to learn more.'
             , 'header': 'Edge Manager'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/edge_manager/'
             , 'newTab': true
@@ -692,7 +706,7 @@
             break;
           case 'overlayLeft':
             coords.top = parseInt(element.style.top, 10) + 44 - 80 + 'px';
-            coords.left = parseInt(element.style.left, 10) - 390 + 'px';
+            coords.left = parseInt(element.style.left, 10) - 400 + 'px';
             break;
           case 'overlayRight':
             coords.top = parseInt(element.style.top, 10) + 44 - 80 + 'px';
