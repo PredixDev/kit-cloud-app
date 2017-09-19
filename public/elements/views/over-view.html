@@ -255,7 +255,7 @@
               src="/docs/images/Gateway_black.png">
             </img>
             <img class="iot-graphic"
-              style="height: 72px; left: 620px; top: 160px;"
+              style="height: 72px; left: 623px; top: 160px;"
               src="/docs/images/Desktop_black.png">
             </img>
             <img class="iot-graphic"
@@ -356,14 +356,14 @@
             <div
               class="component-mouseover"
               id="mobile"
-              style="left: 613px; top: 55px;"
+              style="left: 616px; top: 55px;"
               data-overlay-position="left"
             >
             </div>
             <div
               class="component-mouseover"
               id="apps"
-              style="left: 613px; top: 147px;"
+              style="left: 616px; top: 147px;"
               data-overlay-position="left"
             >
             </div>
@@ -535,12 +535,12 @@
           type: Array,
           value: [
             { 'key': '1',
-              'val': 'Aircraft',
-              'imageURL': '/docs/images/PredixAsset_Aircraft.png'
+              'val': 'Jet Engine',
+              'imageURL': '/docs/images/PredixAsset_JetEngine.png'
             },
             { 'key': '2',
-              'val': 'Hospital',
-              'imageURL': '/docs/images/PredixAsset_Hospital.png'
+              'val': 'PET Scanner',
+              'imageURL': '/docs/images/PredixAsset_PETScanner.png'
             },
             { 'key': '3',
               'val': 'Locomotive',
@@ -548,7 +548,7 @@
             },
             { 'key': '4',
               'val': 'Wind Turbine',
-              'imageURL': '/docs/images/PredixAsset_Windmill.png'
+              'imageURL': '/docs/images/PredixAsset_WindTurbine.png'
             }
           ]
         },
@@ -565,13 +565,13 @@
 
         mouseOverDetails: {
           'industrialAsset': {
-            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.  <b>Click to view data</b> from the Device associated to this asset.'
+            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.  <b>Click to view data</b> from the Device associated to this Asset.'
             , 'header': "Industrial Asset"
             , 'learnMoreURL': '/#/kit-data'
             , 'newTab': false
           },
           'device': {
-            'text': 'A wide variety of devices can run Predix Machine software to monitor and react to your Industrial Asset, aggregate data from your site, and push to the Predix Cloud for industrial scale analytics.'
+            'text': 'A wide variety of devices can run Predix Machine software to monitor and react to your Industrial Asset, aggregate data from your site, and push to the Predix Cloud for industrial scale analytics.  <b>Click to view data</b> from this Device.'
             , 'header': "Device"
             , 'learnMoreURL': '/#/kit-data'
             , 'newTab': false
@@ -726,11 +726,35 @@
         localStorage.setItem('kitCloud.eulaAccepted', true);
       },
 
+      _eulaAccepted: function() {
+        return (localStorage.getItem('kitCloud.eulaAccepted') === 'true');
+      },
+
+      _showWelcomeOverlay: function() {
+        if (this._eulaAccepted()) {
+          if (localStorage.getItem('predixDontShowAgain') !== 'true') {
+            setTimeout(
+              function(event) {
+                window.predix.startTour('predixCloud');
+              },
+              500
+            );
+          }
+          else {
+            this.$.welcomeCurtain.style.display = 'none';
+          }
+        }
+        else {
+          this.$.welcomeCurtain.style.display = 'block';
+        }
+      },
+
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
         var component, videoThumbnail, welcomeDisplayVal;
         window.predix = window.predix || {};
         this._showEula();
+        this._showWelcomeOverlay();
         for (var i=0; i < hoverComponents.length; i++) {
           component = hoverComponents[i];
           component.addEventListener(
@@ -797,23 +821,14 @@
           'dblclick',
           function() {
             localStorage.removeItem('predixDontShowAgain');
+            localStorage.removeItem('kitCloud.eulaAccepted');
           }
         );
 
         this.$.eulaModal.addEventListener('btnModalPositiveClicked', function() {
           this._acceptEula();
+          this._showWelcomeOverlay();
         }.bind(this));
-        if (localStorage.getItem('predixDontShowAgain') !== 'true') {
-          setTimeout(
-            function(event) {
-              window.predix.startTour('predixCloud');
-            },
-            500
-          );
-        }
-        else {
-          this.$.welcomeCurtain.style.display = 'none';
-        }
       }
     });
   </script>

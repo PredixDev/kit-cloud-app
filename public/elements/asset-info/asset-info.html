@@ -7,48 +7,48 @@
 <dom-module id='asset-info'>
   <template>
     <px-card>
-    <style include="asset-info-styles"></style>
-    <div class="asset-info-container">
-      <div class="asset-text">
-        <div class="heading">[[assetDetails.name]]</div>
-        <div class="attributes">
-          <template is="dom-repeat" items="[[assetDetails.attributes]]">
-          <div class="attribute">
-            <div class="key heading">[[item.label]]</div>
-            <div class="value">[[item.value]]</div>
+      <style include="asset-info-styles"></style>
+      <div class="asset-info-container">
+        <div class="asset-text">
+          <div class="heading">[[assetDetails.name]]</div>
+          <div class="attributes">
+            <template is="dom-repeat" items="[[assetDetails.attributes]]">
+            <div class="attribute">
+              <div class="key heading">[[item.label]]</div>
+              <div class="value">[[item.value]]</div>
+            </div>
+          </template>
           </div>
-        </template>
         </div>
+        <div class="asset-image-container">
+          <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
+        </div>
+        <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon></button>
       </div>
-      <div class="asset-image-container">
-        <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
-      </div>
-      <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon></button>
-    </div>
-    <div class="asset-image-container">
-      <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
-    </div>
-    <div>
-      <template is="dom-repeat" items="[[connectedDevices]]">
-        <div class="gateway-device-container">
-          <div class="parent-connector"></div>
-          <div class="sibling-connector"></div>
-          <div class="device-image-container">
-            <img class="device-image" src$="[[item.imageUrl]]"/>
-          </div>
-          <div class="device-text">
-            <div class="heading">[[item.deviceName]]</div>
-            <div class="attributes">
-              <template is="dom-repeat" items="[[item.attributes]]">
-                <div class="attribute">
-                  <div class="key heading">[[item.label]]</div>
-                  <div class="value">[[item.value]]</div>
-                </div>
-              </template>
+      <!--
+      <div>
+        <template is="dom-repeat" items="[[connectedDevices]]">
+          <div class="gateway-device-container">
+            <div class="parent-connector"></div>
+            <div class="sibling-connector"></div>
+            <div class="device-image-container">
+              <img class="device-image" src$="[[item.imageUrl]]"/>
+            </div>
+            <div class="device-text">
+              <div class="heading">[[item.deviceName]]</div>
+              <div class="attributes">
+                <template is="dom-repeat" items="[[item.attributes]]">
+                  <div class="attribute">
+                    <div class="key heading">[[item.label]]</div>
+                    <div class="value">[[item.value]]</div>
+                  </div>
+                </template>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
+        </template>
+      </div>
+      -->
       <iron-ajax id="downloadAjaxEl" content-type="application/octet-stream" handle-as="blob"></iron-ajax>
     </px-card>
   </template>
@@ -75,7 +75,7 @@
     },
 
     ready: function(){
-      this.$.exportBtn.addEventListener('click', function() {        
+      this.$.exportBtn.addEventListener('click', function() {
         this.$.downloadAjaxEl.generateRequest();
       }.bind(this));
 
@@ -84,7 +84,7 @@
         var dl = document.createElement('a');
         var blob = new Blob([evt.detail.response], {type: 'application/zip'});
         var fileUrl = window.URL.createObjectURL(blob);  //(evt.detail.response);
-        if ('download' in dl) {                    
+        if ('download' in dl) {
           dl.href = fileUrl;
           dl.download = 'predix_kit_assets.zip';
           // Crude browser detection, to make the download work...
@@ -93,7 +93,7 @@
             document.body.appendChild(dl);  // appendchild makes safari work.  Chrome and firefox fail.
           } else {
             // Chrome & Firefox
-            // with both appendChild and target set, then chrome & firefox work.  safari gives unknown file. 
+            // with both appendChild and target set, then chrome & firefox work.  safari gives unknown file.
             document.body.appendChild(dl);
             dl.target = '_blank';  // safari works if target is not set.  But firefox fails.
           }

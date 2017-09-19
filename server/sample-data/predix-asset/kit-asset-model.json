@@ -4,6 +4,7 @@
     "uri": "/industrial-asset/jet-engine",
     "classificationUri": "/classification/JET-ENGINE",
     "assetId": "jet-engine",
+    "name": "Jet Engine",
     "description": "GEnx-1B Jet Engine",
     "filter": "group=/group/nuc",
 	  "group": "/group/nuc",
@@ -107,6 +108,343 @@
         "enumeration": [],
         "value": [
           "Over 1600 engines on order"
+        ]
+      }
+    }
+  },
+  {
+    "complexType": "Asset",
+    "uri": "/industrial-asset/wind-turbine",
+    "classificationUri": "/classification/WIND-TURBINE",
+    "assetId": "wind-turbine",
+    "name": "Wind Turbine",
+    "description": "GE 4.8-158 Onshore Wind Turbine",
+    "filter": "group=/group/nuc",
+	  "group": "/group/nuc",
+    "assetTag": {
+      "for-button": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-sound": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-light": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-temperature": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-rotary": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-vibration": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-touch": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      }
+    },
+    "attributes": {
+      "manufacturer": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "GE Renewable Energy"
+        ]
+      },
+      "firstRun": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "2010"
+        ]
+      },
+      "applications": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Onshore Wind Energy"
+        ]
+      },
+      "nominalCapacity": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "4.8MW"
+        ]
+      },
+      "rotorDiameter": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "158m"
+        ]
+      },
+      "windClass": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "IEC (S)"
+        ]
+      },
+      "noiseLevel": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "104 dB(A)"
+        ]
+      }
+    }
+  },
+  {
+    "complexType": "Asset",
+    "uri": "/industrial-asset/locomotive",
+    "classificationUri": "/classification/LOCOMOTIVE",
+    "assetId": "locomotive",
+    "name": "Locomotive",
+    "description": "GE Evolution Series ES44AC",
+    "filter": "group=/group/nuc",
+	  "group": "/group/nuc",
+    "assetTag": {
+      "for-button": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-sound": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-light": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-temperature": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-rotary": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-vibration": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-touch": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      }
+    },
+    "attributes": {
+      "manufacturer": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "GE Transportation"
+        ]
+      },
+      "firstRun": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "2005"
+        ]
+      },
+      "applications": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Union Pacific I-5 Corridor"
+        ]
+      },
+      "noxReductionRate": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "90%"
+        ]
+      },
+      "tractionHorsePower": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "4400"
+        ]
+      },
+      "weightGross": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "432000 lb"
+        ]
+      },
+      "maximumSpeed": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "70 mph"
+        ]
+      }
+    }
+  },
+  {
+    "complexType": "Asset",
+    "uri": "/industrial-asset/",
+    "classificationUri": "/classification/PET-SCANNER",
+    "assetId": "pet-scanner",
+    "name": "PET Scanner",
+    "description": "GE Discovery IQ",
+    "filter": "group=/group/nuc",
+	  "group": "/group/nuc",
+    "assetTag": {
+      "for-button": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-sound": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-light": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-temperature": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-rotary": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-vibration": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      },
+      "for-touch": {
+        "complexType": "AssetTag",
+        "label": "Button",
+        "tagUri": "/tag/button",
+        "isKpi": true
+      }
+    },
+    "attributes": {
+      "manufacturer": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "GE Healthcare"
+        ]
+      },
+      "firstRun": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "2016"
+        ]
+      },
+      "applications": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Hospital Imaging",
+          "Mobile Imaging Center"
+        ]
+      },
+      "detectorTechnology": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "LightBurst"
+        ]
+      },
+      "wholeBodyScanTime": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "325 sec"
+        ]
+      },
+      "reconstructionMethod": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "Q.Clear"
+        ]
+      },
+      "maximumSensitivity": {
+        "complexType": "Attribute",
+        "type": "string",
+        "enumeration": [],
+        "value": [
+          "22 cps/kB(q-squared)"
         ]
       }
     }

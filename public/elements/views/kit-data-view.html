@@ -32,36 +32,20 @@
   </style>
   <template>
     <style include="kit-data-view-styles"></style>
-    <asset-browser id="assetBrowser"
-      asset-model="{{rmdAssetModel}}"
-      opened-asset="{{openedAsset}}"
-      asset-query-url="/api/kit/device"
-      asset-group-query-url="/api/predix-asset/devicegroup"
-      disable-infinite-scroll="true">
-    </asset-browser>
-
-    <px-dropdown id="refreshFrequencyDropdown"
-      display-value="Every 5 sec"
-      selected-key="{{_refreshTimerInterval}}"
-      value="Every 5 sec"
-      style="position: absolute; top: 18px; right: 50px; width: 150px; padding-right: 5px">
-      <px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10'
-        items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"5","val":"Every 5 sec"},{"key":"30","val":"Every 30 sec"}]'>
-      </px-dropdown-content>
-    </px-dropdown>
-
-    <div id="refreshBtn"
-      style="text-align: center; line-height: 26px; width: 28px; height: 28px; position: absolute; top: 18px; right: 20px; border: 1px solid #999; border-radius: 4px; cursor: pointer;">
-      <iron-icon icon="fa:fa-refresh" style="margin-left: 2px; margin-top: 1px"></iron-icon>
-    </div>
-
     <asset-info
-      asset-details="[[openedAsset]]"
+      asset-details="[[selectedAsset]]"
       connected-devices="[[connectedDevices]]"
     >
     </asset-info>
+      <asset-browser id="assetBrowser"
+        asset-model="{{rmdAssetModel}}"
+        opened-asset="{{openedAsset}}"
+        asset-query-url="/api/kit/device"
+        asset-group-query-url="/api/predix-asset/devicegroup"
+        disable-infinite-scroll="true">
+      </asset-browser>
 
-    <div class="u-pt flex kit-data-controls-row">
+    <div class="u-pt flex kit-data-controls-row" style="position: relative;">
       <div class="u-1/2-desk u-1/1-palm">
         <div class="u-pr">
           <px-rangepicker id="tsRangepicker" range="{{selectedRange}}"></px-rangepicker>
@@ -73,6 +57,19 @@
           <span class="u-pr">{{expirationDate}}</span>
         </div>
       </template>
+      <px-dropdown id="refreshFrequencyDropdown"
+        display-value="Every 5 sec"
+        selected-key="{{_refreshTimerInterval}}"
+        value="Every 5 sec"
+        style="position: absolute; top: 15px; left: 580px; width: 150px; padding-right: 5px">
+        <px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10'
+          items='[{"key":"0","val":"No Refresh"},{"key":"3","val":"Every 3 sec"},{"key":"5","val":"Every 5 sec"},{"key":"30","val":"Every 30 sec"}]'>
+        </px-dropdown-content>
+      </px-dropdown>
+      <div id="refreshBtn"
+        style="position: absolute; top: 15px; left: 735px; text-align: center; line-height: 26px; width: 28px; height: 28px; border: 1px solid #999; border-radius: 4px; cursor: pointer;">
+        <iron-icon icon="fa:fa-refresh" style="margin-left: 2px; margin-top: 1px"></iron-icon>
+      </div>
     </div>
 
     <template is="dom-if" if="{{expired}}">
@@ -100,6 +97,21 @@
           type: Object
         },
         openedAsset: {
+          type: Object,
+          observer: '_openedAssetChanged',
+          value: {
+            'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
+            'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+            , name: 'My Big Asset'
+            , attributes: [
+                { 'label': 'keyA', 'value': 'valueA'},
+                { 'label': 'keyB', 'value': 'valueB'},
+                { 'label': 'keyC', 'value': 'valueC'},
+                { 'label': 'keyD', 'value': 'valueD'}
+            ]
+          }
+        },
+        selectedAsset: {
           type: Object,
           observer: '_openedAssetChanged',
           value: {
