@@ -23,7 +23,7 @@
         <div class="asset-image-container">
           <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
         </div>
-        <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon></button>
+        <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon> Download CSV</button>
       </div>
       <!--
       <div>
@@ -56,22 +56,33 @@
   Polymer({
     is: 'asset-info',
     properties: {
+      assetListUrl: '',
       textContent: '',
       assetImageUrl: '',
       deviceImageUrl: '',
       assetDetails: {
         type: Object,
-        value: {},
-        observer: '_assetDetailsChanged'
+        value: {}
       },
       connectedDevices: {
         type: Array,
-        value: []
+        value: [],
+        observer: '_connectedDevicesChanged'
+      },
+      selectedDevice: {
+        type: Object,
+        observer: '_selectedDeviceChanged'
       }
     },
 
-    _assetDetailsChanged: function(newVal) {
+    _selectedDeviceChanged: function(newVal) {
       this.$.downloadAjaxEl.url = '/api/kit' + (newVal.uri || '');
+    },
+
+    _connectedDevicesChanged: function(newVal) {
+      var self = this;
+      console.log('<asset-info> CONNECTED DEVICES 1:' + JSON.stringify(newVal));
+      console.log('<asset-info> CONNECTED DEVICES 2:' + JSON.stringify(self.properties.connectedDevices));
     },
 
     ready: function(){

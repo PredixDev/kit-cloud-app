@@ -3,6 +3,7 @@
     "complexType": "Asset",
     "uri": "/industrial-asset/jet-engine",
     "classificationUri": "/classification/JET-ENGINE",
+    "imageFile": "PredixAsset_JetEngine.png",
     "assetId": "jet-engine",
     "name": "Jet Engine",
     "description": "GEnx-1B Jet Engine",
@@ -115,6 +116,7 @@
   {
     "complexType": "Asset",
     "uri": "/industrial-asset/wind-turbine",
+    "imageFile": "PredixAsset_WindTurbine.png",
     "classificationUri": "/classification/WIND-TURBINE",
     "assetId": "wind-turbine",
     "name": "Wind Turbine",
@@ -227,6 +229,7 @@
   {
     "complexType": "Asset",
     "uri": "/industrial-asset/locomotive",
+    "imageFile": "PredixAsset_Locomotive.png",
     "classificationUri": "/classification/LOCOMOTIVE",
     "assetId": "locomotive",
     "name": "Locomotive",
@@ -339,6 +342,7 @@
   {
     "complexType": "Asset",
     "uri": "/industrial-asset/",
+    "imageFile": "PredixAsset_PETScanner.png",
     "classificationUri": "/classification/PET-SCANNER",
     "assetId": "pet-scanner",
     "name": "PET Scanner",

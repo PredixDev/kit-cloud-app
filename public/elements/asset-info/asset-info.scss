@@ -112,6 +112,10 @@ div.key {
   position: absolute;
   top: 25px;
   right: 25px;
+
+  iron-icon {
+    margin:  0 8px 8px 0;
+  }
 }
 
 $inuit-enable-btn--primary : true;

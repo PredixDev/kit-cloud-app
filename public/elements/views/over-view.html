@@ -235,6 +235,7 @@
             <px-dropdown
               display-value="Select">
               <px-dropdown-content
+                id="pdc"
                 extend-dropdown='false'
                 max-cont-character-width='10'
                 items="[[assets]]">
@@ -244,8 +245,9 @@
         </div>
         <div class="overview-image-container">
           <div class="image-container">
-            <img class="overview-image" src="/docs/images/SystemDiagram_sansGraphics.png" width="750" height="450"></img>
+            <img class="overview-image" src="/docs/images/SystemDiagram.png" width="750" height="450"></img>
             <p style="text-align: right; margin-right: 60px;">[[staticText.clickOnVideo]]</p>
+            <!--
             <img class="iot-graphic"
               style="left: 30px; top: 315px;"
               src="/docs/images/Wind-Turbine_black.png">
@@ -262,6 +264,7 @@
               style="height: 72px; left: 622px; top: 65px;"
               src="/docs/images/Smartphone_black.png">
             </img>
+            -->
             <div
               class="component-mouseover"
               id="predixMachine"
@@ -429,7 +432,6 @@
                 <div class="video-thumbnail-play-icon"></div>
               </div>
             </div>
-
             <div id="iframeVideoContainer" class="iframe-video-container" style="display: none;">
               <iframe id="iframeVideo" width="750" height="450" src="https://www.youtube.com/embed/6mb0gnBUmNk" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -514,6 +516,14 @@
         </div>
       </px-modal>
     </px-card>
+    <iron-ajax content-type="application/json"></iron-ajax>
+    <iron-ajax
+      id="asAjaxEl"
+      url="/api/predix-asset/industrial-asset"
+      handle-as="json"
+      on-response="_handleAssetResponse"
+      debounce-duration="300">
+    </iron-ajax>
   </template>
   <script>
     Polymer({
@@ -533,6 +543,8 @@
         //Mock assets; assets list should eventually be fetched from a service
         assets : {
           type: Array,
+          value: []
+          /*
           value: [
             { 'key': '1',
               'val': 'Jet Engine',
@@ -551,6 +563,7 @@
               'imageURL': '/docs/images/PredixAsset_WindTurbine.png'
             }
           ]
+          */
         },
 
         staticText: {
@@ -577,7 +590,7 @@
             , 'newTab': false
           },
           'predixMachine': {
-            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Click to learn how to leverage Predix Machine to optimize your operations.'
+            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Click to learn how to leverage Predix Machine to optimize your operations.  Click to learn more.'
             , 'header': 'Predix Machine'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/machine/'
             , 'newTab': true
@@ -658,6 +671,28 @@
         , videoIsVisible: false
       },
 
+      _handleAssetResponse: function(evt) {
+        var assets = evt.detail.response;
+        var key = 0;
+        var that = this;
+        this.properties.assets.value = []
+        assets.forEach(
+          function(asset) {
+            asset["val"] = asset.name;
+            asset["key"] = key++;
+            asset["imageURL"] = "/docs/images/" + asset.imageFile;
+            that.properties.assets.value.push(asset);
+          }
+        );
+        var sortedAssets = that.properties.assets.value.sort(
+          function(a, b) {
+            return a.name > b.name;
+          }
+        );
+        this.properties.assets.value = sortedAssets;
+        this.$.pdc.items = this.properties.assets.value;
+      },
+
       assetSelected: function(evt) {
         var assetList = this.properties.assets.value, eventDetails = evt.detail;
         var selectedImage = this.$.assetSelectionImage;
@@ -730,31 +765,31 @@
         return (localStorage.getItem('kitCloud.eulaAccepted') === 'true');
       },
 
-      _showWelcomeOverlay: function() {
-        if (this._eulaAccepted()) {
-          if (localStorage.getItem('predixDontShowAgain') !== 'true') {
-            setTimeout(
-              function(event) {
-                window.predix.startTour('predixCloud');
-              },
-              500
-            );
-          }
-          else {
-            this.$.welcomeCurtain.style.display = 'none';
-          }
-        }
-        else {
-          this.$.welcomeCurtain.style.display = 'block';
-        }
-      },
+      // _showWelcomeOverlay: function() {
+      //   if (this._eulaAccepted()) {
+      //     if (localStorage.getItem('predixDontShowAgain') !== 'true') {
+      //       setTimeout(
+      //         function(event) {
+      //           window.predix.startTour('predixCloud');
+      //         },
+      //         500
+      //       );
+      //     }
+      //     else {
+      //       this.$.welcomeCurtain.style.display = 'none';
+      //     }
+      //   }
+      //   else {
+      //     this.$.welcomeCurtain.style.display = 'block';
+      //   }
+      // },
 
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
         var component, videoThumbnail, welcomeDisplayVal;
         window.predix = window.predix || {};
         this._showEula();
-        this._showWelcomeOverlay();
+        // window.predix.showWelcomeOverlay();
         for (var i=0; i < hoverComponents.length; i++) {
           component = hoverComponents[i];
           component.addEventListener(
@@ -815,8 +850,8 @@
           }.bind(this)
         );
 
-        // A temporary way to reset the 'do not show again' flag in welcome banner
-        // to avoid having to clear cache through browser
+        // A temporary way to reset the 'do not show again' and
+        // EULA agreement flags to avoid having to clear cache through browser
         videoThumbnail.addEventListener(
           'dblclick',
           function() {
@@ -827,8 +862,10 @@
 
         this.$.eulaModal.addEventListener('btnModalPositiveClicked', function() {
           this._acceptEula();
-          this._showWelcomeOverlay();
+          window.predix.showWelcomeOverlay();
         }.bind(this));
+
+        this.$.asAjaxEl.generateRequest();
       }
     });
   </script>

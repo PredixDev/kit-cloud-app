@@ -34,12 +34,14 @@
     <style include="kit-data-view-styles"></style>
     <asset-info
       asset-details="[[selectedAsset]]"
+      selected-device="[[openedDevice]]"
       connected-devices="[[connectedDevices]]"
     >
     </asset-info>
       <asset-browser id="assetBrowser"
         asset-model="{{rmdAssetModel}}"
-        opened-asset="{{openedAsset}}"
+        opened-asset="{{openedDevice}}"
+        fetched-assets="{{connectedDevices}}"
         asset-query-url="/api/kit/device"
         asset-group-query-url="/api/predix-asset/devicegroup"
         disable-infinite-scroll="true">
@@ -96,24 +98,25 @@
         rmdAssetModel: {
           type: Object
         },
-        openedAsset: {
+        // This is the Kit device opened in the context browser
+        openedDevice: {
           type: Object,
-          observer: '_openedAssetChanged',
-          value: {
-            'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
-            'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-            , name: 'My Big Asset'
-            , attributes: [
-                { 'label': 'keyA', 'value': 'valueA'},
-                { 'label': 'keyB', 'value': 'valueB'},
-                { 'label': 'keyC', 'value': 'valueC'},
-                { 'label': 'keyD', 'value': 'valueD'}
-            ]
-          }
+          observer: '_openedDeviceChanged'
+          // value: {
+          //   'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
+          //   'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          //   , name: 'My Big Asset'
+          //   , attributes: [
+          //       { 'label': 'keyA', 'value': 'valueA'},
+          //       { 'label': 'keyB', 'value': 'valueB'},
+          //       { 'label': 'keyC', 'value': 'valueC'},
+          //       { 'label': 'keyD', 'value': 'valueD'}
+          //   ]
+          // },
         },
+        // This is an associated "industrial" asset.  (turbine, jet engine, locomotive, etc.)
         selectedAsset: {
           type: Object,
-          observer: '_openedAssetChanged',
           value: {
             'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
             'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
@@ -150,38 +153,8 @@
         },
         connectedDevices: {
           type: Array,
-          value: [
-            {
-              'deviceName': 'NUC1',
-              'imageUrl': '/docs/images/NUC.png',
-              'attributes': [
-                { 'label': 'key1', 'value': 'value1'},
-                { 'label': 'key2', 'value': 'value2'},
-                { 'label': 'key3', 'value': 'value3'},
-                { 'label': 'key4', 'value': 'value4'}
-              ]
-            },
-            {
-              'deviceName': 'NUC2',
-              'imageUrl': '/docs/images/NUC.png',
-              'attributes': [
-                { 'label': 'key5', 'value': 'value5'},
-                { 'label': 'key6', 'value': 'value6'},
-                { 'label': 'key7', 'value': 'value7'},
-                { 'label': 'key8', 'value': 'value8'}
-              ]
-            },
-            {
-              'deviceName': 'NUC3',
-              'imageUrl': '/docs/images/NUC.png',
-              'attributes': [
-                { 'label': 'key9', 'value': 'value9'},
-                { 'label': 'key10', 'value': 'value10'},
-                { 'label': 'key11', 'value': 'value11'},
-                { 'label': 'key12', 'value': 'value12'}
-              ]
-            }
-          ]
+          value: [],
+          observer: '_connectedDevicesChanged'
         }
       },
       observers: ['_tagsOrRangeChanged(assetTags.*, selectedRange)'],
@@ -204,8 +177,13 @@
         });
         return displayTags;
       },
-      _openedAssetChanged: function(newVal) {
-        console.log('asset opened:', newVal);
+
+      _connectedDevicesChanged: function(newVal) {
+        console.log('++++++++ connected devices new value: ' + newVal);
+      },
+
+      _openedDeviceChanged: function(newVal) {
+        console.log('device opened:', newVal);
         this.expired = false;
         if (newVal.expirationDate) {
           var expMoment = moment(newVal.expirationDate, 'x');
@@ -350,14 +328,14 @@
         }, 5000);
       },
 
-      getAssetInfoDisplay: function() {
-        if (this.properties.openedAsset && this.properties.openedAsset !== {}) {
-          return 'block';
-        }
-        else {
-          return 'none';
-        }
-      }
+      // getAssetInfoDisplay: function() {
+      //   if (this.properties.openedDevice && this.properties.openedDevice !== {}) {
+      //     return 'block';
+      //   }
+      //   else {
+      //     return 'none';
+      //   }
+      // }
     });
   </script>
 </dom-module>

@@ -35,6 +35,17 @@ window.predix.startNextTour = function() {
   }
 };
 
+window.predix.showHideOverviewCurtain = function(show) {
+  var displayStyle = ( show ? 'block' : 'none');
+  var curtain = document.querySelector('#welcomeCurtain');
+  if (curtain && curtain.style) {
+    curtain.style.display = displayStyle;
+  }
+  if (window.predix.isTouring) {
+    window.predix.stopTour();
+  }
+};
+
 window.predix.getTour = function(elementID) {
   var tour = {};
   switch (elementID) {
@@ -56,7 +67,7 @@ window.predix.getTour = function(elementID) {
           showPrevButton: false,
           showCTAButton: true,
           ctaLabel: 'Got It',
-          onCTA: window.predix.removeOverviewCurtain
+          onCTA: window.predix.showHideOverviewCurtain
         }
         ]
       };
@@ -74,7 +85,28 @@ window.predix.startTour = function(elementID) {
   window.predix.isTouring = true;
 };
 
-window.predix.removeOverviewCurtain = function() {
-  window.predix.stopTour();
-  document.querySelector('#welcomeCurtain').style.display = "none";
+window.predix.showWelcomeOverlay = function() {
+  setTimeout(
+    function() {
+      if (window.predix.isTouring) { return; }
+      if (localStorage.getItem('kitCloud.eulaAccepted') === 'true') {
+        if (localStorage.getItem('predixDontShowAgain') !== 'true') {
+          window.predix.showHideOverviewCurtain(true);
+          setTimeout(
+            function(event) {
+              window.predix.startTour('predixCloud');
+            },
+            500
+          );
+        }
+        else {
+          window.predix.showHideOverviewCurtain(false);
+        }
+      }
+      else {
+        window.predix.showHideOverviewCurtain(true);
+      }
+    }
+    , 800
+  );
 }

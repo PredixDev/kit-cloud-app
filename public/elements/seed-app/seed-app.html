@@ -135,7 +135,7 @@
                 "label": "Overview",
                 "path": "/overview",
                 "icon": "fa-home"
-              },              
+              },
               {
                 "label": "Kit Data",
                 "path": "/kit-data",
@@ -175,7 +175,7 @@
         this._checkForDefaultRoute();
         this.$.configAjaxEl.addEventListener('response', function(evt) {
           document.getElementById('userNameButton').style = 'color: #95a8b3';
-          document.getElementById('loginButton').style = 'color: #95a8b3';          
+          document.getElementById('loginButton').style = 'color: #95a8b3';
           // We're getting some global config from the server.
           // console.log('config', evt.detail.response);
           this.appHeader = evt.detail.response.appHeader;
@@ -191,11 +191,15 @@
         }
       },
 
-      _routeChanged: function(newRoute) {        
-        // console.log('new route:', newRoute);
+      _routeChanged: function(newRoute) {
+        if (newRoute.path.indexOf('overview') >= 0) {
+          window.predix.showWelcomeOverlay();
+        }
+        else {
+          window.predix.stopTour();
+        }
         this.$.kitAppNav.markSelected(newRoute.path);
       }
-
     });
   </script>
 </dom-module>
