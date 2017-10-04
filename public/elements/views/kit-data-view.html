@@ -21,27 +21,18 @@
     --iron-icon-width: 16px;
     --iron-icon-height: 16px;
   }
-  #assetInfo {
-    height: 100px;
-    background-color: #aaa;
-  }
-
-  #assetInfo > img {
-    height: 88px;
-  }
   </style>
   <template>
     <style include="kit-data-view-styles"></style>
     <asset-info
+      id="assetInfo"
       asset-details="[[selectedAsset]]"
       selected-device="[[openedDevice]]"
-      connected-devices="[[connectedDevices]]"
     >
     </asset-info>
       <asset-browser id="assetBrowser"
         asset-model="{{rmdAssetModel}}"
         opened-asset="{{openedDevice}}"
-        fetched-assets="{{connectedDevices}}"
         asset-query-url="/api/kit/device"
         asset-group-query-url="/api/predix-asset/devicegroup"
         disable-infinite-scroll="true">
@@ -90,6 +81,8 @@
     </div>
 
     <iron-ajax id="tsAjaxEl" content-type="application/json"></iron-ajax>
+    <iron-ajax id="assetDeviceAjaxEl" content-type="application/json"></iron-ajax>
+    <iron-ajax id="industrialAssetAjaxEl" content-type="application/json" on-response="_handleIndustrialAssetResponse"></iron-ajax>
   </template>
   <script>
     Polymer({
@@ -102,32 +95,6 @@
         openedDevice: {
           type: Object,
           observer: '_openedDeviceChanged'
-          // value: {
-          //   'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
-          //   'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-          //   , name: 'My Big Asset'
-          //   , attributes: [
-          //       { 'label': 'keyA', 'value': 'valueA'},
-          //       { 'label': 'keyB', 'value': 'valueB'},
-          //       { 'label': 'keyC', 'value': 'valueC'},
-          //       { 'label': 'keyD', 'value': 'valueD'}
-          //   ]
-          // },
-        },
-        // This is an associated "industrial" asset.  (turbine, jet engine, locomotive, etc.)
-        selectedAsset: {
-          type: Object,
-          value: {
-            'assetImageUrl': '/docs/images/PredixAsset_Aircraft.png',
-            'assetText': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-            , name: 'My Big Asset'
-            , attributes: [
-                { 'label': 'keyA', 'value': 'valueA'},
-                { 'label': 'keyB', 'value': 'valueB'},
-                { 'label': 'keyC', 'value': 'valueC'},
-                { 'label': 'keyD', 'value': 'valueD'}
-            ]
-          }
         },
         assetTags: {
           type: Array
@@ -150,13 +117,9 @@
         _refreshTimerInterval: {
           type: Number,
           value: 5
-        },
-        connectedDevices: {
-          type: Array,
-          value: [],
-          observer: '_connectedDevicesChanged'
         }
       },
+
       observers: ['_tagsOrRangeChanged(assetTags.*, selectedRange)'],
 
       _formatTagsForDisplay: function(tags) {
@@ -178,12 +141,55 @@
         return displayTags;
       },
 
-      _connectedDevicesChanged: function(newVal) {
-        console.log('++++++++ connected devices new value: ' + newVal);
+      // This function makes a copy of the device object sans the
+      // attributes previously added by the formatting for the
+      // context browser component
+      _unContextBrowserize: function(device) {
+        var deviceClone = {};
+        for (var prop in device) {
+          if (
+            device.hasOwnProperty(prop)
+            && (prop !== 'parentId')
+            && (prop !== 'children')
+            && (prop !== 'name')
+            && (prop !== 'isOpenable')
+            && (prop !== 'parent')
+            && (prop !== 'meta')
+            && (prop !== 'inSelectedPath')
+            && (prop !== 'selectedAsset')
+            && (typeof device[prop] !== 'undefined')
+          ) {
+            deviceClone[prop] = JSON.parse(JSON.stringify(device[prop]));
+          }
+        }
+        return deviceClone;
+      },
+
+      _saveDeviceAssetAssoc: function(device, asset) {
+        if (asset && asset.uri) {
+          console.log('saving device asset association.', device.uri, asset.uri);
+          var cleanedDevice = this._unContextBrowserize(device);
+          this.$.assetDeviceAjaxEl.url = '/api/predix-asset' + cleanedDevice.uri;
+          this.$.assetDeviceAjaxEl.method = 'PUT';
+          cleanedDevice.industrialAssetRef = asset.uri;
+          this.$.assetDeviceAjaxEl.body = cleanedDevice;
+          this.$.assetDeviceAjaxEl.generateRequest();
+        }
+      },
+
+      _handleIndustrialAssetResponse: function(evt) {
+        if (evt.detail && evt.detail.response && evt.detail.response[0]) {
+          console.log('got an industrial asset.', evt.detail.response[0].uri);
+          this.$.assetInfo.assetDetails = evt.detail.response[0];
+        }
+      },
+
+      _fetchIndustrialAsset: function(industrialAssetRef) {
+        this.$.industrialAssetAjaxEl.url = '/api/predix-asset' + industrialAssetRef;
+        this.$.industrialAssetAjaxEl.generateRequest();
       },
 
       _openedDeviceChanged: function(newVal) {
-        console.log('device opened:', newVal);
         this.expired = false;
         if (newVal.expirationDate) {
           var expMoment = moment(newVal.expirationDate, 'x');
@@ -192,13 +198,22 @@
               this.assetTags = this._formatTagsForDisplay(newVal.tags);
             }
             this.expirationDate = expMoment.format('h:mm A MMM D, YYYY');
-            return;
+            // Save the device-asset association here
+            // TODO: Prompt user for confirmation of saving association
+            this._saveDeviceAssetAssoc(newVal, this.$.assetInfo.assetDetails);
           }
         } else if (newVal.uri && newVal.uri.length > 0) {
           this.set('assetTags', []);
           this.set('tagsWithData',[]);
           this.expirationDate = null;
           this.expired = true;
+        }
+        // Save the new device value to window variable
+        // and dispatch event so listeners can pick it up
+        // window.predix.device = newVal;
+        window.dispatchEvent(new Event('device-selected'));
+        if (newVal.industrialAssetRef) {
+          this._fetchIndustrialAsset(newVal.industrialAssetRef);
         }
       },
 
@@ -317,25 +332,32 @@
 
         // Update the image for the selected asset
         window.predix = window.predix || {};
-        if (window.predix == {}) {
-          window.predix.selectedAssetImageURL = '/docs/images/PredixAsset_Aircraft.png';
+        if (window.predix === {}) {
+          window.predix.selectedAssetImageURL = '/docs/images/PredixAsset_PETScanner.png';
         }
-        // this.$.selectedAssetImage.src = window.predix.selectedAssetImageURL;
+        else {
+          if (window.predix.industrialAsset) {
+            this.$.assetInfo.assetDetails = window.predix.industrialAsset;
+          }
+        }
+
+        window.addEventListener('industrial-asset-selected',
+          function() {
+            console.log('industrial-asset-selected')
+            if (window.predix.industrialAsset) {
+              this.$.assetInfo.assetDetails = window.predix.industrialAsset;
+              if (this.openedDevice) {
+                this._saveDeviceAssetAssoc(this.openedDevice, this.$.assetInfo.assetDetails);
+              }
+            }
+          }.bind(this)
+        );
 
         // start off initial interval loop
         this.intervalId = setInterval(function() {
           that.selectedRange = that._getDefaultRange(1);
         }, 5000);
-      },
-
-      // getAssetInfoDisplay: function() {
-      //   if (this.properties.openedDevice && this.properties.openedDevice !== {}) {
-      //     return 'block';
-      //   }
-      //   else {
-      //     return 'none';
-      //   }
-      // }
+      }
     });
   </script>
 </dom-module>

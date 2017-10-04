@@ -29,13 +29,17 @@
           type: Object,
           notify: true
         },
+        rawOpenedAsset: {
+          type: Object,
+          notify: true
+        },
         assetQueryUrl: {
           type: String
         },
         assetGroupQueryUrl: {
           type: String
         },
-        fetchedAssets: {
+        rawAssets: {
           type: Array,
           value: []
         }
@@ -111,12 +115,11 @@
           Promise.all([self._fetchFromUrl(self.$.groupAjaxEl), self._fetchFromUrl(self.$.assetAjaxEl)]).then(function(resultSets) {
             resultSets.forEach(function(items) {
               items.forEach(function(i) {
+                self.push('rawAssets', i);
                 transformedAsset = self._transformEntityForDisplay(i);
                 allAssets.push(transformedAsset);
-                self.properties.fetchedAssets.value.push(transformedAsset);
               });
             });
-            // console.log('***** fetched assets *****: ' + JSON.stringify(self.properties.fetchedAssets.value));
             self._buildAssetModel('/deviceGroup/root', allAssets, newAssetModel.data, localStorage.getItem('kitCloud.openedAssetId'));
 
             self.assetModel = newAssetModel;

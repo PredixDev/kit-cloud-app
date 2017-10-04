@@ -58,7 +58,8 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
-        "value": [
+        "name": "Manufacturer",
+	"value": [
           "GE Aviation"
         ]
       },
@@ -66,6 +67,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "First Run",
         "value": [
           "2006"
         ]
@@ -74,6 +76,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Applications",
         "value": [
           "Boeing 787 Dreamliner",
           "Boeing 747-8"
@@ -82,6 +85,7 @@
       "fuelEfficiency": {
         "complexType": "Attribute",
         "type": "string",
+        "name": "Fuel Efficiency",
         "enumeration": [],
         "value": [
           "15% savings over GE CF6"
@@ -91,6 +95,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "CO2 Efficiency",
         "value": [
           "15% savings over GE CF6"
         ]
@@ -99,6 +104,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Thrust",
         "value": [
           "TakeOff Thrust 57,400 lbf"
         ]
@@ -107,6 +113,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Production",
         "value": [
           "Over 1600 engines on order"
         ]
@@ -172,6 +179,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Manufacturer",
         "value": [
           "GE Renewable Energy"
         ]
@@ -180,6 +188,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "First Run",
         "value": [
           "2010"
         ]
@@ -188,6 +197,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Applications",
         "value": [
           "Onshore Wind Energy"
         ]
@@ -196,6 +206,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Nominal Capacity",
         "value": [
           "4.8MW"
         ]
@@ -204,6 +215,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Rotor Diameter",
         "value": [
           "158m"
         ]
@@ -212,6 +224,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Wind Class",
         "value": [
           "IEC (S)"
         ]
@@ -220,6 +233,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Noise Level",
         "value": [
           "104 dB(A)"
         ]
@@ -285,6 +299,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Manufacturer",
         "value": [
           "GE Transportation"
         ]
@@ -293,6 +308,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "First Run",
         "value": [
           "2005"
         ]
@@ -301,6 +317,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Applications",
         "value": [
           "Union Pacific I-5 Corridor"
         ]
@@ -309,6 +326,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Nox Reduction Rate",
         "value": [
           "90%"
         ]
@@ -317,14 +335,16 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Traction Horse Power",
         "value": [
           "4400"
         ]
       },
-      "weightGross": {
+      "grossWeight": {
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Gross Weight",
         "value": [
           "432000 lb"
         ]
@@ -333,6 +353,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Maximum Speed",
         "value": [
           "70 mph"
         ]
@@ -341,7 +362,7 @@
   },
   {
     "complexType": "Asset",
-    "uri": "/industrial-asset/",
+    "uri": "/industrial-asset/pet-scanner",
     "imageFile": "PredixAsset_PETScanner.png",
     "classificationUri": "/classification/PET-SCANNER",
     "assetId": "pet-scanner",
@@ -398,6 +419,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Manufacturer",
         "value": [
           "GE Healthcare"
         ]
@@ -406,6 +428,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "First Run",
         "value": [
           "2016"
         ]
@@ -414,6 +437,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Applications",
         "value": [
           "Hospital Imaging",
           "Mobile Imaging Center"
@@ -423,6 +447,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Detector Technology",
         "value": [
           "LightBurst"
         ]
@@ -430,6 +455,7 @@
       "wholeBodyScanTime": {
         "complexType": "Attribute",
         "type": "string",
+        "name": "Whole Body Scan Time",
         "enumeration": [],
         "value": [
           "325 sec"
@@ -439,6 +465,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Reconstruction Method",
         "value": [
           "Q.Clear"
         ]
@@ -447,6 +474,7 @@
         "complexType": "Attribute",
         "type": "string",
         "enumeration": [],
+        "name": "Maximum Sensitivity",
         "value": [
           "22 cps/kB(q-squared)"
         ]

@@ -232,13 +232,13 @@
         <div class="asset-selection" style="width: 600px; margin: 25px auto;">
           [[staticText.selectAsset]]
           <div class="dropdown-container">
-            <px-dropdown
+            <px-dropdown id="assetDropdown"
               display-value="Select">
               <px-dropdown-content
                 id="pdc"
                 extend-dropdown='false'
                 max-cont-character-width='10'
-                items="[[assets]]">
+                items="[[industrialAssets]]">
               </px-dropdown-content>
             </px-dropdown>
           </div>
@@ -247,24 +247,7 @@
           <div class="image-container">
             <img class="overview-image" src="/docs/images/SystemDiagram.png" width="750" height="450"></img>
             <p style="text-align: right; margin-right: 60px;">[[staticText.clickOnVideo]]</p>
-            <!--
-            <img class="iot-graphic"
-              style="left: 30px; top: 315px;"
-              src="/docs/images/Wind-Turbine_black.png">
-            </img>
-            <img class="iot-graphic"
-              style="height: 72px; left: 50px; top: 195px;"
-              src="/docs/images/Gateway_black.png">
-            </img>
-            <img class="iot-graphic"
-              style="height: 72px; left: 623px; top: 160px;"
-              src="/docs/images/Desktop_black.png">
-            </img>
-            <img class="iot-graphic"
-              style="height: 72px; left: 622px; top: 65px;"
-              src="/docs/images/Smartphone_black.png">
-            </img>
-            -->
+
             <div
               class="component-mouseover"
               id="predixMachine"
@@ -516,7 +499,7 @@
         </div>
       </px-modal>
     </px-card>
-    <iron-ajax content-type="application/json"></iron-ajax>
+    <iron-ajax id="deviceAjaxEl" content-type="application/json" handle-as="json" on-response="_handleDeviceResponse"></iron-ajax>
     <iron-ajax
       id="asAjaxEl"
       url="/api/predix-asset/industrial-asset"
@@ -527,10 +510,6 @@
   </template>
   <script>
     Polymer({
-      // TODOs:
-      // - Asset JSON fetch and populate UI
-      // - persist selected asset details to backend
-      // -
       is: 'over-view',
 
       listeners: {
@@ -538,33 +517,17 @@
       },
 
       properties: {
-        associatedAsset: {},
+        openedDevice: {
+          type: Object,
+          observer: '_openedDeviceChanged',
+          value : {}
+        },
 
-        //Mock assets; assets list should eventually be fetched from a service
-        assets : {
+        industrialAssets: {
           type: Array,
           value: []
-          /*
-          value: [
-            { 'key': '1',
-              'val': 'Jet Engine',
-              'imageURL': '/docs/images/PredixAsset_JetEngine.png'
-            },
-            { 'key': '2',
-              'val': 'PET Scanner',
-              'imageURL': '/docs/images/PredixAsset_PETScanner.png'
-            },
-            { 'key': '3',
-              'val': 'Locomotive',
-              'imageURL': '/docs/images/PredixAsset_Locomotive.png'
-            },
-            { 'key': '4',
-              'val': 'Wind Turbine',
-              'imageURL': '/docs/images/PredixAsset_WindTurbine.png'
-            }
-          ]
-          */
         },
+
 
         staticText: {
           type: Object,
@@ -673,37 +636,67 @@
 
       _handleAssetResponse: function(evt) {
         var assets = evt.detail.response;
-        var key = 0;
+        // var key = 0;
         var that = this;
-        this.properties.assets.value = []
+        var tempArray = [];
         assets.forEach(
           function(asset) {
             asset["val"] = asset.name;
-            asset["key"] = key++;
+            // asset["key"] = key++;
+            asset.key = asset.uri;
             asset["imageURL"] = "/docs/images/" + asset.imageFile;
-            that.properties.assets.value.push(asset);
+            asset.displayAttributes = [];
+            for (var assetAttr in asset.attributes) {
+              if (asset.attributes.hasOwnProperty(assetAttr)) {
+                var newAttr = {};
+                newAttr["label"] = assetAttr;
+                newAttr["value"] = asset.attributes[assetAttr]["value"][0];
+                asset.displayAttributes.push(newAttr);
+              }
+            }
+            tempArray.push(asset);
           }
         );
-        var sortedAssets = that.properties.assets.value.sort(
+        var sortedAssets = tempArray.sort(
           function(a, b) {
             return a.name > b.name;
           }
         );
-        this.properties.assets.value = sortedAssets;
-        this.$.pdc.items = this.properties.assets.value;
+        this.set('industrialAssets', sortedAssets);
+        // this.$.pdc.items = sortedAssets;
+
+        // check to see if user has previously selected a device, and associated it with an industrial asset
+        if (localStorage.getItem('kitCloud.openedAssetId')) {
+          this.$.deviceAjaxEl.url = '/predix-api/predix-asset' + localStorage.getItem('kitCloud.openedAssetId');
+          this.$.deviceAjaxEl.generateRequest();
+        }
       },
 
+      _openedDeviceChanged: function(newVal) {
+      },
+
+      // When industrial asset selection is changed
       assetSelected: function(evt) {
-        var assetList = this.properties.assets.value, eventDetails = evt.detail;
+        var assetList = this.get('industrialAssets'), eventDetails = evt.detail, selectedAsset;
         var selectedImage = this.$.assetSelectionImage;
+        // visually indicate the selected asset
         for (var i = 0, l = assetList.length; i < l; i++) {
           if (assetList[i].key === eventDetails.key) {
             this.$.assetSelectionContainer.style.backgroundColor = 'rgba(255, 255, 255, 1)';
             selectedImage.src = assetList[i].imageURL;
             selectedImage.style.border = '2px solid rgb(58, 180, 212)';
             selectedImage.style.borderRadius = '10px';
+            selectedAsset = assetList[i];
+            window.predix.industrialAsset = selectedAsset;
+            window.dispatchEvent(new Event('industrial-asset-selected'));
             break;
           }
+        }
+
+        // If web app has device
+        if (window.predix.device) {
+          // if device has different associated industrial asset
+            // prompt if user wants to save new Device-IndustrialAsset association
         }
       },
 
@@ -765,31 +758,33 @@
         return (localStorage.getItem('kitCloud.eulaAccepted') === 'true');
       },
 
-      // _showWelcomeOverlay: function() {
-      //   if (this._eulaAccepted()) {
-      //     if (localStorage.getItem('predixDontShowAgain') !== 'true') {
-      //       setTimeout(
-      //         function(event) {
-      //           window.predix.startTour('predixCloud');
-      //         },
-      //         500
-      //       );
-      //     }
-      //     else {
-      //       this.$.welcomeCurtain.style.display = 'none';
-      //     }
-      //   }
-      //   else {
-      //     this.$.welcomeCurtain.style.display = 'block';
-      //   }
-      // },
+      _handleDeviceChange: function() {
+        console.log('_handleDeviceChange');
+        // this.set('openedDevice', window.predix.device);
+      },
+
+      // this needs to happen after the list of industrial assets has been fetched.
+      _handleDeviceResponse: function(event) {
+        var selectedIndustrialAsset, selectedIndustrialAssetRef;
+        if (event.detail && event.detail.response && event.detail.response[0]) {
+          selectedIndustrialAssetRef = event.detail.response[0].industrialAssetRef;
+        }
+        console.log('_handleDeviceResponse. previously associated asset:', selectedIndustrialAssetRef);
+        this.$.assetDropdown.selectedKey = selectedIndustrialAssetRef;
+        this.industrialAssets.forEach(function(ia) {
+          if (ia.uri === selectedIndustrialAssetRef) {
+            this.$.assetDropdown.displayValue = ia.name;
+            window.predix.industrialAsset = ia;
+            window.dispatchEvent(new Event('industrial-asset-selected'));
+          }
+        }.bind(this));        
+      },
 
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
         var component, videoThumbnail, welcomeDisplayVal;
         window.predix = window.predix || {};
         this._showEula();
-        // window.predix.showWelcomeOverlay();
         for (var i=0; i < hoverComponents.length; i++) {
           component = hoverComponents[i];
           component.addEventListener(
@@ -864,8 +859,34 @@
           this._acceptEula();
           window.predix.showWelcomeOverlay();
         }.bind(this));
-
+        // query industrial asset list to populate dropdown
         this.$.asAjaxEl.generateRequest();
+
+        window.addEventListener('device-selected', this._handleDeviceChange.bind(this));
+
+        // Device-IndustrialAsset Logic (implemented throughout this Polymer object):
+        // industrial asset dropdown starts with no selection
+        // If browser memory (not localStorage) has no device,
+          // industrial asset dropdown should not have a selection
+        // Else
+          // use device ID to get device details from Asset service
+            // if device found,
+                // change indAsset dropdown to associated value
+        // When industrial asset selection is changed
+          // If browser memory has no device
+            // store selection in device info in browser memory
+          // else
+            // prompt if user wants to save new Device-IndustrialAsset association
+
+        // // mock fetch of industrial assets
+        // setTimeout(
+        //   function(){
+        //     var evt = new Event('mock-asset-event');
+        //     evt.detail = {}; evt.detail.response = this.get('mockAssets');
+        //     this._handleAssetResponse(evt);
+        //   }.bind(this),
+        //   1000
+        // );
       }
     });
   </script>

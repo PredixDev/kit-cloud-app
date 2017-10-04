@@ -20,7 +20,7 @@
   border-bottom-right-radius: 0;
   width: 120px;
 
-  height: 80px;
+  height: 100px;
   overflow: hidden;
   position: absolute;
   top: 15px;
@@ -29,7 +29,7 @@
 
 .asset-text {
   border-radius: 5px;
-  height: 80px;
+  height: 130px;
   overflow: hidden;
   float: left;
   width: 100%;
@@ -39,6 +39,18 @@
 
 .asset-image {
   height: 80px;
+  border: 1px solid rgb(58, 180, 212);
+  border-radius: 10px;
+}
+
+.asset-name-container {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  overflow: hidden;
+  left: 15px;
+  top: 100px;
 }
 
 .gateway-device-container {
@@ -92,7 +104,7 @@ img.device-image {
 }
 
 .heading {
-  width: 100%;
+  width: 120px;
   font-weight: bold;
 }
 
@@ -101,7 +113,7 @@ div.key, div.value {
 }
 
 div.key {
-  width: 70px;
+  width: 150px;
 }
 
 .asset-text *, .device-text * {

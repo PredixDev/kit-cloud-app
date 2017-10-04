@@ -10,9 +10,9 @@
       <style include="asset-info-styles"></style>
       <div class="asset-info-container">
         <div class="asset-text">
-          <div class="heading">[[assetDetails.name]]</div>
+          <div class="heading">Industrial Asset Facts</div>
           <div class="attributes">
-            <template is="dom-repeat" items="[[assetDetails.attributes]]">
+            <template is="dom-repeat" items="[[assetDetails.displayAttributes]]">
             <div class="attribute">
               <div class="key heading">[[item.label]]</div>
               <div class="value">[[item.value]]</div>
@@ -21,34 +21,13 @@
           </div>
         </div>
         <div class="asset-image-container">
-          <img class="asset-image" src$="{{assetDetails.assetImageUrl}}"/>
+          <img class="asset-image" src$="/docs/images/{{assetDetails.imageFile}}"/>
+        </div>
+        <div class="asset-name-container">
+          <span>[[assetDetails.name]]</span>
         </div>
         <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon> Download CSV</button>
       </div>
-      <!--
-      <div>
-        <template is="dom-repeat" items="[[connectedDevices]]">
-          <div class="gateway-device-container">
-            <div class="parent-connector"></div>
-            <div class="sibling-connector"></div>
-            <div class="device-image-container">
-              <img class="device-image" src$="[[item.imageUrl]]"/>
-            </div>
-            <div class="device-text">
-              <div class="heading">[[item.deviceName]]</div>
-              <div class="attributes">
-                <template is="dom-repeat" items="[[item.attributes]]">
-                  <div class="attribute">
-                    <div class="key heading">[[item.label]]</div>
-                    <div class="value">[[item.value]]</div>
-                  </div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </template>
-      </div>
-      -->
       <iron-ajax id="downloadAjaxEl" content-type="application/octet-stream" handle-as="blob"></iron-ajax>
     </px-card>
   </template>
@@ -62,12 +41,24 @@
       deviceImageUrl: '',
       assetDetails: {
         type: Object,
-        value: {}
-      },
-      connectedDevices: {
-        type: Array,
-        value: [],
-        observer: '_connectedDevicesChanged'
+        value: {
+          "name": "Industrial Asset",
+          "imageFile": "PredixAsset_GenericAsset.png",
+          "displayAttributes": [
+            {
+              "label": "attribute1",
+              "value": "value1"
+            },
+            {
+              "label": "attribute2",
+              "value": "value2"
+            },
+            {
+              "label": "attribute3",
+              "value": "value3"
+            }
+          ]
+        }
       },
       selectedDevice: {
         type: Object,
@@ -77,12 +68,6 @@
 
     _selectedDeviceChanged: function(newVal) {
       this.$.downloadAjaxEl.url = '/api/kit' + (newVal.uri || '');
-    },
-
-    _connectedDevicesChanged: function(newVal) {
-      var self = this;
-      console.log('<asset-info> CONNECTED DEVICES 1:' + JSON.stringify(newVal));
-      console.log('<asset-info> CONNECTED DEVICES 2:' + JSON.stringify(self.properties.connectedDevices));
     },
 
     ready: function(){
