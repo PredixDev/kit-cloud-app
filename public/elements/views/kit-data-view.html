@@ -82,7 +82,6 @@
 
     <iron-ajax id="tsAjaxEl" content-type="application/json"></iron-ajax>
     <iron-ajax id="assetDeviceAjaxEl" content-type="application/json"></iron-ajax>
-    <iron-ajax id="industrialAssetAjaxEl" content-type="application/json" on-response="_handleIndustrialAssetResponse"></iron-ajax>
   </template>
   <script>
     Polymer({
@@ -177,18 +176,6 @@
         }
       },
 
-      _handleIndustrialAssetResponse: function(evt) {
-        if (evt.detail && evt.detail.response && evt.detail.response[0]) {
-          console.log('got an industrial asset.', evt.detail.response[0].uri);
-          this.$.assetInfo.assetDetails = evt.detail.response[0];
-        }
-      },
-
-      _fetchIndustrialAsset: function(industrialAssetRef) {
-        this.$.industrialAssetAjaxEl.url = '/api/predix-asset' + industrialAssetRef;
-        this.$.industrialAssetAjaxEl.generateRequest();
-      },
-
       _openedDeviceChanged: function(newVal) {
         this.expired = false;
         if (newVal.expirationDate) {
@@ -208,13 +195,8 @@
           this.expirationDate = null;
           this.expired = true;
         }
-        // Save the new device value to window variable
-        // and dispatch event so listeners can pick it up
-        // window.predix.device = newVal;
+
         window.dispatchEvent(new Event('device-selected'));
-        if (newVal.industrialAssetRef) {
-          this._fetchIndustrialAsset(newVal.industrialAssetRef);
-        }
       },
 
       _loadFragment: function(elementId, fragmentPath) {

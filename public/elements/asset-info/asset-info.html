@@ -6,11 +6,11 @@
 
 <dom-module id='asset-info'>
   <template>
-    <px-card>
+    <px-card style="padding: 0 0 15px 0;">
       <style include="asset-info-styles"></style>
       <div class="asset-info-container">
         <div class="asset-text">
-          <div class="heading">Industrial Asset Facts</div>
+          <div class="heading">Your Industrial Asset</div>
           <div class="attributes">
             <template is="dom-repeat" items="[[assetDetails.displayAttributes]]">
             <div class="attribute">
@@ -26,7 +26,26 @@
         <div class="asset-name-container">
           <span>[[assetDetails.name]]</span>
         </div>
-        <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon> Download CSV</button>
+        <button id="exportBtn" class="btn btn--primary csv-export-btn"><iron-icon icon="px-utl:download"></iron-icon>Download</button>
+      </div>
+      <div class="asset-info-container">
+        <div class="asset-text">
+          <div class="heading">Your Edge Device</div>
+          <div class="attributes">
+            <template is="dom-repeat" items="[[deviceDetails.displayAttributes]]">
+            <div class="attribute">
+              <div class="key heading">[[item.label]]</div>
+              <div class="value">[[item.value]]</div>
+            </div>
+          </template>
+          </div>
+        </div>
+        <div class="asset-image-container">
+          <img class="asset-image" src$="/docs/images/{{deviceDetails.imageFile}}"/>
+        </div>
+        <div class="asset-name-container">
+          <span>[[deviceDetails.name]]</span>
+        </div>
       </div>
       <iron-ajax id="downloadAjaxEl" content-type="application/octet-stream" handle-as="blob"></iron-ajax>
     </px-card>
@@ -60,6 +79,27 @@
           ]
         }
       },
+      deviceDetails: {
+        type: Object,
+        value: {
+          "name": "Edge Device",
+          "imageFile": "NUC.png",
+          "displayAttributes": [
+            {
+              "label": "attributeA",
+              "value": "valueA"
+            },
+            {
+              "label": "attributeB",
+              "value": "valueB"
+            },
+            {
+              "label": "attributeC",
+              "value": "valueC"
+            }
+          ]
+        }
+      },
       selectedDevice: {
         type: Object,
         observer: '_selectedDeviceChanged'
@@ -68,6 +108,14 @@
 
     _selectedDeviceChanged: function(newVal) {
       this.$.downloadAjaxEl.url = '/api/kit' + (newVal.uri || '');
+      this.set('deviceDetails.name', newVal["deviceName"]);
+      var newDisplayAttributes = [];
+      newDisplayAttributes.push({ "label" : "URI", "value" : newVal["uri"]});
+      newDisplayAttributes.push({ "label" : "Type", "value" : newVal["deviceType"]});
+      newDisplayAttributes.push({ "label" : "ID", "value" : newVal["deviceId"]});
+      newDisplayAttributes.push({ "label" : "Address", "value" : newVal["deviceAddress"]});
+      newDisplayAttributes.push({ "label" : "IP Address", "value" : newVal["ipAddress"]});
+      this.set('deviceDetails.displayAttributes', newDisplayAttributes);
     },
 
     ready: function(){

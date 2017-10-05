@@ -98,6 +98,13 @@
 
     <seed-footer footer-links='[[footerLinks]]'></seed-footer>
     <iron-ajax id="configAjaxEl" url="/config" auto></iron-ajax>
+    <iron-ajax id="deviceAjaxEl" content-type="application/json" handle-as="json" on-response="_handleDeviceResponse"></iron-ajax>
+    <iron-ajax
+      id="asAjaxEl"
+      url="/api/predix-asset/industrial-asset"
+      handle-as="json"
+      on-response="_handleAssetResponse">
+    </iron-ajax>
   </template>
   <script>
     Polymer({
@@ -173,15 +180,78 @@
 
       ready: function(){
         this._checkForDefaultRoute();
+        this.fetchIndustrialAssets();
         this.$.configAjaxEl.addEventListener('response', function(evt) {
           document.getElementById('userNameButton').style = 'color: #95a8b3';
           document.getElementById('loginButton').style = 'color: #95a8b3';
           // We're getting some global config from the server.
-          // console.log('config', evt.detail.response);
           this.appHeader = evt.detail.response.appHeader;
-          // this.$.rmdPxView.elementData = evt.detail.response;
         }.bind(this));
       },
+
+      // We're fetching industrial assets and selected device here in the main app element,
+      //  because we need this to happen on both of the main views (overview and kit-data)
+      fetchIndustrialAssets: function() {
+        this.$.asAjaxEl.generateRequest();
+      },
+
+      _handleAssetResponse: function(evt) {
+        var assets = evt.detail.response;
+        var that = this;
+        var tempArray = [];
+        assets.forEach(
+          function(asset) {
+            asset["val"] = asset.name;
+            asset.key = asset.uri;
+            asset["imageURL"] = "/docs/images/" + asset.imageFile;
+            asset.displayAttributes = [];
+            for (var assetAttr in asset.attributes) {
+              if (asset.attributes.hasOwnProperty(assetAttr)) {
+                var newAttr = {};
+                newAttr["label"] = assetAttr;
+                newAttr["value"] = asset.attributes[assetAttr]["value"][0];
+                asset.displayAttributes.push(newAttr);
+              }
+            }
+            tempArray.push(asset);
+          }
+        );
+        var sortedAssets = tempArray.sort(
+          function(a, b) {
+            return a.name > b.name;
+          }
+        );
+
+        window.predix = window.predix || {};
+        window.predix.allIndustrialAssets = sortedAssets;
+        window.dispatchEvent(new Event('all-industrial-assets-fetched'));
+
+        this._fetchPreviouslySelectedDevice();
+      },      
+
+      _fetchPreviouslySelectedDevice: function() {
+        console.log('_fetchPreviouslySelectedDevice');
+        // check to see if user has previously selected a device, and associated it with an industrial asset
+        if (localStorage.getItem('kitCloud.openedAssetId')) {
+          this.$.deviceAjaxEl.url = '/predix-api/predix-asset' + localStorage.getItem('kitCloud.openedAssetId');
+          this.$.deviceAjaxEl.generateRequest();
+        }        
+      },
+
+      // this needs to happen after the list of industrial assets has been fetched.
+      _handleDeviceResponse: function(event) {
+        var selectedIndustrialAsset, selectedIndustrialAssetRef;
+        if (event.detail && event.detail.response && event.detail.response[0]) {
+          selectedIndustrialAssetRef = event.detail.response[0].industrialAssetRef;
+        }
+        console.log('_handleDeviceResponse. previously associated asset:', selectedIndustrialAssetRef);
+        window.predix.allIndustrialAssets.forEach(function(ia) {
+          if (ia.uri === selectedIndustrialAssetRef) {
+            window.predix.industrialAsset = ia;
+            window.dispatchEvent(new Event('industrial-asset-selected'));
+          }
+        }.bind(this));
+      },      
 
       _checkForDefaultRoute: function() {
         // set default route to /overview
@@ -193,9 +263,11 @@
 
       _routeChanged: function(newRoute) {
         if (newRoute.path.indexOf('overview') >= 0) {
-          window.predix.showWelcomeOverlay();
+          if (window.predix && window.predix.showWelcomeOverlay) {
+            window.predix.showWelcomeOverlay();
+          }
         }
-        else {
+        else if (window.predix && window.predix.stopTour) {
           window.predix.stopTour();
         }
         this.$.kitAppNav.markSelected(newRoute.path);
