@@ -31,13 +31,14 @@
   height: 140px;
   overflow: hidden;
   float: left;
-  width: 500px;
+  width: 450px;
   background-color: #eee;
   padding: 5px 0 0 130px;
+  border: 1px solid #ccc;
 }
 
 .asset-image {
-  height: 80px;
+  width: 120px;
   border: 1px solid rgb(58, 180, 212);
 }
 
@@ -113,7 +114,7 @@ div.key {
 }
 
 .asset-text .heading {
-  width: 120px;
+  width: 150px;
   font-weight: bold;
 }
 
@@ -124,11 +125,20 @@ div.key {
 
 .csv-export-btn {
   position: absolute;
-  top: 25px;
-  right: 15px;
+  width: 120px;
+  bottom: 0;
+  left: 15px;
   iron-icon {
     margin:  0 8px 8px 0;
   }
+}
+
+#exportBtn {
+  background-color: #086e87;
+}
+#exportBtn.download-disabled {
+  color:#96a8b2;
+  cursor: default;
 }
 
 $inuit-enable-btn--primary : true;

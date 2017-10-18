@@ -231,6 +231,22 @@
       position: absolute;
       height: 108px;
     }
+
+    .halo-sizzle {
+      animation-name: sizzle;
+      animation-duration: 1s;
+      animation-direction: alternate;
+      animation-iteration-count: 2;
+    }
+
+    @@keyframes halo-sizzle {
+      from {
+
+      }
+      to {
+
+      }
+    }
   </style>
   <template>
     <px-card header-text="Predix Kits">
@@ -511,7 +527,7 @@
       is: 'over-view',
 
       listeners: {
-        'px-dropdown-value-changed': 'assetSelected'
+        'px-dropdown-value-changed': '_assetSelected'
       },
 
       properties: {
@@ -533,91 +549,91 @@
 
         mouseOverDetails: {
           'industrialAsset': {
-            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.  <b>Click to view data</b> from the Device associated to this Asset.'
+            'text': 'Your Industrial Asset in Predix is a Digital Twin of your physical asset at your Edge site.  You can download a copy of this application to add new features, run Analytics and realize operational efficiencies.  CLICK ON THE PICTURE to view data from the Device associated to this Asset.'
             , 'header': "Industrial Asset"
             , 'learnMoreURL': '/#/kit-data'
             , 'newTab': false
           },
           'device': {
-            'text': 'A wide variety of devices can run Predix Machine software to monitor and react to your Industrial Asset, aggregate data from your site, and push to the Predix Cloud for industrial scale analytics.  <b>Click to view data</b> from this Device.'
+            'text': 'A wide variety of devices can run Predix Machine software to monitor and react to your Industrial Asset, aggregate data from your site, and push to the Predix Cloud for industrial scale analytics.  CLICK ON THE GRAPHIC to view data from this Device.'
             , 'header': "Device"
             , 'learnMoreURL': '/#/kit-data'
             , 'newTab': false
           },
           'predixMachine': {
-            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Click to learn how to leverage Predix Machine to optimize your operations.  Click to learn more.'
+            'text': 'Predix Machine unlocks the potential of Edge Analytics, Edge Filtering and much more.  Click on shape learn how to leverage Predix Machine to optimize your operations.  Click on shape to learn more.'
             , 'header': 'Predix Machine'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/machine/'
             , 'newTab': true
           },
           'eventHub': {
-            'text': 'Real time messaging across your Digital Twin ecosystem is critical.  From data ingestion to analytics, Event Hub streaming services keep your processes running efficiently.  Click to learn more.'
+            'text': 'Real time messaging across your Digital Twin ecosystem is critical.  From data ingestion to analytics, Event Hub streaming services keep your processes running efficiently.  Click on shape to learn more.'
             , 'header': 'Event Hub'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/event_hub/'
             , 'newTab': true
           },
           'asset': {
-            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytics inputs, aggregating results and managing core asset models.  Click to learn more.'
+            'text': 'Predix Asset is a fast, scalable noSQL store that provides a full view across your assets.  Asset is the system-of-record for managing your Digital Twin ecosystem, storing Analytics inputs, aggregating results and managing core asset models.  Click on shape to learn more.'
             , 'header': 'Asset'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/asset/'
             , 'newTab': true
           },
           'timeSeries': {
-            'text': 'Diverse, high velocity and high volume data is the inevitable use case of the Industrial Internet.  Predix Time Series stores data at cloud scale, and with a straightforward REST API, allows your Analytics to unlock the potential of asset optimization.  Click to learn more.'
+            'text': 'Diverse, high velocity and high volume data is the inevitable use case of the Industrial Internet.  Predix Time Series stores data at cloud scale, and with a straightforward REST API, allows your Analytics to unlock the potential of asset optimization.  Click on shape to learn more.'
             , 'header': 'Time Series'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/data_management/time_series/'
             , 'newTab': true
           },
           'analytics': {
-            'text': 'The realization of continuously updating your Digital Twin is where Predix Analytics shines.  With a huge library of orchestrated analytics you can realize efficiencies across your assets, your plant, your fleets, your people and your processes. Click to learn more.'
+            'text': 'The realization of continuously updating your Digital Twin is where Predix Analytics shines.  With a huge library of orchestrated analytics you can realize efficiencies across your assets, your plant, your fleets, your people and your processes. Click on shape to learn more.'
             , 'header': 'Analytics'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/analytics_services/analytics_framework/'
             , 'newTab': true
           },
           'appEngine': {
-            'text': 'The Predix App Engine is the runtime for Predix Studio where Citizen Developers can aggregate data and build apps with ease. Click to learn more.'
+            'text': 'The Predix App Engine is the runtime for Predix Studio where Citizen Developers can aggregate data and build apps with ease. Click on shape to learn more.'
             , 'header': 'App Engine'
             , 'learnMoreURL': 'https://www.predix.io/'
             , 'newTab': true
           },
           'customServices': {
-            'text': 'Predix enables you to create your own services, leveraging the security and performance of the platform.  Visit the About page to Install a personal, customizable copy of this app and see its code.  Click to learn more.'
+            'text': 'Predix enables you to create your own services, leveraging the security and performance of the platform.  Visit the About page to Install a personal, customizable copy of this app and see its code.  Click on shape to learn more.'
             , 'header': 'Custom Microservices'
             , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html#2041'
             , 'newTab': true
           },
           'otherServices': {
-            'text': 'Predix offers a wide variety of services and analytics to help you build your Industrial Internet application.  Subscribe to any of these services from the Predix catalog.  Click to learn more.'
+            'text': 'Predix offers a wide variety of services and analytics to help you build your Industrial Internet application.  Subscribe to any of these services from the Predix catalog.  Click on shape to learn more.'
             , 'header': 'Other Predix Services'
             , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/journey.html#2041'
             , 'newTab': true
           },
           'auth': {
-            'text': 'Security permeates the entire Predix ecosystem.  From Edge devices to Edge Manager and the Cloud, your industrial processes are safe and secure.  Click to learn more.'
+            'text': 'Security permeates the entire Predix ecosystem.  From Edge devices to Edge Manager and the Cloud, your industrial processes are safe and secure.  Click on shape to learn more.'
             , 'header': 'Authentication'
             , 'learnMoreURL': 'https://docs.predix.io/en/service'
             , 'newTab': true
           },
           'edgeManager': {
-            'text': 'Predix EdgeManager provides a single point of entry for deploying and monitoring remote devices.  EdgeManager lets you administer applications and configuration files at both device and fleet levels, helping keep your device software current.  Click to learn more.'
+            'text': 'Predix EdgeManager provides a single point of entry for deploying and monitoring remote devices.  EdgeManager lets you administer applications and configuration files at both device and fleet levels, helping keep your device software current.  Click on shape to learn more.'
             , 'header': 'Edge Manager'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/edge_software_and_services/edge_manager/'
             , 'newTab': true
           },
           'apps': {
-            'text': 'Predix provides pre-built, responsive web application starter kits that accelerate frontend development.  These applications are based on leading frontend technology and come with server-side features for easy integration with Predix services.  Click to learn more.'
+            'text': 'Predix provides pre-built, responsive web application starter kits that accelerate frontend development.  These applications are based on leading frontend technology and come with server-side features for easy integration with Predix services.  Click on graphic to learn more.'
             , 'header': 'Web Applications'
             , 'learnMoreURL': 'https://github.com/PredixDev/predix-webapp-starter'
             , 'newTab': true
           },
           'mobile': {
-            'text': 'Predix Mobile provides a Backend-as-a-Service to Industrial Internet mobile applications built with the Predix Mobile SDK.  Use the Mobile SDK to interact with the Mobile service components and your Mobile application code.  Click to learn more.'
+            'text': 'Predix Mobile provides a Backend-as-a-Service to Industrial Internet mobile applications built with the Predix Mobile SDK.  Use the Mobile SDK to interact with the Mobile service components and your Mobile application code.  Click on graphic to learn more.'
             , 'header': 'Mobile'
             , 'learnMoreURL': 'https://docs.predix.io/en-US/content/service/mobile/mobile_overview/'
             , 'newTab': true
           },
           'appDevTools': {
-            'text': 'Predix provides a collection of UI components, sample web application code, and development tools to build the front end of your Industrial Internet application.  Click to learn more.'
+            'text': 'Predix provides a collection of UI components, sample web application code, and development tools to build the front end of your Industrial Internet application.  Click on graphic to learn more.'
             , 'header': 'Application Development Tools'
             , 'learnMoreURL': 'https://www.predix.io/resources/tutorials/tutorial-details.html?tutorial_id=2101&tag=2100&journey=Predix%20Web%20App%20Starter&resources=2101,1544,2225,1549,1736,2273'
             , 'newTab': true
@@ -626,16 +642,21 @@
         , videoIsVisible: false
       },
 
+      _setSelectedAssetImage: function(imageURL) {
+        this.$.assetSelectionContainer.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+        this.$.assetSelectionImage.src = imageURL;
+        this.$.assetSelectionImage.style.border = '1px solid rgb(58, 180, 212)';
+      },
+
       // When industrial asset selection is changed
-      assetSelected: function(evt) {
+      _assetSelected: function(evt) {
         var assetList = this.get('industrialAssets'), eventDetails = evt.detail, selectedAsset;
         var selectedImage = this.$.assetSelectionImage;
         // visually indicate the selected asset
         for (var i = 0, l = assetList.length; i < l; i++) {
           if (assetList[i].key === eventDetails.key) {
-            this.$.assetSelectionContainer.style.backgroundColor = 'rgba(255, 255, 255, 1)';
-            selectedImage.src = assetList[i].imageURL;
-            selectedImage.style.border = '1px solid rgb(58, 180, 212)';
+            this._setSelectedAssetImage(assetList[i].imageURL)
+            this._showHoverOverlay('industrialAsset', 'right');
             selectedAsset = assetList[i];
             window.predix.industrialAsset = selectedAsset;
             window.dispatchEvent(new Event('industrial-asset-selected'));
@@ -649,6 +670,7 @@
           console.log('_showPreviouslySelectedAsset', window.predix.industrialAsset.name);
           this.$.assetDropdown.selectedKey = window.predix.industrialAsset;
           this.$.assetDropdown.displayValue = window.predix.industrialAsset.name;
+          this._setSelectedAssetImage(window.predix.industrialAsset.imageURL);
         } else {
           console.log('trying to show selected asset, but no asset found in memory.');
         }
@@ -716,6 +738,27 @@
         console.log('_handleDeviceChange');
       },
 
+      _showHoverOverlay: function(elemID, overlayPosition) {
+        var mouseOverDetails = this.properties.mouseOverDetails[elemID],
+            overlayElem = this.getOverlayElement(overlayPosition),
+            hoverComponent = Polymer.dom(this.root).querySelector('#' + elemID),
+            overlayCoords = this.getOverlayCoords(hoverComponent, overlayElem.id),
+            overlayElems = Polymer.dom(this.root).querySelectorAll('.overlay');
+        for (var i=0; i < overlayElems.length; i++) {
+          overlayElems[i].style.display = 'none';
+        }
+        overlayElem.style.top = overlayCoords.top;
+        overlayElem.style.left = overlayCoords.left;
+        hoverComponent.dataset.overlayElemID = overlayElem.id;
+        overlayElem.querySelector('span.text').innerHTML = mouseOverDetails.text;
+        overlayElem.querySelector('span.header').innerHTML = mouseOverDetails.header;
+        overlayElem.style.display = 'inline';
+      },
+
+      attached: function() {
+        window.predix.showWelcomeOverlay();
+      },
+
       ready: function() {
         var hoverComponents = Polymer.dom(this.root).querySelectorAll('.component-mouseover');
         var component, videoThumbnail, welcomeDisplayVal;
@@ -727,15 +770,7 @@
             'mouseover',
             function(event) {
               var hoverComponent = event.target;
-              var mouseOverDetails = this.properties.mouseOverDetails[event.target.id];
-              var overlayElem = this.getOverlayElement(hoverComponent.dataset.overlayPosition);
-              overlayCoords = this.getOverlayCoords(hoverComponent, overlayElem.id);
-              overlayElem.style.top = overlayCoords.top;
-              overlayElem.style.left = overlayCoords.left;
-              hoverComponent.dataset.overlayElemID = overlayElem.id;
-              overlayElem.querySelector('span.text').innerHTML = mouseOverDetails.text;
-              overlayElem.querySelector('span.header').innerHTML = mouseOverDetails.header;
-              overlayElem.style.display = 'inline';
+              this._showHoverOverlay(hoverComponent.id, hoverComponent.dataset.overlayPosition);
             }.bind(this)
           );
           component.addEventListener(
@@ -779,16 +814,6 @@
               this.properties.videoIsVisible = true;
             }
           }.bind(this)
-        );
-
-        // A temporary way to reset the 'do not show again' and
-        // EULA agreement flags to avoid having to clear cache through browser
-        videoThumbnail.addEventListener(
-          'dblclick',
-          function() {
-            localStorage.removeItem('predixDontShowAgain');
-            localStorage.removeItem('kitCloud.eulaAccepted');
-          }
         );
 
         this.$.eulaModal.addEventListener('btnModalPositiveClicked', function() {

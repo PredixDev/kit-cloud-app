@@ -208,7 +208,7 @@
             for (var assetAttr in asset.attributes) {
               if (asset.attributes.hasOwnProperty(assetAttr)) {
                 var newAttr = {};
-                newAttr["label"] = assetAttr;
+                newAttr["label"] = asset.attributes[assetAttr]["name"];
                 newAttr["value"] = asset.attributes[assetAttr]["value"][0];
                 asset.displayAttributes.push(newAttr);
               }
@@ -227,15 +227,18 @@
         window.dispatchEvent(new Event('all-industrial-assets-fetched'));
 
         this._fetchPreviouslySelectedDevice();
-      },      
+      },
 
       _fetchPreviouslySelectedDevice: function() {
         console.log('_fetchPreviouslySelectedDevice');
         // check to see if user has previously selected a device, and associated it with an industrial asset
         if (localStorage.getItem('kitCloud.openedAssetId')) {
           this.$.deviceAjaxEl.url = '/predix-api/predix-asset' + localStorage.getItem('kitCloud.openedAssetId');
+          // TODO:
+          // 1. Disable/cover UI components when fetching device details is being fetched
+          // 2. Show spinner or notice when fetching device details
           this.$.deviceAjaxEl.generateRequest();
-        }        
+        }
       },
 
       // this needs to happen after the list of industrial assets has been fetched.
@@ -251,7 +254,7 @@
             window.dispatchEvent(new Event('industrial-asset-selected'));
           }
         }.bind(this));
-      },      
+      },
 
       _checkForDefaultRoute: function() {
         // set default route to /overview
@@ -262,15 +265,10 @@
       },
 
       _routeChanged: function(newRoute) {
-        if (newRoute.path.indexOf('overview') >= 0) {
-          if (window.predix && window.predix.showWelcomeOverlay) {
-            window.predix.showWelcomeOverlay();
-          }
-        }
-        else if (window.predix && window.predix.stopTour) {
-          window.predix.stopTour();
-        }
         this.$.kitAppNav.markSelected(newRoute.path);
+        if (window.predix.isTouring) {
+          window.predix.showHideOverviewCurtain(false);
+        }
       }
     });
   </script>

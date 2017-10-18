@@ -30,6 +30,8 @@
       selected-device="[[openedDevice]]"
     >
     </asset-info>
+    <div style="position: relative;">
+      <div id="assetBrowserOverlayAnchor"></div>
       <asset-browser id="assetBrowser"
         asset-model="{{rmdAssetModel}}"
         opened-asset="{{openedDevice}}"
@@ -37,15 +39,15 @@
         asset-group-query-url="/api/predix-asset/devicegroup"
         disable-infinite-scroll="true">
       </asset-browser>
-
-    <div class="u-pt flex kit-data-controls-row" style="position: relative;">
+    </div>
+    <div class="u-pt flex kit-data-controls-row" style="position: relative;" hidden="[[!openedDevice.uri]]">
       <div class="u-1/2-desk u-1/1-palm">
         <div class="u-pr">
           <px-rangepicker id="tsRangepicker" range="{{selectedRange}}"></px-rangepicker>
         </div>
       </div>
       <template is="dom-if" if="{{expirationDate}}">
-        <div class="u-1/2-desk u-1/1-palm" style="text-align: right;">
+        <div class="u-1/2-desk u-1/1-palm" style="text-align: right; font-size: 12px;">
           <span class="u-pr"><a href="/#/about">Device active in cloud until:</a></span><br/>
           <span class="u-pr">{{expirationDate}}</span>
         </div>
@@ -72,9 +74,9 @@
       </div>
     </template>
 
-    <div class="flex flex--wrap">
+    <div class="flex flex--wrap charts-wrapper">
       <template is="dom-repeat" items="{{tagsWithData}}">
-        <div class="flex__item u-1/3-desk u-1/1-palm">
+        <div class="flex__item u-1/3-desk u-1/1-palm chart-wrapper">
           <sensor-chart tag="{{item}}" selected-range="{{chartRange}}"></sensor-chart>
         </div>
       </template>
@@ -93,6 +95,7 @@
         // This is the Kit device opened in the context browser
         openedDevice: {
           type: Object,
+          value: {},
           observer: '_openedDeviceChanged'
         },
         assetTags: {
@@ -179,6 +182,7 @@
       _openedDeviceChanged: function(newVal) {
         this.expired = false;
         if (newVal.expirationDate) {
+          window.predix.stopTour();
           var expMoment = moment(newVal.expirationDate, 'x');
           if (moment().diff(expMoment) < 0) {
             if (newVal.tags) {
@@ -190,12 +194,20 @@
             this._saveDeviceAssetAssoc(newVal, this.$.assetInfo.assetDetails);
           }
         } else if (newVal.uri && newVal.uri.length > 0) {
+          window.predix.stopTour();
           this.set('assetTags', []);
           this.set('tagsWithData',[]);
           this.expirationDate = null;
           this.expired = true;
         }
-
+        // else {
+        //   setTimeout(
+        //     function() {
+        //       window.predix.startTour('assetBrowserOverlayAnchor');
+        //     },
+        //     2000
+        //   );
+        // }
         window.dispatchEvent(new Event('device-selected'));
       },
 
@@ -289,6 +301,10 @@
           this.chartRange = this.selectedRange;
         }.bind(this));
 
+        this.$.assetDeviceAjaxEl.addEventListener('error', function(evt) {
+          console.log('error associating device to asset.', evt.detail);
+        })
+
         // Set refresh  button behavior
         this.$.refreshBtn.addEventListener('click', function() {
           this.selectedRange = this._getDefaultRange(1);
@@ -322,6 +338,10 @@
             this.$.assetInfo.assetDetails = window.predix.industrialAsset;
           }
         }
+
+        this.$.assetBrowser.addEventListener('click', function() {
+          window.predix.stopTour();
+        });
 
         window.addEventListener('industrial-asset-selected',
           function() {

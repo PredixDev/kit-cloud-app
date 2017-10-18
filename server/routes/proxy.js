@@ -146,7 +146,7 @@ var setProxyRoute = function(key, credentials) {
 };
 
 // Fetches client token, adds to request headers, and stores in session.
-// Returns 403 if no session.
+// Redirects to /logout if no session.
 // Use this middleware to proxy a request to a secure service, using a client token.
 var addClientTokenMiddleware = function(req, res, next) {
 	function errorHandler(errorString) {
@@ -170,7 +170,9 @@ var addClientTokenMiddleware = function(req, res, next) {
 			next();
 		}
 	} else {
-		next(res.sendStatus(403).send('Forbidden'));
+		// next(res.sendStatus(403).send('Forbidden'));
+		console.log('no session found.  redirecting to logout.');
+		next(res.redirect('/logout'));
 	}
 };
 

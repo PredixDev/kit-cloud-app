@@ -14,6 +14,25 @@
     padding-left: 1rem;
 }
 
+.charts-wrapper {
+  background-color: white;
+}
+
+.chart-wrapper {
+  margin: 0 0 15px 15px;
+  border: 1px solid #ccc;
+}
+
+#assetBrowserOverlayAnchor {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background-color: #fff;
+}
+
 // Trumps
 $inuit-enable-paddings : true;
 $inuit-enable-paddings--tiny : true;

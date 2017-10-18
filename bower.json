@@ -40,7 +40,8 @@
     "px-colors-design": "^0.3.9",
     "px-datetime-common": "0.8.1",
     "px-modal": "^1.4.10",
-    "px-icon-set": "^2.0.10"
+    "px-icon-set": "^2.0.10",
+    "px-spinner": "0.5.3"
   },
   "resolutions": {
     "app-localize-behavior": "^1.0.2",

@@ -5,17 +5,37 @@
 
 <dom-module id="asset-browser">
     <template>
-        <px-context-browser id="assetBrowser"
-          opened-item-name="Select Device"
-          browser-context="{{assetModel}}"
-          disable-infinite-scroll>Sensor Data</px-context-browser>
-        <!-- Fetch the whole asset model at once, using these two queries.
-            (Our asset model has only groups and assets.)
-            This way, we can pre-select an asset deep in the tree.
-            This component assumes that every entity has a "parent" or "group" attribute.
-            -->
-        <iron-ajax id="groupAjaxEl" url="{{assetGroupQueryUrl}}"></iron-ajax>
-        <iron-ajax id="assetAjaxEl" url="{{assetQueryUrl}}"></iron-ajax>
+      <style>
+        .loading-overlay {
+          z-index: 58;
+          background-color: black;
+          opacity: 0.3;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .loading-overlay .spinner {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      </style>
+      <px-context-browser id="assetBrowser"
+        style="margin-bottom: 0;"
+        opened-item-name="Select Device"
+        browser-context="{{assetModel}}"
+        disable-infinite-scroll>Sensor Data</px-context-browser>
+      <!-- Fetch the whole asset model at once, using these two queries.
+          (Our asset model has only groups and assets.)
+          This way, we can pre-select an asset deep in the tree.
+          This component assumes that every entity has a "parent" or "group" attribute.
+          -->
+      <iron-ajax id="groupAjaxEl" url="{{assetGroupQueryUrl}}"></iron-ajax>
+      <iron-ajax id="assetAjaxEl" url="{{assetQueryUrl}}"></iron-ajax>
+      <div class="loading-overlay" hidden="[[hideSpinner]]"><px-spinner class="spinner"></px-spinner></px-spinner></div>
     </template>
     <script>
     Polymer({
@@ -42,6 +62,10 @@
         rawAssets: {
           type: Array,
           value: []
+        },
+        hideSpinner: {
+          type: Boolean,
+          value: false
         }
       },
       observers: ['_fetchAssetModel(assetQueryUrl, assetGroupQueryUrl)'],
@@ -109,7 +133,6 @@
         var allAssets = [];
         var newAssetModel = {data: []};
         var assetBrowser = this.$.assetBrowser;
-        // TODO: show spinner
         // call two functions that return promises
         this.debounce('fetch', function() {
           Promise.all([self._fetchFromUrl(self.$.groupAjaxEl), self._fetchFromUrl(self.$.assetAjaxEl)]).then(function(resultSets) {
@@ -124,8 +147,13 @@
 
             self.assetModel = newAssetModel;
             self.openedAsset = self.$.assetBrowser.selectedItem;
+            self.hideSpinner = true;
+            if (!localStorage.getItem('kitCloud.openedAssetId')) {
+              window.predix.startTour('assetBrowserOverlayAnchor');
+            }
           }).catch(function(error) {
             console.error('Fail!', error);
+            self.hideSpinner = true;
           });
         }, 100);
       },

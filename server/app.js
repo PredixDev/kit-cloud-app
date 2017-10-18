@@ -129,7 +129,8 @@ function verifyLoginState(req, res, next) {
   if (req.query.state === stateFromSession) {
     next();
   } else {
-    res.status(403).send('Forbidden');
+    // res.status(403).send('Forbidden');
+    res.redirect('/logout'); // clear session, then try to login again.
   }
 }
 

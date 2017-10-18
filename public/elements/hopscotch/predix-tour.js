@@ -46,7 +46,12 @@ window.predix.showHideOverviewCurtain = function(show) {
   }
 };
 
+window.predix.emptyHandler = function() {
+  window.predix.stopTour();
+};
+
 window.predix.getTour = function(elementID) {
+  console.log('inside window.predix.getTour() with elementID ' + elementID);
   var tour = {};
   switch (elementID) {
     case 'predixCloud':
@@ -72,6 +77,29 @@ window.predix.getTour = function(elementID) {
         ]
       };
       break;
+      case 'assetBrowserOverlayAnchor':
+        tour =  {
+          id: 'assetBrowserOverlayAnchor',
+          isTour: false,
+          steps: [
+          {
+            title: "Select Your Edge Device",
+            content: "Select an edge device that will receive data from the Industrial Asset and send it to Predix Cloud.",
+            target: elementID,
+            placement: "right",
+            arrowOffset: "center",
+            xOffset: "165",
+            yOffset: "-50",
+            showNumber: false,
+            isTourBubble: false,
+            showNextButton: false,
+            showPrevButton: false,
+            showCTAButton: true,
+            ctaLabel: 'Got It',
+            onCTA: window.predix.emptyHandler
+          }
+          ]
+        };
   }
   window.predix.currentTourElementID = elementID;
   return tour;
@@ -86,27 +114,20 @@ window.predix.startTour = function(elementID) {
 };
 
 window.predix.showWelcomeOverlay = function() {
-  setTimeout(
-    function() {
-      if (window.predix.isTouring) { return; }
-      if (localStorage.getItem('kitCloud.eulaAccepted') === 'true') {
-        if (localStorage.getItem('predixDontShowAgain') !== 'true') {
-          window.predix.showHideOverviewCurtain(true);
-          setTimeout(
-            function(event) {
-              window.predix.startTour('predixCloud');
-            },
-            500
-          );
-        }
-        else {
-          window.predix.showHideOverviewCurtain(false);
-        }
-      }
-      else {
-        window.predix.showHideOverviewCurtain(true);
-      }
-    }
-    , 800
-  );
+  if (window.predix.isTouring) { return; }
+  if ( (localStorage.getItem('kitCloud.eulaAccepted') === 'true')
+       &&
+       (localStorage.getItem('predixDontShowAgain') !== 'true')
+     ) {
+    window.predix.showHideOverviewCurtain(true);
+    setTimeout(
+      function(event) {
+        window.predix.startTour('predixCloud');
+      },
+      500
+    );
+  }
+  else {
+    window.predix.showHideOverviewCurtain(false);
+  }
 }
