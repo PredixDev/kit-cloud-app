@@ -10,7 +10,7 @@ var settings = {};
 var node_env = process.env.node_env || 'development';
 if(node_env === 'development') {
   // use localConfig file
-	var devConfig = require('./localConfig.json')[node_env];	
+	var devConfig = require('./localConfig.json')[node_env];
 	// console.log(devConfig);
 	settings.base64ClientCredential = devConfig.base64ClientCredential;
 	settings.loginBase64ClientCredential = devConfig.loginBase64ClientCredential;
@@ -97,7 +97,7 @@ settings.buildVcapObjectFromLocalConfig = function(config) {
 settings.isUaaConfigured = function() {
 	return settings.uaaURL &&
     settings.uaaURL.indexOf('https') === 0 &&
-    settings.base64ClientCredential && 
+    settings.base64ClientCredential &&
 	settings.base64ClientCredential.indexOf('client') < 0 &&
 	settings.loginBase64ClientCredential &&
 	settings.loginBase64ClientCredential.indexOf('client') < 0;
@@ -111,7 +111,7 @@ settings.isAssetConfigured = function() {
 }
 
 settings.isTimeSeriesConfigured = function() {
-	return settings.timeseriesURL && 
+	return settings.timeseriesURL &&
 	settings.timeseriesURL.indexOf('https') === 0 &&
 	settings.timeseriesZoneId &&
 	settings.timeseriesZoneId.indexOf('{') !== 0;
@@ -144,8 +144,8 @@ settings.getRedisCredentials = function() {
 	var vcaps = JSON.parse(process.env.VCAP_SERVICES || '{}');
 	var creds;
 	Object.keys(vcaps).forEach(function(vcap) {
-		if (vcap.indexOf('redis') > -1) {						
-			creds = vcaps[vcap][0].credentials; 
+		if (vcap.indexOf('predix-cache') > -1) {						
+			creds = vcaps[vcap][0].credentials;
 		}
 	});
 	return creds;
