@@ -1,6 +1,6 @@
 {
   "name": "kit-cloud-app",
-  "version": "1.0.86",
+  "version": "1.0.89",
   "private": true,
   "engines": {
     "node": ">=0.10.0"
