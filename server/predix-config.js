@@ -38,6 +38,7 @@ if(node_env === 'development') {
     	settings.uaaURL = uaaService[0].credentials.uri;
 		settings.tokenURL = uaaService[0].credentials.uri;
 	}
+
 	if(assetService) {
 		settings.assetURL = assetService[0].credentials.uri + '/' + process.env.assetMachine;
 		settings.assetZoneId = assetService[0].credentials.zone['http-header-value'];
@@ -55,6 +56,8 @@ if(node_env === 'development') {
 	settings.loginBase64ClientCredential = process.env.loginBase64ClientCredential;
 	settings.websocketServerURL = process.env.websocketServerURL;
 	settings.kitServiceURL = process.env.kitServiceURL;
+	settings.productionPush = process.env.productionPush !== "";
+
 	// settings.rmdDocsURL = process.env.rmdDocsURL;
 }
 // console.log('config settings: ' + JSON.stringify(settings));
@@ -108,14 +111,14 @@ settings.isAssetConfigured = function() {
 	settings.assetURL.indexOf('https') === 0 &&
 	settings.assetZoneId &&
 	settings.assetZoneId.indexOf('{') !== 0;
-}
+};
 
 settings.isTimeSeriesConfigured = function() {
 	return settings.timeseriesURL &&
 	settings.timeseriesURL.indexOf('https') === 0 &&
 	settings.timeseriesZoneId &&
 	settings.timeseriesZoneId.indexOf('{') !== 0;
-}
+};
 
 function getValueFromEncodedString(encoded, index) {
 	if (!encoded) {
@@ -144,7 +147,7 @@ settings.getRedisCredentials = function() {
 	var vcaps = JSON.parse(process.env.VCAP_SERVICES || '{}');
 	var creds;
 	Object.keys(vcaps).forEach(function(vcap) {
-		if (vcap.indexOf('predix-cache') > -1) {						
+		if (vcap.indexOf('predix-cache') > -1) {
 			creds = vcaps[vcap][0].credentials;
 		}
 	});

@@ -167,7 +167,7 @@ function addTokenFromPK(req, res, next) {
 	SET UP EXPRESS ROUTES
 *****************************************************************************/
 
-if (!config.isUaaConfigured()) { 
+if (!config.isUaaConfigured()) {
   // no restrictions
   app.use(express.static(path.join(__dirname, process.env['base-dir'] ? process.env['base-dir'] : '../public')));
 
@@ -191,7 +191,7 @@ if (!config.isUaaConfigured()) {
   });
 
   //callback route redirects to secure route after login
-  app.get('/callback',  
+  app.get('/callback',
     passport.authenticate('predix', {failureRedirect: '/'}),
     verifyLoginState,
     redirectToDevice);
@@ -242,7 +242,7 @@ if (!config.isUaaConfigured()) {
         res.status(401).send({error: "Session expired, or no token found in session."})
       } else {
         // add user token to request
-        req.headers['Authorization'] = 'bearer ' + tokenString;        
+        req.headers['Authorization'] = 'bearer ' + tokenString;
       }
       next();
     },
@@ -317,7 +317,13 @@ app.get('/logout', function(req, res) {
 	req.session.destroy();
 	req.logout();
   passportConfig.reset(); //reset auth tokens
-  res.redirect(config.uaaURL + '/logout?redirect=' + config.appURL);
+  if (config.productionPush) {
+    var logoutUrl = "https://login.system.aws-usw02-pr.ice.predix.io/logout?redirect=" + config.appURL;
+    res.redirect(config.uaaURL + '/logout?redirect='  + encodeURIComponent(logoutUrl));
+  }
+  else {
+    res.redirect("https://login.system.aws-usw02-pr.ice.predix.io/logout?redirect=" + config.appURL);
+  }
 });
 
 app.get('/favicon.ico', function (req, res) {
