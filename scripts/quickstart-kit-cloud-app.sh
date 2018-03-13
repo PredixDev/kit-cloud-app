@@ -1,6 +1,36 @@
 #!/bin/bash
 set -e
+function check_user_repo()
+{
+  while (( "$#" )); do
+  opt="$1"
+  case $opt in
+    -h|-\?|--\?--help)
+      PRINT_USAGE=1
+      QUICKSTART_ARGS="$SCRIPT $1"
+      break
+    ;;
+    --skip-va)
+    # if this is present then user does not want verify artifactory. so dont add the -va flag. Right now this happens only through the new propel jenkins script
+    # ADD_VA is defaulted to true because we always want this
+      ADD_VA=false
+      QUICKSTART_ARGS="$QUICKSTART_ARGS_NEW $ASSET_MODEL $SCRIPT"
+    ;;
+    *)
+
+      echo $1
+    ;;
+  esac
+  shift
+  done
+}
+
+
 function local_read_args() {
+  # if $ADD_VA; then
+  #  QUICKSTART_ARGS= "$QUICKSTART_ARGS$VERIFY_ARTIFACTORY_USER"
+  # fi
+
   while (( "$#" )); do
   opt="$1"
   case $opt in
@@ -35,6 +65,9 @@ function local_read_args() {
     echo "Usage: $0 -b/--branch <branch> [--skip-setup]"
     exit 1
   fi
+
+  echo "quickstart_args=$QUICKSTART_ARGS"
+
 }
 
 
@@ -46,6 +79,7 @@ SKIP_PULL=false
 ASSET_MODEL="-amkit kit-cloud-app/server/sample-data/predix-asset/kit-asset-model-metadata.json kit-cloud-app/server/sample-data/predix-asset/kit-asset-model.json"
 SCRIPT="-script edge-starter.sh -script-readargs edge-starter-readargs.sh"
 QUICKSTART_ARGS="-pxclimin 0.6.3 -ba -uaa -asset -ts -cidd -dx -kitsvc -cache -kitui -va $ASSET_MODEL $SCRIPT"
+QUICKSTART_ARGS_NEW="-pxclimin 0.6.3 -ba -uaa -asset -ts -cidd -dx -kitsvc -cache -kitui"
 VERSION_JSON="version.json"
 PREDIX_SCRIPTS=predix-scripts
 REPO_NAME=kit-cloud-app
@@ -54,8 +88,11 @@ APP_NAME="Predix Kit Cloud App"
 SCRIPT_NAME="quickstart-kit-cloud-app.sh"
 TOOLS="Cloud Foundry CLI, Git, Maven, Node.js, Predix CLI"
 TOOLS_SWITCHES="--cf --git --maven --nodejs --predixcli"
+ADD_VA=true
 
+#check_user_repo $@
 local_read_args $@
+
 IZON_SH="https://raw.githubusercontent.com/PredixDev/izon/$BRANCH/izon.sh"
 VERSION_JSON_URL=https://raw.githubusercontent.com/PredixDev/$REPO_NAME/$BRANCH/version.json
 
@@ -104,6 +141,9 @@ else
     __standard_mac_initialization
   fi
 fi
+
+
+
 
 getPredixScripts
 #clone the repo itself if running from oneclick script

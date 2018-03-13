@@ -34,7 +34,7 @@
     "px-app-nav": "^1.10.9",
     "px-percent-circle": "^0.2.3",
     "px-spacing-design": "^0.4.4",
-    "px-buttons-design": "^1.1.7",
+    "px-buttons-design": "~1.1.7",
     "marked-element": "^1.3.1",
     "px-simple-bar-chart": "^1.9.1",
     "px-colors-design": "^0.3.9",
@@ -47,6 +47,7 @@
     "app-localize-behavior": "^1.0.2",
     "iron-iconset-svg": "^1.0.9",
     "iron-flex-layout": "^1.0.0",
-    "iron-icon": "^1.0.7"
+    "iron-icon": "^1.0.7",
+    "iron-ajax": "^2.0.0"
   }
 }
