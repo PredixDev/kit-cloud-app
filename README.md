@@ -106,7 +106,7 @@ The simplest way to push the Starter application to a cloud environment is by mo
 Ask questions and file tickets on <a href="https://www.predix.io/community" target="_blank">https://www.predix.io/community</a>.
 
 # Copyright
-Copyright &copy; 2015, 2016, 2017 GE Global Research. All rights reserved.
+Copyright &copy; 2015, 2016, 2017, 2018 GE Global Research. All rights reserved.
 
 The copyright to the computer software herein is the property of
 GE Global Research. The software may be used and/or copied only
