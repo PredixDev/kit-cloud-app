@@ -66,18 +66,19 @@ function local_read_args() {
     exit 1
   fi
 
-  echo "quickstart_args=$QUICKSTART_ARGS"
+  #echo "quickstart_args=$QUICKSTART_ARGS"
 
 }
 
-
-
+# default settings
 BRANCH="master"
 PRINT_USAGE=0
 SKIP_SETUP=false
 SKIP_PULL=false
+
+IZON_SH="https://raw.githubusercontent.com/PredixDev/izon/1.1.0/izon2.sh"
 ASSET_MODEL="-amkit kit-cloud-app/server/sample-data/predix-asset/kit-asset-model-metadata.json kit-cloud-app/server/sample-data/predix-asset/kit-asset-model.json"
-SCRIPT="-script edge-starter.sh -script-readargs edge-starter-readargs.sh"
+SCRIPT="-script edge-starter.sh -script-readargs edge-starter-kit-readargs.sh"
 QUICKSTART_ARGS="-pxclimin 0.6.3 -ba -uaa -asset -ts -cidd -dx -kitsvc -cache -kitui -va $ASSET_MODEL $SCRIPT"
 QUICKSTART_ARGS_NEW="-pxclimin 0.6.3 -ba -uaa -asset -ts -cidd -dx -kitsvc -cache -kitui"
 VERSION_JSON="version.json"
@@ -86,15 +87,17 @@ REPO_NAME=kit-cloud-app
 APP_DIR="kit-cloud"
 APP_NAME="Predix Kit Cloud App"
 SCRIPT_NAME="quickstart-kit-cloud-app.sh"
+GITHUB_RAW="https://raw.githubusercontent.com/PredixDev"
 TOOLS="Cloud Foundry CLI, Git, Maven, Node.js, Predix CLI"
 TOOLS_SWITCHES="--cf --git --maven --nodejs --predixcli"
 ADD_VA=true
 
-#check_user_repo $@
+# Process switches
 local_read_args $@
 
-IZON_SH="https://raw.githubusercontent.com/PredixDev/izon/$BRANCH/izon.sh"
-VERSION_JSON_URL=https://raw.githubusercontent.com/PredixDev/$REPO_NAME/$BRANCH/version.json
+#variables after processing switches
+SCRIPT_LOC="$GITHUB_RAW/$REPO_NAME/$BRANCH/scripts/$SCRIPT_NAME"
+VERSION_JSON_URL="$GITHUB_RAW/$REPO_NAME/$BRANCH/version.json"
 
 function check_internet() {
   set +e
@@ -113,7 +116,7 @@ function check_internet() {
 
 function init() {
   currentDir=$(pwd)
-  echo $currentDir
+  #echo $currentDir
   if [[ $currentDir == *"scripts" ]]; then
     echo 'Please launch the script from the root dir of the project'
     exit 1
@@ -125,6 +128,8 @@ function init() {
 
   check_internet
   eval "$(curl -s -L $IZON_SH)"
+  getUsingCurl $SCRIPT_LOC
+  chmod 755 $SCRIPT_NAME
   getVersionFile
   getLocalSetupFuncs
 

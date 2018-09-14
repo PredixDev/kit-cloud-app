@@ -48,6 +48,7 @@
     "iron-iconset-svg": "^1.0.9",
     "iron-flex-layout": "^1.0.0",
     "iron-icon": "^1.0.7",
-    "iron-ajax": "^2.0.0"
+    "iron-ajax": "^2.0.0",
+    "webcomponentsjs": "^0.7.24"
   }
 }

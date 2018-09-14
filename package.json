@@ -1,6 +1,6 @@
 {
   "name": "kit-cloud-app",
-  "version": "1.0.121",
+  "version": "1.0.122",
   "private": true,
   "engines": {
     "node": ">=0.10.0"
@@ -29,10 +29,10 @@
     "gulp-sequence": "^0.4.6",
     "gulp-style-modules": "^0.1.0",
     "merge-stream": "^1.0.0",
-    "mocha": "^3.2.0",
-    "node-sass": "^4.7.0",
+    "mocha": "^5.2.0",
+    "node-sass": "^4.9.0",
     "node-sass-import-once": "^1.2.0",
-    "open": "0.0.4",
+    "open": "0.0.5",
     "polymer-build": "^0.9.1",
     "postcss": "^5.0.21",
     "postcss-cli": "^2.5.2",
@@ -50,10 +50,10 @@
     "express-http-proxy": "^0.10.0",
     "express-session": "^1.14.1",
     "https-proxy-agent": "^1.0.0",
-    "json-server": "^0.8.10",
+    "json-server": "^0.14.0",
     "passport": "^0.3.2",
     "passport-oauth2-middleware": "^1.0.2",
-    "passport-predix-oauth": "^0.1.2",
+    "passport-predix-oauth": "^0.1.55",
     "url": "^0.11.0"
   }
 }
