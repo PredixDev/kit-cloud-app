@@ -76,7 +76,7 @@ PRINT_USAGE=0
 SKIP_SETUP=false
 SKIP_PULL=false
 
-IZON_SH="https://raw.githubusercontent.com/PredixDev/izon/1.1.0/izon2.sh"
+IZON_SH="https://raw.githubusercontent.com/PredixDev/izon/1.2.0/izon2.sh"
 ASSET_MODEL="-amkit kit-cloud-app/server/sample-data/predix-asset/kit-asset-model-metadata.json kit-cloud-app/server/sample-data/predix-asset/kit-asset-model.json"
 SCRIPT="-script edge-starter.sh -script-readargs edge-starter-kit-readargs.sh"
 QUICKSTART_ARGS="-pxclimin 0.6.3 -ba -uaa -asset -ts -cidd -dx -kitsvc -cache -kitui -va $ASSET_MODEL $SCRIPT"
@@ -121,15 +121,18 @@ function init() {
     echo 'Please launch the script from the root dir of the project'
     exit 1
   fi
+
+  check_internet
+  eval "$(curl -s -L $IZON_SH)"
+  
+  #download the script and cd
+  getUsingCurl $SCRIPT_LOC
+  chmod 755 $SCRIPT_NAME  
   if [[ ! $currentDir == *"$REPO_NAME" ]]; then
     mkdir -p $APP_DIR
     cd $APP_DIR
   fi
-
-  check_internet
-  eval "$(curl -s -L $IZON_SH)"
-  getUsingCurl $SCRIPT_LOC
-  chmod 755 $SCRIPT_NAME
+  
   getVersionFile
   getLocalSetupFuncs
 

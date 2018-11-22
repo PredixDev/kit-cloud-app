@@ -33,7 +33,7 @@ IF [!BRANCH!]==[] (
   EXIT /b 1
 )
 
-SET IZON_BAT=https://raw.githubusercontent.com/PredixDev/izon/!BRANCH!/izon.bat
+SET IZON_BAT=https://raw.githubusercontent.com/PredixDev/izon/1.2.0/izon.bat
 SET TUTORIAL=https://www.predix.io/resources/tutorials/tutorial-details.html?tutorial_id=1475&tag=2365&journey=Predix%20Developer%20Kit&environment=dev
 SET REPO_NAME=kit-cloud-app
 SET SHELL_SCRIPT_NAME=quickstart-kit-cloud-app.sh
